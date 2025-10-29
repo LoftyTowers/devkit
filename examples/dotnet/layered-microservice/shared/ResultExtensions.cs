@@ -32,4 +32,10 @@ public static class ResultExtensions
         result.IsSuccess
             ? new OkObjectResult(map(result.Value!))
             : ((Result)result).ToActionResult();
+
+    public static IActionResult ToActionResult(this ControllerBase controller, Result result) =>
+        result.ToActionResult();
+
+    public static IActionResult ToActionResult<T>(this ControllerBase controller, Result<T> result, Func<T, object> map) =>
+        result.ToActionResult(map);
 }

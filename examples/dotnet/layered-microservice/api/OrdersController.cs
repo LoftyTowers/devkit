@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LayeredMicroservice.Api;
 
+// uses ResultExtensions from examples/dotnet/layered-microservice/shared
 [ApiController]
 [Route("api/orders")]
 public sealed class OrdersController : ControllerBase
@@ -41,24 +42,24 @@ public sealed class OrdersController : ControllerBase
         var validation = await _validator.ValidateAsync(request, cancellationToken);
         if (!validation.IsValid)
         {
-            return Result.Failure(ErrorCode.Validation, validation.Errors.Select(e => e.ErrorMessage))
-                .ToActionResult();
+            var failure = Result.Failure(ErrorCode.Validation, validation.Errors.Select(e => e.ErrorMessage));
+            return this.ToActionResult(failure);
         }
 
         try
         {
             var command = request.ToCommand(HttpContext.TraceIdentifier);
             var result = await _handler.HandleAsync(command, cancellationToken);
-            return result.ToActionResult(order => new { order.Id, order.Total });
+            return this.ToActionResult(result, order => new { order.Id, order.Total });
         }
         catch (OperationCanceledException)
         {
-            return Result.Failure(ErrorCode.Cancelled, Array.Empty<string>()).ToActionResult();
+            return this.ToActionResult(Result.Failure(ErrorCode.Cancelled, Array.Empty<string>()));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected failure when creating order for {CustomerId}", request.CustomerId);
-            return Result.Failure(ErrorCode.Unexpected, new[] { "Unexpected failure" }).ToActionResult();
+            return this.ToActionResult(Result.Failure(ErrorCode.Unexpected, new[] { "Unexpected failure" }));
         }
     }
 }
