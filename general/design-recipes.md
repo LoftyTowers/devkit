@@ -9,6 +9,7 @@
 | Integration owned by another team/vendor | Port + Adapter |
 
 See also: examples under `examples/dotnet/patterns/` and the layered microservice walkthrough.
+Always import the shared primitives from `examples/dotnet/layered-microservice/shared/`; never duplicate `Result`, `ErrorCode`, or related helpers in new samples.
 
 ## Endpoint recipe
 - Keep controllers/edges thin; delegate to a handler/service.
@@ -25,7 +26,7 @@ See: examples/dotnet/design-recipes/validation/PayRequestValidator.cs
 ## Result -> ProblemDetails mapping
 - Map Validation -> 400, domain failure -> 422, unexpected -> 500.
 - Include an error code so mapping is deterministic.
-See: examples/dotnet/design-recipes/problem-details/ResultAndMapper.cs
+See: `examples/dotnet/layered-microservice/shared/ResultExtensions.cs`
 
 ## Observability
 - Log meaningful events (start/end, external I/O).

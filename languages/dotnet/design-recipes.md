@@ -12,6 +12,7 @@
 | Tests | Tests | [status mapping tests](../../examples/dotnet/layered-microservice/tests/README.md) |
 
 See [examples/dotnet/layered-microservice](../../examples/dotnet/layered-microservice/) for the canonical layered structure, then return here for focused recipes.
+All samples must reference the shared primitives in `examples/dotnet/layered-microservice/shared/` rather than redefining `Result`, `ErrorCode`, or mapping helpers.
 
 ## Extensibility decision table
 | Situation | Use | Rationale | Example trigger |
