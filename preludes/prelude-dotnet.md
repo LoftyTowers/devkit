@@ -13,9 +13,11 @@ Include prelude-general.md, then apply .NET specifics:
 | Shared | Keep primitives/framework helpers (`Result`, `ErrorCode`, `IClock`, mapping extensions) consistent across layers. |
 | Tests | Use NUnit + Moq, cover happy/error/cancellation, assert exact HTTP codes via `ToActionResult()`. |
 
+### Style Rules Quick Check
+- Follow the [XML Comments Guidelines](../languages/dotnet/style.md#xml-comments-guidelines); only document public APIs or nuanced behaviour.
 - Public async APIs: name ends with Async and accept CancellationToken.
 - BeginScope includes CorrelationId and key ids (OrderId/PaymentId).
-- All failures use Result<T>.Failure(code, errors).
+- All failures use `Result<T>.Failure(code, errors)`.
 - Map errors: 400 Validation, 422 Domain, 500 Unexpected at edges.
 - Controller edge has try/catch for unexpected and cancellation cases.
 - Tests assert exact status codes.
@@ -32,10 +34,7 @@ Include prelude-general.md, then apply .NET specifics:
 
 ### HTTP mapping (must follow)
 - Never return `Result` types directly to clients.
-- Always map via the DevKit helper `MapResult` → **ProblemDetails**:
-  - `"Validation"` → 400, Title: "Validation Failed"
-  - `"Domain"` → 422, Title: "Operation Failed"
-  - default → 500, Title: "Unexpected error"
+- Always map via `ResultExtensions.ToActionResult()` so `ErrorCode.Validation` → 400, `ErrorCode.Domain` → 422, `ErrorCode.Cancelled` → 499, and `ErrorCode.Unexpected` → 500.
 
 ### ErrorCode Enum Convention
 

@@ -5,22 +5,34 @@
 - Coordinate ports (repositories, gateways) and translate failures into `Result` codes.
 
 **Golden Rules**
+- Always use `ValidateAsync(...)` with a `CancellationToken` on every public method.
 - Keep logic thin: validate, call domain, persist via ports.
-- Return `Result<T>` with domain entities, never DTOs.
 - Convert port failures into `ErrorCode` values before returning.
-- Log with context (correlation, entity identifiers) but leave IO to adapters.
+- Log with correlation and entity identifiers via `BeginScope`; no infrastructure access here.
 
 **Example**
 ```csharp
 public async Task<Result<Order>> HandleAsync(CreateOrderCommand command, CancellationToken ct)
 {
+    using var scope = _logger.BeginScope(new Dictionary<string, object?>
+    {
+        ["CorrelationId"] = command.CorrelationId,
+        ["CustomerId"] = command.CustomerId
+    });
+
     var validation = await _validator.ValidateAsync(command, ct);
     if (!validation.IsValid)
     {
         return Result<Order>.Failure(ErrorCode.Validation, validation.Errors.Select(e => e.ErrorMessage));
     }
 
-    var order = Order.Create(command.CustomerId, command.Lines, _clock.UtcNow);
+    var order = Order.Create(
+        command.CustomerId,
+        command.Lines.Select(line => new OrderLineDraft(line.Sku, line.Quantity)),
+        _clock.UtcNow);
+
+    using var orderScope = _logger.BeginScope(new { command.CorrelationId, OrderId = order.Id });
+
     var saveResult = await _repository.SaveAsync(order, ct);
     if (!saveResult.IsSuccess)
     {

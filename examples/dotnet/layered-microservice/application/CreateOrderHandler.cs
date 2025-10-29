@@ -36,6 +36,12 @@ public sealed class CreateOrderHandler : ICreateOrderHandler
 
     public async Task<Result<Order>> HandleAsync(CreateOrderCommand command, CancellationToken cancellationToken)
     {
+        using var scope = _logger.BeginScope(new Dictionary<string, object?>
+        {
+            ["CorrelationId"] = command.CorrelationId,
+            ["CustomerId"] = command.CustomerId
+        });
+
         var validation = await _validator.ValidateAsync(command, cancellationToken);
         if (!validation.IsValid)
         {
@@ -48,6 +54,9 @@ public sealed class CreateOrderHandler : ICreateOrderHandler
                 command.CustomerId,
                 command.Lines.Select(line => new OrderLineDraft(line.Sku, line.Quantity)),
                 _clock.UtcNow);
+
+            using var orderScope = _logger.BeginScope(new { command.CorrelationId, OrderId = order.Id });
+
             var persistence = await _repository.SaveAsync(order, cancellationToken);
             if (!persistence.IsSuccess)
             {
@@ -59,17 +68,22 @@ public sealed class CreateOrderHandler : ICreateOrderHandler
         }
         catch (DomainRuleException ex)
         {
-            _logger.LogInformation(ex, "Domain rule violation when creating order {OrderId}", ex.OrderId);
+            _logger.LogInformation(ex, "Domain rule violation when creating order for {CustomerId}", command.CustomerId);
             return Result<Order>.Failure(ErrorCode.Domain, new[] { ex.Message });
         }
         catch (OperationCanceledException)
         {
             return Result<Order>.Failure(ErrorCode.Cancelled, Array.Empty<string>());
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected failure when creating order for {CustomerId}", command.CustomerId);
+            return Result<Order>.Failure(ErrorCode.Unexpected, new[] { "Unexpected failure" });
+        }
     }
 }
 
-public sealed record CreateOrderCommand(Guid CustomerId, IReadOnlyCollection<CreateOrderLine> Lines);
+public sealed record CreateOrderCommand(Guid CustomerId, IReadOnlyCollection<CreateOrderLine> Lines, string CorrelationId);
 
 public sealed record CreateOrderLine(string Sku, int Quantity);
 

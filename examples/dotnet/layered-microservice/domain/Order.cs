@@ -23,18 +23,19 @@ public sealed class Order
 
     public static Order Create(Guid customerId, IEnumerable<OrderLineDraft> lines, DateTimeOffset createdAt)
     {
+        var orderId = Guid.NewGuid();
         var lineArray = lines.Select(l => new OrderLine(l.Sku, l.Quantity)).ToArray();
         if (lineArray.Length == 0)
         {
-            throw new DomainRuleException("Order must contain at least one line", Guid.Empty);
+            throw new DomainRuleException("Order must contain at least one line", orderId);
         }
 
         if (lineArray.Any(line => line.Quantity <= 0))
         {
-            throw new DomainRuleException("Line quantity must be positive", Guid.Empty);
+            throw new DomainRuleException("Line quantity must be positive", orderId);
         }
 
-        return new Order(Guid.NewGuid(), customerId, lineArray, createdAt);
+        return new Order(orderId, customerId, lineArray, createdAt);
     }
 }
 

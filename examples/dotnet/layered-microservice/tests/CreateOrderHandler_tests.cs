@@ -28,9 +28,11 @@ public sealed class CreateOrderHandlerTests
     [Test]
     public async Task HandleAsync_WhenValid_SavesOrder()
     {
-        var command = new CreateOrderCommand(Guid.NewGuid(), new[] { new CreateOrderLine("SKU", 1) });
+        var command = new CreateOrderCommand(Guid.NewGuid(), new[] { new CreateOrderLine("SKU", 1) }, "corr-1");
         _validator.Setup(v => v.ValidateAsync(command, It.IsAny<CancellationToken>()))
             .ReturnsAsync(new ValidationResult());
+        _repository.Setup(r => r.SaveAsync(It.IsAny<Order>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(Result.Success());
 
         var handler = new CreateOrderHandler(_validator.Object, _repository.Object, _logger.Object, _clock.Object);
 
@@ -43,7 +45,7 @@ public sealed class CreateOrderHandlerTests
     [Test]
     public async Task HandleAsync_WhenDomainRuleFails_ReturnsDomainError()
     {
-        var command = new CreateOrderCommand(Guid.NewGuid(), Array.Empty<CreateOrderLine>());
+        var command = new CreateOrderCommand(Guid.NewGuid(), Array.Empty<CreateOrderLine>(), "corr-2");
         _validator.Setup(v => v.ValidateAsync(command, It.IsAny<CancellationToken>()))
             .ReturnsAsync(new ValidationResult());
 

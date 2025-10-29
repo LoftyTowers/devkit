@@ -7,6 +7,7 @@ using FluentValidation;
 using LayeredMicroservice.Application;
 using LayeredMicroservice.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LayeredMicroservice.Api;
 
@@ -31,7 +32,7 @@ public sealed class OrdersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreateOrderRequest request, CancellationToken cancellationToken)
     {
-        using var scope = _logger.BeginScope(new Dictionary<string, object>
+        using var scope = _logger.BeginScope(new Dictionary<string, object?>
         {
             ["CorrelationId"] = HttpContext.TraceIdentifier,
             ["CustomerId"] = request.CustomerId
@@ -46,19 +47,26 @@ public sealed class OrdersController : ControllerBase
 
         try
         {
-            var result = await _handler.HandleAsync(request.ToCommand(), cancellationToken);
+            var command = request.ToCommand(HttpContext.TraceIdentifier);
+            var result = await _handler.HandleAsync(command, cancellationToken);
             return result.ToActionResult(order => new { order.Id, order.Total });
         }
         catch (OperationCanceledException)
         {
             return Result.Failure(ErrorCode.Cancelled, Array.Empty<string>()).ToActionResult();
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected failure when creating order for {CustomerId}", request.CustomerId);
+            return Result.Failure(ErrorCode.Unexpected, new[] { "Unexpected failure" }).ToActionResult();
+        }
     }
 }
 
 public sealed record CreateOrderRequest(Guid CustomerId, IReadOnlyCollection<OrderLineRequest> Lines)
 {
-    public CreateOrderCommand ToCommand() => new(CustomerId, Lines.Select(l => new CreateOrderLine(l.Sku, l.Quantity)).ToArray());
+    public CreateOrderCommand ToCommand(string correlationId) =>
+        new(CustomerId, Lines.Select(l => new CreateOrderLine(l.Sku, l.Quantity)).ToArray(), correlationId);
 }
 
 public sealed record OrderLineRequest(string Sku, int Quantity);

@@ -3,6 +3,10 @@
 
 ---
 
+### Start Here
+The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/).
+It demonstrates the full layered structure (API → Application → Domain → Infrastructure → Shared → Tests).
+
 ## 🚀 Setup Instructions
 
 ### 1. Clone or download this DevKit

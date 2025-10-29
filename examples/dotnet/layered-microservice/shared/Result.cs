@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace LayeredMicroservice.Shared;
 
-public record Result
+public class Result
 {
-    private Result(bool isSuccess, ErrorCode? code, IReadOnlyCollection<string> errors)
+    protected Result(bool isSuccess, ErrorCode? code, IReadOnlyCollection<string> errors)
     {
         IsSuccess = isSuccess;
         Code = code;
@@ -20,10 +20,13 @@ public record Result
     public static Result Success() => new(true, null, Array.Empty<string>());
 
     public static Result Failure(ErrorCode code, IEnumerable<string> errors) =>
-        new(false, code, errors as IReadOnlyCollection<string> ?? errors.ToArray());
+        new(false, code, Materialise(errors));
+
+    protected static IReadOnlyCollection<string> Materialise(IEnumerable<string> errors) =>
+        errors as IReadOnlyCollection<string> ?? errors.ToArray();
 }
 
-public record Result<T>(T? Value) : Result(true, null, Array.Empty<string>())
+public class Result<T> : Result
 {
     private Result(T? value, bool isSuccess, ErrorCode? code, IReadOnlyCollection<string> errors)
         : base(isSuccess, code, errors)
@@ -31,10 +34,10 @@ public record Result<T>(T? Value) : Result(true, null, Array.Empty<string>())
         Value = value;
     }
 
-    public new T? Value { get; }
+    public T? Value { get; }
 
     public static Result<T> Success(T value) => new(value, true, null, Array.Empty<string>());
 
     public static Result<T> Failure(ErrorCode code, IEnumerable<string> errors) =>
-        new(default, false, code, errors as IReadOnlyCollection<string> ?? errors.ToArray());
+        new(default, false, code, Materialise(errors));
 }
