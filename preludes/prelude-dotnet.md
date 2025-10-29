@@ -1,7 +1,17 @@
-﻿Include prelude-general.md, then apply .NET specifics:
+Include prelude-general.md, then apply .NET specifics:
 - languages/dotnet/style.md
 - languages/dotnet/libraries.md
 - languages/dotnet/design-recipes.md
+
+### Layer Rules Quick Check
+| Layer | Guard rails |
+|---|---|
+| API | Validate with FluentValidation, open logging scope with correlation, map results via `ToActionResult()`, catch cancellation to return 499. |
+| Application | Validate commands, invoke domain factories, call ports, translate port failures to `Result<T>`, log context but no HTTP types. |
+| Domain | Pure business rules only, throw `DomainRuleException` on invariant breach, no logging/IO/time lookups. |
+| Infrastructure | Implement ports, map external failures to `ErrorCode` before returning, never embed domain rules. |
+| Shared | Keep primitives/framework helpers (`Result`, `ErrorCode`, `IClock`, mapping extensions) consistent across layers. |
+| Tests | Use NUnit + Moq, cover happy/error/cancellation, assert exact HTTP codes via `ToActionResult()`. |
 
 - Public async APIs: name ends with Async and accept CancellationToken.
 - BeginScope includes CorrelationId and key ids (OrderId/PaymentId).
@@ -41,7 +51,7 @@ All failures should use `ErrorCode` enum values instead of string literals:
 Use:
 ```csharp
 Result.Failure(ErrorCode.Validation, "Amount must be greater than zero.")
-
+```
 
 ### IDs & scope (must follow)
 - Controller must not fabricate IDs (e.g., `PaymentId`). If not present in request, omit it from `BeginScope`.

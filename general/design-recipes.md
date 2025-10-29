@@ -1,4 +1,14 @@
-﻿# Design Recipes (technology-neutral)
+# Design Recipes (technology-neutral)
+
+## When to add a seam
+| Trigger | Add a seam via |
+|---|---|
+| Crossing an IO boundary (HTTP, DB, queue, filesystem) | Port + Adapter |
+| Two or more real variants need swapping at runtime | Strategy or Factory |
+| Optional behaviour toggled by feature flag or policy | Decorator |
+| Integration owned by another team/vendor | Port + Adapter |
+
+See also: examples under `examples/dotnet/patterns/` and the layered microservice walkthrough.
 
 ## Endpoint recipe
 - Keep controllers/edges thin; delegate to a handler/service.
@@ -9,7 +19,7 @@ See: examples/dotnet/design-recipes/api-endpoint/OrdersController.cs
 
 ## Validation flow
 - Declarative rules near DTO.
-- Fail fast; aggregate errors for 400 responses; donâ€™t throw for control flow.
+- Fail fast; aggregate errors for 400 responses; don't throw for control flow.
 See: examples/dotnet/design-recipes/validation/PayRequestValidator.cs
 
 ## Result -> ProblemDetails mapping
@@ -21,5 +31,3 @@ See: examples/dotnet/design-recipes/problem-details/ResultAndMapper.cs
 - Log meaningful events (start/end, external I/O).
 - Use scopes to attach correlation id and entity ids.
 - (Optional) metrics/tracing if the platform supports it.
-
-

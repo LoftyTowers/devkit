@@ -1,3 +1,4 @@
+// See examples/dotnet/layered-microservice for the canonical layered structure.
 namespace DevKit.Examples.ApiEndpoint;
 
 public sealed class PayRequestValidator : AbstractValidator<PayRequest>
