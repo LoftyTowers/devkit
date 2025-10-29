@@ -1,0 +1,39 @@
+﻿@'
+# Patterns
+
+## Extensibility decision table
+| Situation | Use | Rationale | Example trigger |
+|---|---|---|---|
+| Talking to HTTP/DB/Queue/FS | **Port + Adapter** | External boundary; testable seam | Replace gateway, fake in tests |
+| Multiple algorithms/variants | **Strategy** | Swap behaviour by type/rule | Payment method, pricing rules |
+| Construction differs by env/config | **Factory** | Centralise creation; hide wiring | Sandbox vs prod gateway |
+| Add concerns around existing flow | **Decorator** | Add logging/caching/metrics | Cache read models; log at edges |
+| Refactor big if/else with data-driven steps | **Template/Policy/Chain** | Stable flow with varying steps | Risk checks, approval chains |
+
+> Default to **no pattern**. Use the simplest thing that meets the need.
+
+See: examples/dotnet/design-recipes/api-endpoint/OrdersController.cs
+
+## Testing recipe (.NET)
+
+- Test framework: **NUnit** + **Moq** + **FluentAssertions**.
+- Keep tests in a **separate test project**. Do not place tests in controller files.
+- Assert **exact** status codes (400 for validation; 422 for domain failures; 500 only for unexpected).
+- Use clear arrange/act/assert; keep tests short and focused.
+
+See: examples/dotnet/design-recipes/api-endpoint/OrdersController_tests.cs
+
+## Class recipe (service/handler)
+
+- Constructor DI all collaborators (logger, validator, clock, gateway, repo).
+- Validate inputs early (validator or guard clauses).
+- Return `Result/Result<T>` for expected outcomes; throw for unexpected.
+- No HTTP types in domain/application layers.
+
+See `examples/dotnet/design-recipes/class-service/PaymentService.cs`
+
+### Composition root (Program.cs)
+- Register validators using assembly scanning (FluentValidation).
+- Register gateways/repos with appropriate lifetimes.
+- Prefer typed clients or factories when the dependency varies per call.
+
