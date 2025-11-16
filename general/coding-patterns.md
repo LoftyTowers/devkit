@@ -8,7 +8,7 @@
 | Optional concern toggled by feature flag/plugin | **Decorator** |
 | Integration owned by another team/vendor | **Port + Adapter** |
 
-Always cite the trigger in your PR/commit when you introduce a seam; otherwise prefer the simplest implementation.
+Always cite the trigger in your PR/commit when you introduce a seam; otherwise prefer the simplest DevKit-style implementation.
 
 ## Strategy
 Use when behaviour varies by type/rule/flag. Avoid if only one variant and no near-term need.

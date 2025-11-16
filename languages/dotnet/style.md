@@ -1,5 +1,4 @@
-﻿@'
-# Style
+﻿# Style
 
 ## XML Comments Guidelines
 Use XML comments only where they add real value:
@@ -22,7 +21,6 @@ Use XML comments only where they add real value:
 - Validation: **FluentValidation** for request/DTO validation.
 - Test method names: <Method>_<Condition>_<ExpectedOutcome> (e.g., PayAsync_InvalidInput_ReturnsBadRequest)
 - HTTP resilience (when needed): **Polly** policies (timeouts, retries with backoff, circuit breaker).
-'@ | Out-File 'G:\Programming\devkit\style.md' -Encoding utf8
 
 ## Extensibility heuristics
 - **Seams at boundaries**: wrap external I/O in interfaces (ports), implement adapters.

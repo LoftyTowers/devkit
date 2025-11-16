@@ -11,7 +11,7 @@ Apply these by default (no need to be asked):
 8) Performance: avoid N+1 and wasteful I/O; measure before optimising.
 
 ## Extensibility (pragmatic)
-- Prefer **KISS** by default. Add seams only where change is **likely**.
+- Prefer **KISS inside the DevKit style** by default. Add seams only where change is **likely**.
 - Add an abstraction when at least one is true:
   1) External dependency (HTTP, DB, queue, filesystem) → isolate behind a port/interface.
   2) Clear **variation points** now or in the near roadmap (≥2 real variants).
