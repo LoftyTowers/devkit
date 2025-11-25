@@ -58,10 +58,10 @@ Operational classes must use the following:
 - error handling,
 - and testing.
 
-### DI policy (global)
-- For ANY class you generate, use **constructor injection** for collaborators.
-- Do not construct collaborators with `new` inside methods.
-- Use static methods only for pure, stateless helpers.
+### DI Policy (operational classes)
+- Operational classes must follow the DI rules in `general/operational-contract.md`. Other classes may use constructor injection where useful but are not required to follow operational DI rules.
+- Static helpers are allowed only when pure. Domain/value objects and simple utility classes
+- should remain simple and should not be forced through operational DI rules.
 
 After generating new code, you must mentally apply the "New Feature Checklist" in `general/checklists.md`.
 If any item would fail, you must adjust the code so that all items pass.

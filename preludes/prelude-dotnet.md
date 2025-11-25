@@ -5,6 +5,10 @@ Include preludes/prelude-general.md, then apply .NET specifics:
 
 ## Workflow you must follow when generating .NET code
 
+Operational classes (HTTP endpoints, handlers, sagas, workers, CLI commands) must follow
+`general/operational-contract.md`. Domain entities, value objects, pure utilities, repositories,
+and configuration types follow general style guidance but do not use operational rules.
+
 For any non-trivial piece of code (endpoint, service, repository, background job, etc.):
 
 1. **Locate relevant DevKit rules and examples**:
