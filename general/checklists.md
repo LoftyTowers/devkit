@@ -1,48 +1,68 @@
 ﻿## Feature DoD
-- Tests updated/added (unit; integration if boundary touched)
-- Structured logs at meaningful points
-- Errors mapped (Result<T>/ProblemDetails)
-- Docs updated (README/ADR)
-- Perf/security considered briefly
-- Migrations safe (if data changed)
-- Async public APIs include CancellationToken and are suffixed Async.
-- Error mapping covers Validation(400), Domain(422), Unexpected(500).
-- Structured logging includes CorrelationId + key identifiers in scope.
-- Tests cover happy path + invalid input; assert exact HTTP status codes.
-- DevKit self-check passed (Async+CT, scope keys, Result code, 400/422/500 mapping, edge try/catch, tests assert status, no unjustified seams).
+- Tests updated/added (unit; integration if a boundary is touched).
+- Structured logs at meaningful points.
+- Docs updated (README/ADR).
+- Perf/security considered briefly.
+- Migrations safe (if data changed).
+- Async public APIs include CancellationToken and are suffixed `Async`.
 - All classes use **constructor DI** for collaborators (logger, validator, repos, gateways, clock).
 - No service locator, no static singletons for shared state.
 - Only pure helpers are static.
-- If a new seam added, a one-line reason is present in code.
-
 - Extensibility considered using the decision table:
   - [ ] External boundary behind a port (if applicable)
   - [ ] Real variation → Strategy (only if ≥2 variants now/soon)
   - [ ] Construction differs → Factory (config/env)
   - [ ] Cross-cut → Decorator (logging/caching/metrics)
   - [ ] Otherwise: no pattern (keep it simple)
-- One-line note explaining any new seam’s purpose.
+- One-line note explaining any new seam’s purpose and trigger (why it exists).
+
+If the feature touches an HTTP boundary:
+
+- Errors mapped using `Result` / `Result<T>` + `ErrorCode` via a central helper (e.g. ProblemDetails).
+- Error mapping covers Validation (400), Domain (422), Unexpected (500).
+- Structured logging includes CorrelationId (TraceIdentifier) + key identifiers in scope.
+- Tests cover happy path + invalid input; assert exact HTTP status codes.
+- DevKit self-check passed for HTTP code (Async+CT, scope keys, Result+ErrorCode mapping, 400/422/500, edge try/catch, tests assert status, no unjustified seams).
+
+---
 
 ## PR Review
-Correctness • Boundaries • Tests • Logging • Security • Performance • Docs
+**Correctness • Boundaries • Tests • Logging • Security • Performance • Docs**
 
-- Over-engineering guard: Did we add an interface/class without a real boundary or variation?
-- Patterns used match the triggers; else recommend simpler code.
+- Over-engineering guard: did we add an interface/class without a real boundary or variation?
+- Patterns used match the triggers; otherwise recommend simpler code.
+
+---
 
 ## Package guard (dotnet)
 - [ ] Does any file reference types from packages not in the `.csproj`?
-- [ ] If yes, either add the PackageReference or output `dotnet add package ...` commands.
+- [ ] If yes, either add the `PackageReference` or output the `dotnet add package ...` commands.
 - [ ] Confirm `Directory.Build.props` has `<ImplicitUsings>enable</ImplicitUsings>`.
 
-## New Feature Checklist (AI must apply all)
+---
 
-For any new endpoint / feature:
+## Operational Checklist (AI must apply all)
 
-- [ ] Uses Result / Result<T> and ErrorCode enum for ALL errors.
-- [ ] Uses CancellationToken on async methods and passes it through the stack.
-- [ ] Validates input with FluentValidation and returns ErrorCode.Validation on failure.
-- [ ] Uses logging scope with CorrelationId / TraceIdentifier.
-- [ ] No `new` of dependencies inside controllers / endpoints (DI only).
-- [ ] Tests cover: success, validation failure, domain failure, cancelled, unexpected.
+For any new **operational** class (handles input or orchestrates work, e.g. endpoint, handler, saga, worker, CLI):
 
-If any item is not met, change the code to comply BEFORE considering the feature complete.
+- [ ] Uses a typed `Result` / `Result<T>` and an `ErrorCode` enum (or equivalent error categories) for all outcomes.
+- [ ] Uses `CancellationToken` on async methods and passes it through to async collaborators.
+- [ ] Validates input at the edge (DTO/message/command) and treats validation failure as an error outcome (e.g. `ErrorCode.Validation`).
+- [ ] Uses a structured logging scope with a correlation/trace identifier when available.
+- [ ] No `new` of collaborators inside methods (DI only via constructor).
+- [ ] Tests cover: success, validation failure, unexpected error, and cancellation (where supported).
+
+---
+
+## HTTP Endpoint Checklist (AI must apply all)
+
+For any new HTTP endpoint or controller:
+
+- [ ] Maps `Result` / `Result<T>` + `ErrorCode` to HTTP status codes consistently (e.g. Validation → 400, Domain → 422, Unexpected → 500).
+- [ ] Uses ProblemDetails (or the project’s mapping helper) for error responses.
+- [ ] Uses FluentValidation for request DTOs and converts validation failures into appropriate 4xx responses.
+- [ ] Uses a logging scope that includes `HttpContext.TraceIdentifier` as CorrelationId plus key identifiers (e.g. UserId, Email, OrderId).
+- [ ] Never `new` services; all dependencies resolved via DI.
+- [ ] Tests assert exact HTTP responses for: success, validation failure, domain failure, cancelled, and unexpected errors.
+
+If any item in the Operational or HTTP checklist is not met (where applicable), change the code and/or tests to comply **before** considering the feature complete.
