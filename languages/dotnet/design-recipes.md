@@ -49,3 +49,10 @@ See `examples/dotnet/design-recipes/class-service/PaymentService.cs`
 - Register validators using assembly scanning (FluentValidation).
 - Register gateways/repos with appropriate lifetimes.
 - Prefer typed clients or factories when the dependency varies per call.
+
+### Dependencies
+- Required NuGet (edit `.csproj` or emit install commands):
+  - `FluentValidation (>=12.0.0)`
+- Required usings in controllers/services:
+  - Controllers: `Microsoft.AspNetCore.Mvc`, `Microsoft.Extensions.Logging`, `FluentValidation`, `System.Linq`, `System.Collections.Generic`
+  - Services: `Microsoft.Extensions.Logging`, `System.Collections.Generic` (if logging scopes)

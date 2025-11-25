@@ -1,22 +1,67 @@
-﻿Apply the general rules:
-- general/charter.md
+﻿Before generating or editing code, read and follow:
+
 - general/engineering-style.md
 - general/coding-patterns.md
+- general/house-style-contract.md
+- general/charter.md
 - general/design-recipes.md
+- general/operational-contract.md
 - general/checklists.md
 
-When designing:
-1) Prefer the simplest code first (KISS). Avoid speculative seams (YAGNI).
-2) Consult the decision table in coding-patterns.md. Only add a pattern if a trigger applies.
-3) If a pattern is chosen, cite the trigger and add a one-line reason in code comments.
 
-Output for any task:
-- summary + trade-offs,
-- minimal patch,
-- tests,
-- notes (logging/error/docs/perf).
+### When designing:
+
+1) Prefer the simplest DevKit-style solution first.
+
+   “Simple” does NOT mean generic tutorial code.
+
+   “Simple” means:
+   - follow the DevKit structure (Result/ErrorCode, validation, DI, logging scopes),
+   - keep functions small and readable,
+   - avoid unnecessary abstractions UNTIL a DevKit trigger applies.
+
+   If the DevKit has an example in a similar area, copy its structure and adapt it.
+   Never fall back to global/default coding patterns when the DevKit offers a precedent.
+
+2) Only add patterns (factory/strategy/decorator/etc.) when a trigger in
+   `general/coding-patterns.md` applies. Avoid speculative seams (YAGNI).
+
+3) If you introduce a pattern:
+   - cite the trigger in a short comment,
+   - copy the closest DevKit example and adapt it.
+
+Operational classes include:
+
+- HTTP endpoints/controllers
+- NServiceBus handlers and sagas
+- message consumers
+- background workers
+- CLI/command handlers
+- top-level orchestrators in the application layer
+
+Do NOT apply these rules to:
+
+- domain entities
+- value objects
+- pure utilities
+- repositories
+- configuration/option objects
+- EF Core DbContexts
+- infrastructure models
+
+Operational classes must use the following:
+
+- dependency injection,
+- async and cancellation,
+- logging and scopes,
+- validation,
+- error handling,
+- and testing.
 
 ### DI policy (global)
 - For ANY class you generate, use **constructor injection** for collaborators.
 - Do not construct collaborators with `new` inside methods.
 - Use static methods only for pure, stateless helpers.
+
+After generating new code, you must mentally apply the "New Feature Checklist" in `general/checklists.md`.
+If any item would fail, you must adjust the code so that all items pass.

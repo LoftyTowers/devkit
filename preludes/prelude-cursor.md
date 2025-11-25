@@ -1,8 +1,8 @@
 ﻿Apply local rules from .devkit:
-- charter.md
-- style.md
-- patterns.md
-- checklists.md
+- general/charter.md
+- languages/dotnet/style.md
+- general/coding-patterns.md
+- general/checklists.md
 
 Tasks must include:
 - summary + trade-offs (brief),
@@ -21,3 +21,5 @@ If none apply, say “no pattern needed” and keep it simple.
 For any seam added, include a one-line reason: “Seam for X because Y”.
 
 Keep code simple; follow the patterns. Do not skip tests or logging where they add value.
+
+If you cannot modify `.csproj`, output a final section titled **“Packages to install”** with exact `dotnet add package` commands. Do not omit this if build would fail without packages.

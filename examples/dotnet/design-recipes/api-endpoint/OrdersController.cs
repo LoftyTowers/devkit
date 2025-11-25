@@ -43,36 +43,23 @@ public sealed class OrdersController : ControllerBase
 
         try
         {
-            // Validate request at the edge
             var validation = await _validator.ValidateAsync(request, cancellationToken);
             if (!validation.IsValid)
-            {
-                var errors = validation.Errors.Select(e => e.ErrorMessage);
-                var failure = Result<object>.Failure(ErrorCode.Validation, errors);
-                return this.ToActionResult(failure);
-            }
+                return this.ToActionResult(Result<PaymentReceipt>.Failure(
+                    ErrorCode.Validation, validation.Errors.Select(e => e.ErrorMessage)));
 
-            _logger.LogInformation("Processing payment for Order {OrderId} with PaymentId {PaymentId} and Amount {Amount}",
-                id, request.PaymentId, request.Amount);
-
-            // Simulate the async work (e.g., calling a payment gateway)
-            await Task.Delay(10, cancellationToken);
-
-            _logger.LogInformation("Payment processed for Order {OrderId}", id);
-
-            return this.ToActionResult(Result<object>.Success(new { Success = true }));
+            var result = await _orderService.PayAsync(id, request.PaymentId, request.Amount, cancellationToken);
+            return this.ToActionResult(result);
         }
         catch (OperationCanceledException)
         {
-            // Policy choice: 499 ('Client Closed Request') is common; 400 is acceptable if you prefer.
             _logger.LogInformation("Payment cancelled for Order {OrderId}", id);
-            return this.ToActionResult(Result<object>.Failure(ErrorCode.Cancelled, Array.Empty<string>()));
+            return this.ToActionResult(Result<PaymentReceipt>.Failure(ErrorCode.Cancelled, Array.Empty<string>()));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected error while paying for Order {OrderId}", id);
-            var failure = Result<object>.Failure(ErrorCode.Unexpected, new[] { "An unexpected error occurred." });
-            return this.ToActionResult(failure);
+            return this.ToActionResult(Result<PaymentReceipt>.Failure(ErrorCode.Unexpected, "An unexpected error occurred."));
         }
     }
 }

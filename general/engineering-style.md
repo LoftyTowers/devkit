@@ -1,6 +1,6 @@
 ﻿# Engineering Style (language-agnostic)
 
-- Keep code simple (KISS); avoid speculative hooks (YAGNI).
+- Keep code simple within the DevKit architecture (KISS); avoid speculative hooks (YAGNI).
 - Boundaries: high cohesion, low coupling; explicit interfaces at seams.
 - Async: suffix Async; accept cancellation tokens/handles in public async APIs.
 - Errors: handle at edges; return domain results internally; never swallow exceptions.
