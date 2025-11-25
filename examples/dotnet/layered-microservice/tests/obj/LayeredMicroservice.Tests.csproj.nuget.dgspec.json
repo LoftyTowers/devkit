@@ -1,0 +1,111 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\Programming\\devkit\\examples\\dotnet\\layered-microservice\\tests\\LayeredMicroservice.Tests.csproj": {}
+  },
+  "projects": {
+    "G:\\Programming\\devkit\\examples\\dotnet\\layered-microservice\\tests\\LayeredMicroservice.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Programming\\devkit\\examples\\dotnet\\layered-microservice\\tests\\LayeredMicroservice.Tests.csproj",
+        "projectName": "LayeredMicroservice.Tests",
+        "projectPath": "G:\\Programming\\devkit\\examples\\dotnet\\layered-microservice\\tests\\LayeredMicroservice.Tests.csproj",
+        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
+        "outputPath": "G:\\Programming\\devkit\\examples\\dotnet\\layered-microservice\\tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "(, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

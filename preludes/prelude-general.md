@@ -5,7 +5,9 @@
 - general/house-style-contract.md
 - general/charter.md
 - general/design-recipes.md
+- general/operational-contract.md
 - general/checklists.md
+
 
 ### When designing:
 
@@ -28,6 +30,33 @@
    - cite the trigger in a short comment,
    - copy the closest DevKit example and adapt it.
 
+Operational classes include:
+
+- HTTP endpoints/controllers
+- NServiceBus handlers and sagas
+- message consumers
+- background workers
+- CLI/command handlers
+- top-level orchestrators in the application layer
+
+Do NOT apply these rules to:
+
+- domain entities
+- value objects
+- pure utilities
+- repositories
+- configuration/option objects
+- EF Core DbContexts
+- infrastructure models
+
+Operational classes must use the following:
+
+- dependency injection,
+- async and cancellation,
+- logging and scopes,
+- validation,
+- error handling,
+- and testing.
 
 ### DI policy (global)
 - For ANY class you generate, use **constructor injection** for collaborators.

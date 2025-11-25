@@ -9,7 +9,13 @@
 | Integration owned by another team/vendor | Port + Adapter |
 
 See also: examples under `examples/dotnet/patterns/` and the layered microservice walkthrough.
-Always import the shared primitives from `examples/dotnet/layered-microservice/shared/`; never duplicate `Result`, `ErrorCode`, or related helpers in new samples.
+Use the shared primitives under `examples/dotnet/layered-microservice/shared` as the **canonical pattern** for `Result`, `ErrorCode`, and mapping helpers.
+
+When you need these concepts in a project:
+- define them locally in that project’s own namespaces,
+- shape them after the DevKit examples,
+- do **not** reference or compile `.devkit` files directly.
+
 
 ## Endpoint recipe
 - Keep controllers/edges thin; delegate to a handler/service.
