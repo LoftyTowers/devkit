@@ -1,3 +1,14 @@
+// NOTE: Canonical ErrorCode/Result/ResultExtensions live in examples/dotnet/layered-microservice/shared/.
+// For real code, import those instead of re-defining types.
+// See examples/dotnet/layered-microservice for the canonical layered structure.
+// using layered shared primitives from: examples/dotnet/layered-microservice/shared
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentValidation;
+using LayeredMicroservice.Shared;
+using Microsoft.Extensions.Logging;
+
 namespace DevKit.Examples.ClassService;
 
 public interface IPaymentGateway
@@ -43,14 +54,14 @@ public sealed class PaymentService
     {
         var validation = await _validator.ValidateAsync(cmd, ct);
         if (!validation.IsValid)
-            return Result<PaymentReceipt>.Failure("Validation", validation.ErrorsToMessages());
+            return Result<PaymentReceipt>.Failure(ErrorCode.Validation, validation.ErrorsToMessages());
 
         using var _ = _log.BeginScope(new { cmd.OrderId, cmd.PaymentId, CorrelationId = Guid.NewGuid() });
 
         try
         {
             var paid = await _gateway.PayAsync(cmd.OrderId, cmd.PaymentId, cmd.Amount, ct);
-            if (!paid.IsSuccess) return Result<PaymentReceipt>.Failure("Domain", paid.Errors);
+            if (!paid.IsSuccess) return Result<PaymentReceipt>.Failure(paid.Code ?? ErrorCode.Unexpected, paid.Errors);
 
             var receipt = new PaymentReceipt(cmd.OrderId, cmd.PaymentId, cmd.Amount, _clock.UtcNow);
             return Result<PaymentReceipt>.Success(receipt);
@@ -58,12 +69,12 @@ public sealed class PaymentService
         catch (OperationCanceledException)
         {
             _log.LogInformation("Payment cancelled for {OrderId}", cmd.OrderId);
-            return Result<PaymentReceipt>.Failure("Cancelled", "Operation cancelled.");
+            return Result<PaymentReceipt>.Failure(ErrorCode.Cancelled, new[] { "Operation cancelled." });
         }
         catch (Exception ex)
         {
             _log.LogError(ex, "Unexpected error processing payment {OrderId}", cmd.OrderId);
-            return Result<PaymentReceipt>.Failure("Unexpected", "Unexpected error.");
+            return Result<PaymentReceipt>.Failure(ErrorCode.Unexpected, new[] { "Unexpected error." });
         }
     }
 }

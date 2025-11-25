@@ -1,11 +1,23 @@
-﻿Include prelude-general.md, then apply .NET specifics:
+Include prelude-general.md, then apply .NET specifics:
 - languages/dotnet/style.md
 - languages/dotnet/libraries.md
 - languages/dotnet/design-recipes.md
 
+### Layer Rules Quick Check
+| Layer | Guard rails |
+|---|---|
+| API | Validate with FluentValidation, open logging scope with correlation, map results via `ToActionResult()`, catch cancellation to return 499. |
+| Application | Validate commands, invoke domain factories, call ports, translate port failures to `Result<T>`, log context but no HTTP types. |
+| Domain | Pure business rules only, throw `DomainRuleException` on invariant breach, no logging/IO/time lookups. |
+| Infrastructure | Implement ports, map external failures to `ErrorCode` before returning, never embed domain rules. |
+| Shared | Keep primitives/framework helpers (`Result`, `ErrorCode`, `IClock`, mapping extensions) consistent across layers. |
+| Tests | Use NUnit + Moq, cover happy/error/cancellation, assert exact HTTP codes via `ToActionResult()`. |
+
+### Style Rules Quick Check
+- Follow the [XML Comments Guidelines](../languages/dotnet/style.md#xml-comments-guidelines); only document public APIs or nuanced behaviour.
 - Public async APIs: name ends with Async and accept CancellationToken.
 - BeginScope includes CorrelationId and key ids (OrderId/PaymentId).
-- All failures use Result<T>.Failure(code, errors).
+- All failures use `Result<T>.Failure(code, errors)`.
 - Map errors: 400 Validation, 422 Domain, 500 Unexpected at edges.
 - Controller edge has try/catch for unexpected and cancellation cases.
 - Tests assert exact status codes.
@@ -22,10 +34,7 @@
 
 ### HTTP mapping (must follow)
 - Never return `Result` types directly to clients.
-- Always map via the DevKit helper `MapResult` → **ProblemDetails**:
-  - `"Validation"` → 400, Title: "Validation Failed"
-  - `"Domain"` → 422, Title: "Operation Failed"
-  - default → 500, Title: "Unexpected error"
+- Always map via `ResultExtensions.ToActionResult()` so `ErrorCode.Validation` → 400, `ErrorCode.Domain` → 422, `ErrorCode.Cancelled` → 499, and `ErrorCode.Unexpected` → 500.
 
 ### ErrorCode Enum Convention
 
@@ -41,7 +50,7 @@ All failures should use `ErrorCode` enum values instead of string literals:
 Use:
 ```csharp
 Result.Failure(ErrorCode.Validation, "Amount must be greater than zero.")
-
+```
 
 ### IDs & scope (must follow)
 - Controller must not fabricate IDs (e.g., `PaymentId`). If not present in request, omit it from `BeginScope`.

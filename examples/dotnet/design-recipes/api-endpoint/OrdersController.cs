@@ -1,3 +1,17 @@
+// NOTE: Canonical ErrorCode/Result/ResultExtensions live in examples/dotnet/layered-microservice/shared/.
+// For real code, import those instead of re-defining types.
+// See examples/dotnet/layered-microservice for the canonical layered structure.
+// using layered shared primitives from: examples/dotnet/layered-microservice/shared
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentValidation;
+using LayeredMicroservice.Shared;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 namespace DevKit.Examples.ApiEndpoint;
 
 [ApiController]
@@ -34,7 +48,8 @@ public sealed class OrdersController : ControllerBase
             if (!validation.IsValid)
             {
                 var errors = validation.Errors.Select(e => e.ErrorMessage);
-                return this.ToActionResult(Result<object>.Failure(ErrorCode.Validation, errors.ToArray()));
+                var failure = Result<object>.Failure(ErrorCode.Validation, errors);
+                return this.ToActionResult(failure);
             }
 
             _logger.LogInformation("Processing payment for Order {OrderId} with PaymentId {PaymentId} and Amount {Amount}",
@@ -51,18 +66,13 @@ public sealed class OrdersController : ControllerBase
         {
             // Policy choice: 499 ('Client Closed Request') is common; 400 is acceptable if you prefer.
             _logger.LogInformation("Payment cancelled for Order {OrderId}", id);
-            return StatusCode(499);
+            return this.ToActionResult(Result<object>.Failure(ErrorCode.Cancelled, Array.Empty<string>()));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected error while paying for Order {OrderId}", id);
-            var pd = new ProblemDetails
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                Title  = "Unexpected error",
-                Detail = "An unexpected error occurred."
-            };
-            return new ObjectResult(pd) { StatusCode = pd.Status };
+            var failure = Result<object>.Failure(ErrorCode.Unexpected, new[] { "An unexpected error occurred." });
+            return this.ToActionResult(failure);
         }
     }
 }

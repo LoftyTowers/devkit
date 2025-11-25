@@ -1,5 +1,18 @@
-﻿@'
 # Patterns
+
+## Where each recipe lives
+| Recipe | Layer | Canonical example |
+|---|---|---|
+| API endpoint | API | [layered microservice API](../../examples/dotnet/layered-microservice/api/README.md) |
+| Validation | API / Application | [request validator](../../examples/dotnet/layered-microservice/api/OrdersController.cs) |
+| Service/handler | Application | [create order handler](../../examples/dotnet/layered-microservice/application/CreateOrderHandler.cs) |
+| Result + ProblemDetails | Shared | [result primitives](../../examples/dotnet/layered-microservice/shared/README.md) |
+| Domain rules | Domain | [order aggregate](../../examples/dotnet/layered-microservice/domain/Order.cs) |
+| Infrastructure adapter | Infrastructure | [SQL repository](../../examples/dotnet/layered-microservice/infrastructure/SqlOrderRepository.cs) |
+| Tests | Tests | [status mapping tests](../../examples/dotnet/layered-microservice/tests/README.md) |
+
+See [examples/dotnet/layered-microservice](../../examples/dotnet/layered-microservice/) for the canonical layered structure, then return here for focused recipes.
+All samples must reference the shared primitives in `examples/dotnet/layered-microservice/shared/` rather than redefining `Result`, `ErrorCode`, or mapping helpers.
 
 ## Extensibility decision table
 | Situation | Use | Rationale | Example trigger |
@@ -36,4 +49,3 @@ See `examples/dotnet/design-recipes/class-service/PaymentService.cs`
 - Register validators using assembly scanning (FluentValidation).
 - Register gateways/repos with appropriate lifetimes.
 - Prefer typed clients or factories when the dependency varies per call.
-

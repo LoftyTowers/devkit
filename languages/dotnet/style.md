@@ -1,6 +1,13 @@
 ﻿@'
 # Style
 
+## XML Comments Guidelines
+Use XML comments only where they add real value:
+- ✅ Public API boundaries (controllers, DTOs, public interfaces)
+- ✅ Non-obvious behaviour or invariants
+- 🚫 Omit for short private methods and clear domain types
+- 🧭 Keep summaries short and imperative ("Processes payment requests.")
+
 - Naming: PascalCase for public; _camelCase for private fields; clear, no abbreviations.
 - Async methods: suffix Async; always accept CancellationToken on public async APIs.
 - Catch OperationCanceledException at edges and log with level Information.
