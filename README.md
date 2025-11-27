@@ -35,16 +35,29 @@ cd path/to/your/project
 bash G:/Programming/devkit/tools/sync-ai.sh .devkit
 ```
 
+This creates a hidden `.devkit/` folder inside your project containing the latest DevKit rules, style guides, examples, and preludes.
+
 ---
 
 ### 3. Keep DevKit out of Git
-Add a local exclude so `.devkit/` never lands in commits:
+Run this once in each client repo to prevent accidental commits:
 
-```bash
-echo ".devkit/" >> .git/info/exclude
+```powershell
+powershell -ExecutionPolicy Bypass -File G:\Programming\devkit\tools\setup-hooks.ps1
 ```
 
-This keeps the synced guidance private to your machine while letting you update it freely.
+This does two things:
+1. Adds `.devkit/` to your `.git/info/exclude` (local ignore that never syncs to remote).  
+2. Installs a **pre-commit hook** that blocks `.devkit/` or `.local/` files from being committed.
+
+To verify:
+```powershell
+type .git\info\exclude
+```
+You should see:
+```
+.devkit/
+```
 
 ---
 
