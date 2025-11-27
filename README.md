@@ -1,11 +1,10 @@
-﻿# DevKit 🧠  
+# DevKit 🧠
 *A reusable AI-assisted coding framework for senior-level code generation.*
 
 ---
 
 ### Start Here
-The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/).
-It demonstrates the full layered structure (API → Application → Domain → Infrastructure → Shared → Tests).
+The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/), showing the full layered structure (API → Application → Domain → Infrastructure → Shared → Tests). Angular and SQL scaffolds live under `examples/angular` and `examples/SQL`.
 
 ## 🚀 Setup Instructions
 
@@ -20,137 +19,67 @@ git clone https://github.com/LoftyTowers/devkit.git
 
 ---
 
-### 2. Copy the DevKit into a project
-
-When you start a new project (or want to update an existing one), run:
+### 2. Copy the DevKit into a project (or refresh an existing one)
 
 #### On **Windows (PowerShell)**
+From the root of the project you want to seed or update:
 ```powershell
-cd path\to\your\project
-powershell -ExecutionPolicy Bypass -File G:\Programming\devkit\tools\sync-ai.ps1
+& "G:\Programming\devkit\tools\sync-ai.ps1" ".devkit"
 ```
+
+`sync-ai.ps1` mirrors the repo into the target folder (default `.devkit`). Pass a different folder name if you prefer (for example, `.ai`).
 
 #### On **macOS / Linux**
 ```bash
 cd path/to/your/project
-bash G:/Programming/devkit/tools/sync-ai.sh
-```
-
-This creates a hidden `.devkit/` folder inside your project containing the latest DevKit rules, style guides, examples, and preludes.
-
----
-
-### 3. Exclude DevKit from Git
-
-Run this once in each client repo to prevent accidental commits:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File G:\Programming\devkit\tools\setup-hooks.ps1
-```
-
-This does two things:
-1. Adds `.devkit/` to your `.git/info/exclude` (local ignore that never syncs to remote).  
-2. Installs a **pre-commit hook** that blocks `.devkit/` or `.local/` files from being committed.
-
-To verify:
-```powershell
-type .git\info\exclude
-```
-You should see:
-```
-.devkit/
+bash G:/Programming/devkit/tools/sync-ai.sh .devkit
 ```
 
 ---
 
-### 4. (Optional) Run a dry sync to preview changes
+### 3. Keep DevKit out of Git
+Add a local exclude so `.devkit/` never lands in commits:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File G:\Programming\devkit\tools\sync-ai.ps1 -DryRun
+```bash
+echo ".devkit/" >> .git/info/exclude
 ```
 
-This lists files that *would* be updated without touching your current `.devkit`.
+This keeps the synced guidance private to your machine while letting you update it freely.
 
 ---
 
-## ⚙️ How It Works
+## ⚙️ What’s Inside
 
-### Overview
-DevKit provides a **private, personal framework** that guides AI tools (like Cursor, Copilot, or ChatGPT) to write consistent, senior-level code in your preferred style.  
-It’s not a dependency — it’s a local, invisible companion that shapes how AI writes and reviews your code.
-
----
-
-### Folder structure
 ```
 devkit/
+├── examples/             # Worked examples (layered microservice, patterns, Angular, SQL)
 ├── general/              # Shared engineering philosophy, checklists, and design recipes
-├── languages/
-│   ├── dotnet/           # .NET-specific style, recipes, and libraries
-│   └── python/           # Placeholder for other languages
-├── examples/             # Fully-worked code examples (Controllers, Patterns, etc.)
+├── languages/            # Language-specific style, recipes, and libraries (dotnet, etc.)
 ├── preludes/             # AI preload instructions (“what to follow before coding”)
-└── tools/                # Helper scripts to sync and protect DevKit
+└── tools/                # Helper scripts to sync DevKit into projects
 ```
 
----
-
-### Sync process (under the hood)
-When you run a sync script:
-
-- `sync-ai.ps1` or `sync-ai.sh` copies all DevKit content (except `.git`, `.github`, and `tools`) into your target project.  
-- The target folder defaults to `.devkit/`, but you can choose another name (e.g. `.ai/`).
-- A `.last_sync.txt` timestamp records when you last synced.
-- If `.devkit/.local/` exists, it’s preserved — so you can safely keep per-project overrides.
+The sync scripts copy everything except `.git`, `.github`, and `tools` into your target folder using `robocopy` (Windows) or `rsync` (macOS/Linux).
 
 ---
 
-### Integration with AI tools
+## 🧩 Using DevKit with AI tools
 
-Once synced, you can tell any AI assistant:
+Once synced, tell your AI assistant to preload the appropriate prelude, for example:
 
-> “Load and follow the rules in `.devkit/preludes/prelude-dotnet.md` before generating code.”
+> “Load and follow `.devkit/preludes/prelude-dotnet.md` before generating code.”
 
-That prelude acts as a **senior developer’s checklist** — enforcing:
-- Clean architecture & SOLID boundaries  
-- Logging, validation, and error-handling conventions  
-- Proper async + cancellation usage  
-- Standard test coverage (NUnit + Moq + FluentAssertions)  
-- Consistent extensibility and naming patterns  
+That prelude acts as a **senior developer’s checklist** — covering architecture boundaries, validation, logging, async/cancellation, testing patterns, and naming conventions.
 
 ---
 
-### Safe isolation
-- The `.devkit` folder **never appears in version control** (it’s excluded locally).  
-- Clients never see it — but your AI still reads it.  
-- You can freely update your DevKit repo without touching client codebases.
-
----
-
-### Updating across projects
-To update all projects that use your DevKit:
+## 🔁 Updating across projects
 1. Pull the latest changes in `G:\Programming\devkit`.
-2. In each project:
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\tools\sync-ai.ps1
-   ```
-   or re-run:
-   ```bash
-   bash G:/Programming/devkit/tools/sync-ai.sh
-   ```
+2. In each project, rerun the sync command (e.g., `& "G:\Programming\devkit\tools\sync-ai.ps1" ".devkit"`).
 
 ---
 
-### Validation (optional)
-You can check the integrity of your DevKit setup anytime:
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\validate-devkit.ps1
-```
-This confirms that required files, mapping policies, and compliance notes exist.
-
----
-
-### Key principle
+## 🧭 Key principle
 > The DevKit doesn’t write code for you — it teaches your AI *how you* write code.
 
 It’s your architecture, your rules, automated.
