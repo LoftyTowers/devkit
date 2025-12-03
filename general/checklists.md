@@ -1,11 +1,12 @@
 ﻿## Feature DoD
 - Tests updated/added (unit; integration if a boundary is touched).
-- Structured logs at meaningful points.
+- Structured logs at meaningful points (message templates, named properties, log exceptions once at the boundary).
 - Docs updated (README/ADR).
 - Perf/security considered briefly.
 - Migrations safe (if data changed).
-- Async public APIs include CancellationToken and are suffixed `Async`.
-- All classes use **constructor DI** for collaborators (logger, validator, repos, gateways, clock).
+- Async public APIs include `CancellationToken` and are suffixed `Async`.
+- All classes use **constructor DI** for collaborators (logger, validator, repos, gateways, clock) and wrap method bodies in
+  `try/catch` unless an explicit comment explains why not.
 - No service locator, no static singletons for shared state.
 - Only pure helpers are static.
 - Extensibility considered using the decision table:
@@ -22,7 +23,7 @@ If the feature touches an HTTP boundary:
 - Error mapping covers Validation (400), Domain (422), Unexpected (500).
 - Structured logging includes CorrelationId (TraceIdentifier) + key identifiers in scope.
 - Tests cover happy path + invalid input; assert exact HTTP status codes.
-- DevKit self-check passed for HTTP code (Async+CT, scope keys, Result+ErrorCode mapping, 400/422/500, edge try/catch, tests assert status, no unjustified seams).
+- DevKit self-check passed for HTTP code (Async+CT, scope keys, Result+ErrorCode mapping, 400/422/500, full-method try/catch at the boundary with single-point exception logging, tests assert status, no unjustified seams).
 
 ---
 
@@ -36,7 +37,7 @@ If the feature touches an HTTP boundary:
 
 ## Package guard (dotnet)
 - [ ] Does any file reference types from packages not in the `.csproj`?
-- [ ] If yes, either add the `PackageReference` or output the `dotnet add package ...` commands.
+- [ ] If yes, **add the correct `<PackageReference>` entries to the appropriate `.csproj` and show the updated snippet**.
 - [ ] Confirm `Directory.Build.props` has `<ImplicitUsings>enable</ImplicitUsings>`.
 
 ---
@@ -51,6 +52,8 @@ For any new **operational** class (handles input or orchestrates work, e.g. endp
 - [ ] Uses a structured logging scope with a correlation/trace identifier when available.
 - [ ] No `new` of collaborators inside methods (DI only via constructor).
 - [ ] Tests cover: success, validation failure, unexpected error, and cancellation (where supported).
+- [ ] Wraps the full method body in `try/catch` per `languages/dotnet/style.md#exception-handling-canonical` and logs exceptions
+      once at the operational boundary.
 
 ---
 

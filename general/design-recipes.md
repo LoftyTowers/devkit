@@ -35,6 +35,7 @@ See: examples/dotnet/design-recipes/validation/PayRequestValidator.cs
 See: `examples/dotnet/layered-microservice/shared/ResultExtensions.cs`
 
 ## Observability
-- Log meaningful events (start/end, external I/O).
+- Structured logging only (message templates + named properties).
+- Log meaningful events (start/end, external I/O) and keep exception logging at the operational boundary.
 - Use scopes to attach correlation id and entity ids.
 - (Optional) metrics/tracing if the platform supports it.

@@ -22,4 +22,4 @@ For any seam added, include a one-line reason: “Seam for X because Y”.
 
 Keep code simple; follow the patterns. Do not skip tests or logging where they add value.
 
-If you cannot modify `.csproj`, output a final section titled **“Packages to install”** with exact `dotnet add package` commands. Do not omit this if build would fail without packages.
+When generated code requires a library, add the corresponding `<PackageReference>` entries to the correct `.csproj` and show the updated snippet; do not replace this with install commands.

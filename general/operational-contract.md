@@ -1,5 +1,18 @@
 # Operational Contract
 
+## Instruction Precedence
+
+Follow instructions in this order:
+
+1. C# / .NET language and runtime rules
+2. Specific user instructions in the current task
+3. DevKit rules in this repository
+4. Project-specific DevKit overrides
+5. Model defaults
+
+All files in the DevKit must defer to this precedence. If another document lists a different order, replace it with a reference
+to this section.
+
 This contract applies to any code that reacts to input and orchestrates work:
 
 - HTTP controllers / endpoints
@@ -23,12 +36,9 @@ Treat all of these as **operational handlers** and follow the rules below.
 
 ## 2. Async and cancellation
 
-- If the platform allows it, operational methods must:
-  - be `async`, and
-  - accept a `CancellationToken` (or platform equivalent).
-- Always pass the token through to async collaborators.
-- Call `ThrowIfCancellationRequested()` before heavy work and in long-running operations.
-- When cancelled, treat it as a **first-class outcome** (log it and return/emit a clear cancellation result).
+- Operational methods must be `async` when the platform allows it and **public async methods must accept a `CancellationToken`**.
+- Always pass the token through to async collaborators and check it before heavy or long-running work.
+- When cancelled, treat it as a **first-class outcome** (log at the boundary and return/emit a clear cancellation result).
 
 ---
 
@@ -41,10 +51,10 @@ Operational code must never leak unhandled exceptions as normal behaviour.
   - a small set of error categories (e.g. a local `ErrorCode` enum: Validation, Domain, Cancelled, Unexpected)
   - optional error messages or reasons.
 - Use exceptions only for unexpected conditions, not for validation or known domain rules.
-- Wrap calls to external systems (HTTP services, DB, queues, payment gateways, file I/O) in `try/catch`:
-  - log the exception with context,
-  - convert it into an appropriate failure outcome (`Unexpected` or similar),
-  - do **not** let the exception leak out as the primary signal.
+- Wrap the **entire body** of each operational method in `try/catch` using the canonical rule in
+  `languages/dotnet/style.md#exception-handling-canonical`.
+- Exceptions are logged **once** at the operational boundary (controller, handler, job entry point). Inner layers rethrow and
+  let the boundary log.
 
 Transport-specific rules:
 
@@ -73,14 +83,13 @@ Transport-specific rules:
 
 ## 5. Logging and scopes
 
-- Use structured logging (`ILogger<T>` or equivalent).
+- Use structured logging (`ILogger<T>` or equivalent) with message templates and named properties.
 - For each operation, open a logging scope that includes:
   - correlation / trace id (if the platform provides one),
   - key identifiers (OrderId, Email, UserId, etc.).
-- Log:
-  - start / end of significant operations at **Information** level,
-  - validation and domain failures at **Information** or **Warning**,
-  - unexpected errors at **Error**, with the exception attached.
+- Log exceptions **once** at the boundary; lower layers throw and allow the boundary to log with context.
+- Log start/end of significant operations at **Information** level and validation/domain failures at **Information** or
+  **Warning**.
 
 ---
 

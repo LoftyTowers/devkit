@@ -2,14 +2,15 @@
 
 - Keep code simple within the DevKit architecture (KISS); avoid speculative hooks (YAGNI).
 - Boundaries: high cohesion, low coupling; explicit interfaces at seams.
-- Async: suffix Async; accept cancellation tokens/handles in public async APIs.
-- Errors: handle at edges; return domain results internally; never swallow exceptions.
+- Async: suffix Async; **all public async methods accept a CancellationToken** and pass it through.
+- Errors: wrap each method body in `try/catch` (see `languages/dotnet/style.md#exception-handling-canonical`); return domain
+  results internally; never swallow exceptions.
 - Validation: declarative rules near the DTO; fail fast; no exceptions for control flow.
 - Immutability where possible for inputs/DTOs.
 - Docs light but up to date; ADRs for notable decisions.
-- Prefer async all the way: `ValidateAsync`, async gateways/repos, pass `CancellationToken`.
+- Prefer async all the way: `ValidateAsync`, async gateways/repos, pass `CancellationToken` end-to-end.
 - Controllers never fabricate business IDs; services own ID creation.
-- Centralise HTTP mapping via helper; no ad-hoc `Problem(...)` in controllers.
+- Centralise HTTP mapping via helper; no ad-hoc `Problem(...)` in controllers; log exceptions once at the operational boundary.
 
 ## SOLID (pragmatic)
 S - one reason to change per unit.
