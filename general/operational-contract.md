@@ -6,8 +6,8 @@ Follow instructions in this order:
 
 1. C# / .NET language and runtime rules
 2. Specific user instructions in the current task
-3. DevKit rules in this repository
-4. Project-specific DevKit overrides
+3. Project-specific DevKit overrides
+4. DevKit rules in this repository
 5. Model defaults
 
 All files in the DevKit must defer to this precedence. If another document lists a different order, replace it with a reference
