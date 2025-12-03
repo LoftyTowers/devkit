@@ -49,19 +49,20 @@ If the answer to any self-check is “no”, rewrite the code to match the DevKi
 - Always include required `using` statements explicitly in generated files:
   - `Microsoft.AspNetCore.Mvc`, `Microsoft.Extensions.Logging`, `FluentValidation`,
     `System.Linq`, `System.Collections.Generic`.
-- If the code depends on a NuGet package, EITHER:
-  1) Edit the `.csproj` to include it, OR
-  2) Output a “Packages to install” section with exact `dotnet add package` commands.
+- When code requires a library, **add the appropriate `<PackageReference>` entries to the correct `.csproj` and show the
+  updated snippet**. Do not assume the package exists and do not replace this with install commands.
 - Use FluentValidation **12+**. Prefer manual edge validation via `ValidateAsync(..., CancellationToken)`.
 - No `FluentValidation.AspNetCore` unless you also wire MVC auto-validation. Manual validation is the default here.
 
 ### Style Rules Quick Check
 - Follow the [XML Comments Guidelines](../languages/dotnet/style.md#xml-comments-guidelines); only document public APIs or nuanced behaviour.
 - Public async APIs: name ends with Async and accept CancellationToken.
+- Wrap every method body in `try/catch` per `languages/dotnet/style.md#exception-handling-canonical`; log exceptions once at the
+  operational boundary.
 - BeginScope includes CorrelationId and key ids (OrderId/PaymentId).
 - All failures use `Result<T>.Failure(code, errors)`.
 - Map errors: 400 Validation, 422 Domain, 500 Unexpected at edges.
-- Controller edge has try/catch for unexpected and cancellation cases.
+- Controller edge follows the full-method `try/catch` rule (boundary handles logging and rethrows).
 - Tests assert exact status codes.
 - No new seam unless a trigger applies; add a one-line reason if you add one.
 

@@ -53,8 +53,14 @@ See `examples/dotnet/design-recipes/class-service/PaymentService.cs`
 - Prefer typed clients or factories when the dependency varies per call.
 
 ### Dependencies
-- Required NuGet (edit `.csproj` or emit install commands):
+- Required NuGet: **add `<PackageReference>` entries to the appropriate `.csproj` and show the updated snippet** when code
+  depends on a package (do not assume packages already exist). Minimum set:
   - `FluentValidation (>=12.0.0)`
 - Required usings in controllers/services:
   - Controllers: `Microsoft.AspNetCore.Mvc`, `Microsoft.Extensions.Logging`, `FluentValidation`, `System.Linq`, `System.Collections.Generic`
   - Services: `Microsoft.Extensions.Logging`, `System.Collections.Generic` (if logging scopes)
+
+### Swagger/OpenAPI
+- Include `Swashbuckle.AspNetCore` as a `<PackageReference>` when generating Swagger-enabled APIs and show the `.csproj` snippet.
+- In `Program.cs`, wire `AddSwaggerGen()` during service registration and call `UseSwagger()` plus `UseSwaggerUI()` in the
+  pipeline.
