@@ -11,7 +11,6 @@ The canonical .NET example is in [examples/dotnet/layered-microservice](examples
 ### 1. Clone or download this DevKit
 Open PowerShell or your terminal and run:
 ```bash
-cd G:\Programming
 git clone https://github.com/LoftyTowers/devkit.git
 ```
 
