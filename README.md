@@ -77,11 +77,76 @@ The sync scripts copy everything except `.git`, `.github`, and `tools` into your
 
 ## 🧩 Using DevKit with AI tools
 
-Once synced, tell your AI assistant to preload the appropriate prelude, for example:
+Before starting any coding task, provide your AI assistant (Cursor, Copilot, ChatGPT, etc.) with the following DevKit Prep Prompt.
 
-> “Load and follow `.devkit/preludes/prelude-dotnet.md` before generating code.”
+This forces the model to preload your architecture, coding style, error handling rules, DI usage, Result<T>/ErrorCode approach, structured logging, NUnit tests, and csproj management rules.
 
-That prelude acts as a **senior developer’s checklist** — covering architecture boundaries, validation, logging, async/cancellation, testing patterns, and naming conventions.
+## DevKit Prep Prompt
+
+READ THESE FILES BEFORE DOING ANYTHING:
+
+```
+General rules:
+- .devkit/general/charter.md
+- .devkit/general/checklists.md
+- .devkit/general/coding-patterns.md
+- .devkit/general/design-recipes.md
+- .devkit/general/engineering-style.md
+- .devkit/general/house-style-contract.md
+- .devkit/general/operational-contract.md
+
+.NET-specific rules:
+- .devkit/languages/dotnet/design-recipes.md
+- .devkit/languages/dotnet/style.md
+- .devkit/languages/dotnet/libraries.md
+
+Preludes:
+- .devkit/preludes/prelude-cursor.md
+- .devkit/preludes/prelude-dotnet.md
+- .devkit/preludes/prelude-general.md
+
+INSTRUCTION PRECEDENCE (ALWAYS USE THIS ORDER):
+1. C# / .NET language and runtime rules  
+2. Specific user instructions in this task  
+3. DevKit rules in `.devkit/**`  
+4. Project-specific DevKit overrides (if present)  
+5. Model defaults  
+
+If any conflict occurs, follow the higher-priority item and state which rule was overridden.
+
+AFTER reading the DevKit, summarise the rules you will follow for:
+- Controllers
+- Services
+- Validation (FluentValidation, ValidateAsync)
+- Error handling (strict try/catch wrapping the entire method unless explicitly documented otherwise)
+- Logging (structured logging; log exceptions only at the appropriate boundary)
+- Async + CancellationToken usage
+- Test rules (NUnit only)
+- Dependency Injection (all services resolved via DI; no `new` inside methods)
+- Result<T> + ErrorCode usage
+- Extensibility rules (add patterns only when DevKit explicitly allows it)
+- csproj management (always add required PackageReference entries, including Swagger/OpenAPI)
+
+Then stop.  
+Do not write any code until I give you the feature or file to implement.
+```
+
+## Why this matters
+
+This prompt ensures your AI-generated code:
+
+- obeys your architectural boundaries  
+- enforces strict method-wrapped try/catch  
+- uses structured logging  
+- adopts Result<T> + ErrorCode  
+- implements DI properly  
+- uses asynchronous patterns consistently  
+- writes NUnit tests, not xUnit  
+- updates .csproj files when new libraries are needed  
+- follows DevKit naming, style, and validation rules  
+- only introduces new patterns when explicitly permitted  
+
+This creates a predictable, professional, senior-quality codebase across projects.
 
 ---
 
