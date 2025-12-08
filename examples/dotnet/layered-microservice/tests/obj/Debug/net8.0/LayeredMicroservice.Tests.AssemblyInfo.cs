@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LayeredMicroservice.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37b789c9ae5b58adac32c91248a309e5ec6b43f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fda00244617e1983534f24f0420c7dfc64927686")]
 [assembly: System.Reflection.AssemblyProductAttribute("LayeredMicroservice.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LayeredMicroservice.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
