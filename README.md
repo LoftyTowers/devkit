@@ -83,9 +83,8 @@ This forces the model to preload your architecture, coding style, error handling
 
 ## DevKit Prep Prompt
 
-READ THESE FILES BEFORE DOING ANYTHING:
-
 ```
+READ THESE FILES BEFORE DOING ANYTHING:
 General rules:
 - .devkit/general/charter.md
 - .devkit/general/checklists.md
