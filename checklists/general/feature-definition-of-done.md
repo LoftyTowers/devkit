@@ -1,0 +1,53 @@
+# Feature Definition of Done
+
+- Tests updated/added:
+  - Unit tests always
+  - Integration tests if a boundary is touched
+  - Keep tests in a separate test project (no tests in controller files)
+  - Use clear arrange/act/assert; keep tests short and focused
+- Structured logs added at meaningful points:
+  - Message templates with named properties
+  - Exceptions logged once at the operational boundary
+  - Log meaningful events (start/end, external I/O)
+  - (Optional) metrics/tracing if the platform supports it
+- Documentation updated where relevant (README and/or ADR).
+- Performance and security considerations reviewed briefly.
+- Database migrations are safe and reversible (if data changed).
+- Public async APIs:
+  - Accept `CancellationToken`
+  - Are suffixed with `Async`
+- All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
+- Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
+- No service locator usage.
+- No static singletons for shared state.
+- Static methods are allowed **only** for pure helpers.
+- Extensibility considered using the decision table:
+  - [ ] External boundary → Port + Adapter
+  - [ ] Real variation now or soon (≥2 variants) → Strategy
+  - [ ] Construction differs by config/environment → Factory
+  - [ ] Cross-cutting concern → Decorator
+  - [ ] Otherwise: no pattern (keep it simple)
+- Any new seam includes a **one-line note** explaining its purpose and trigger.
+
+If the feature touches an HTTP boundary:
+
+- Errors are mapped via `Result` / `Result<T>` + `ErrorCode` using a central mapper (e.g. ProblemDetails).
+- Error mapping covers:
+  - Validation → 400
+  - Domain → 422
+  - Unexpected → 500
+- Structured logging scopes include:
+  - CorrelationId (TraceIdentifier)
+  - Key business identifiers where available
+- Tests cover:
+  - Happy path
+  - Invalid input
+  - Exact HTTP status codes
+- DevKit HTTP self-check passes:
+  - Async + CancellationToken
+  - Logging scopes present
+  - Result + ErrorCode mapping
+  - Correct 400 / 422 / 500 responses
+  - Full-method try/catch at the boundary
+  - Single-point exception logging
+  - No unjustified seams
