@@ -1,6 +1,6 @@
 # PR Review
 
-**Correctness · Boundaries · Tests · Logging · Security · Performance · Docs**
+**Correctness | Boundaries | Tests | Logging | Security | Performance | Docs**
 
 Before approving a PR, confirm:
 

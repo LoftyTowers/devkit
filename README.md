@@ -4,7 +4,7 @@
 ---
 
 ### Start Here
-The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/), showing the full layered structure (API → Application → Domain → Infrastructure → Shared → Tests). Angular and SQL scaffolds live under `examples/angular` and `examples/SQL`.
+The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/), showing the full layered structure (API -> Application -> Domain -> Infrastructure -> Shared -> Tests). Angular and SQL scaffolds live under `examples/angular` and `examples/SQL`.
 
 ## 🚀 Setup Instructions
 
@@ -67,7 +67,7 @@ devkit/
 ├── examples/             # Worked examples (layered microservice, patterns, Angular, SQL)
 ├── general/              # Shared engineering philosophy, checklists, and design recipes
 ├── languages/            # Language-specific style, recipes, and libraries (dotnet, etc.)
-├── preludes/             # AI preload instructions (“what to follow before coding”)
+├── preludes/             # AI preload instructions ("what to follow before coding")
 └── tools/                # Helper scripts to sync DevKit into projects
 ```
 

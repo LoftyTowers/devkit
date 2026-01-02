@@ -4,16 +4,16 @@
 
 - Prefer **KISS inside the DevKit style** by default. Add seams only where change is **likely**.
 - Add an abstraction when at least one is true:
-  1) External dependency (HTTP, DB, queue, filesystem) — isolate behind a port/interface.
+  1) External dependency (HTTP, DB, queue, filesystem) - isolate behind a port/interface.
   2) Clear **variation points** now or in the near roadmap (two or more real variants).
   3) Business rule plug-in / feature flag toggles are requested by product.
 - Avoid abstractions when none of the above apply (YAGNI).
-- Each new interface/class must pass: “What **concrete variation** or **external boundary** requires this?”
+- Each new interface/class must pass: "What **concrete variation** or **external boundary** requires this?"
 - When adding a seam, write a **one-line note** explaining why the seam exists.
 - MUST design boundaries for high cohesion and low coupling.
 - SHOULD use explicit interfaces at integration boundaries and where multiple implementations are expected.
-- When trade-offs exist, propose 2–3 options briefly, then pick one and implement.
-- See `new/contracts/general/coding-patterns.md` for pattern selection rules and tables.
+- When trade-offs exist, propose 2-3 options briefly, then pick one and implement.
+- See `.devkit/contracts/general/coding-patterns.md` for pattern selection rules and tables.
 
 ## Separation of concerns
 
@@ -22,7 +22,7 @@
   - HTTP / messaging / worker concerns in the operational layer,
   - business rules in domain/services,
   - persistence in infrastructure.
-- Do not let sagas, controllers, or workers become “god objects” that do validation, business rules, and persistence in one place.
+- Do not let sagas, controllers, or workers become "god objects" that do validation, business rules, and persistence in one place.
 
 ## Performance pragmatics
 

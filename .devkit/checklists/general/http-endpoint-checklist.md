@@ -3,10 +3,10 @@
 For any new HTTP endpoint or controller:
 
 - [ ] Maps `Result` / `Result<T>` + `ErrorCode` to HTTP status codes consistently:
-  - Validation → 400
-  - Domain → 422
-  - Unexpected → 500
-- [ ] Uses ProblemDetails (or the project’s approved central mapping helper) for error responses.
+  - Validation -> 400
+  - Domain -> 422
+  - Unexpected -> 500
+- [ ] Uses ProblemDetails (or the project's approved central mapping helper) for error responses.
 - [ ] Uses the approved validation mechanism for request DTOs and converts validation failures into appropriate 4xx responses.
 - [ ] Uses a logging scope that includes:
   - `HttpContext.TraceIdentifier` as CorrelationId

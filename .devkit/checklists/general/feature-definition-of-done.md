@@ -22,10 +22,10 @@
 - No static singletons for shared state.
 - Static methods are allowed **only** for pure helpers.
 - Extensibility considered using the decision table:
-  - [ ] External boundary → Port + Adapter
-  - [ ] Real variation now or soon (≥2 variants) → Strategy
-  - [ ] Construction differs by config/environment → Factory
-  - [ ] Cross-cutting concern → Decorator
+  - [ ] External boundary -> Port + Adapter
+  - [ ] Real variation now or soon (>=2 variants) -> Strategy
+  - [ ] Construction differs by config/environment -> Factory
+  - [ ] Cross-cutting concern -> Decorator
   - [ ] Otherwise: no pattern (keep it simple)
 - Any new seam includes a **one-line note** explaining its purpose and trigger.
 
@@ -33,9 +33,9 @@ If the feature touches an HTTP boundary:
 
 - Errors are mapped via `Result` / `Result<T>` + `ErrorCode` using a central mapper (e.g. ProblemDetails).
 - Error mapping covers:
-  - Validation → 400
-  - Domain → 422
-  - Unexpected → 500
+  - Validation -> 400
+  - Domain -> 422
+  - Unexpected -> 500
 - Structured logging scopes include:
   - CorrelationId (TraceIdentifier)
   - Key business identifiers where available
