@@ -14,9 +14,8 @@
 
 ## Exception logging
 
-- MUST log exceptions **once** at the operational boundary (controllers, message handlers, workers).
-- Inner layers MAY catch exceptions for translation or cleanup, but SHOULD rethrow and MUST NOT log them.
-- MUST preserve the original exception and stack trace.
+- Logging exceptions MUST preserve the original exception and stack trace.
+- Logging MUST NOT swallow exceptions.
 
 ## Operational events
 
