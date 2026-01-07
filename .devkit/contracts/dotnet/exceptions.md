@@ -1,8 +1,9 @@
 # Exception Handling (canonical)
 
-- Wrap the **entire body of every operational handler entrypoint** in a `try/catch`.
+- Unexpected/unhandled exceptions MAY bubble to a central exception handler (middleware/filters) at the API boundary, which MUST return an HTTP 5xx **ProblemDetails** response (sanitised; no sensitive internals).
+- Endpoints MUST NOT use `try/catch` primarily to steer expected outcomes (e.g., catching to return 404/400/409).
 - Expected failures (validation, known domain rule failures, known external failures) MUST be represented as explicit outcomes (e.g., `Result` / `ReturnObj`) and MUST NOT use exceptions for control flow.
-- Unexpected exceptions MUST be caught at the boundary and converted into an explicit **Unexpected** outcome (e.g., `ErrorCode.Unexpected`).
+- Unexpected exceptions MUST be translated at the operational boundary into an explicit **Unexpected** outcome (e.g., `ErrorCode.Unexpected`) or, for HTTP APIs, by the central exception handler into an HTTP 5xx **ProblemDetails** response.
 - Inner layers MUST NOT swallow exceptions.
 - Inner layers MAY catch only specific exception types (not `System.Exception`) for handling, cleanup, or adding context.
 - If an inner layer catches an exception, it MUST rethrow in a way that preserves the original exception and stack trace.
@@ -24,8 +25,6 @@
 ## Canonical boundary shape (schematic)
 
 method entrypoint:
-  try:
-    run all method logic
-    return success or expected failure outcome
-  catch unexpected exception:
-    return Unexpected outcome (never throw)
+  run all method logic
+  return success or expected failure outcome
+  unexpected exceptions bubble to central handler or are translated at the boundary into an Unexpected outcome
