@@ -9,9 +9,17 @@
   - If rethrowing without wrapping, use `throw;`.
   - If wrapping, the original exception MUST be assigned to `InnerException`.
 - When wrapping for context, add only a short contextual message and small, safe key fields.
+- Diagnostic context preservation SHOULD be done via the Logging contract's operation-scoped diagnostic context mechanism.
+- Exception wrapping for context MUST be used sparingly and only when adding semantic meaning or when the required diagnostic fields cannot be preserved via the approved context carrier.
 - If an exception is caught, it MUST either:
   - propagate to the boundary for translation, or
   - be translated at the boundary into an Unexpected outcome.
+
+## Failure signalling for non-HTTP handlers (dotnet operational boundaries)
+
+- SHOULD represent failures in non-HTTP operational handlers using result-like outcomes, events, or state transitions.
+- MUST NOT rely on callers catching exceptions as the normal error signal.
+- This does not require inner layers to catch exceptions; unexpected exceptions are handled at the operational boundary.
 
 ## Canonical boundary shape (schematic)
 
