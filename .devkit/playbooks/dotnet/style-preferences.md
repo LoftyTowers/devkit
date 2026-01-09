@@ -2,7 +2,8 @@
 
 ## Naming conventions
 
-- Public async method names end with `Async`.
+- Async suffix is enforced in `.devkit/contracts/dotnet/naming.md`; exceptions are described in `.devkit/playbooks/dotnet/naming-conventions.md`.
+- See `.devkit/playbooks/dotnet/naming-conventions.md` for additional naming guidance and deviations.
 
 ## Cancellation token conventions (guidance)
 
