@@ -32,6 +32,7 @@
 ## Immutability
 
 - SHOULD prefer immutability for inputs and DTOs where practical.
+- See `.devkit/contracts/dotnet/modern-language-features.md` for enforceable init-only, required member, and immutable surface rules.
 
 ## SOLID (pragmatic)
 
