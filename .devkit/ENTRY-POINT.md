@@ -11,11 +11,9 @@ Do not infer rules from this file.
 
 1) Read `.devkit/ai/PRELUDE.md`
 2) Read `.devkit/ai/MANIFEST.md`
-3) From MANIFEST, load only the relevant files under:
-   - `.devkit/contracts/**`
-   - `.devkit/checklists/**`
-   - `.devkit/how-to/**`
-   - `.devkit/playbooks/**`
+3) From MANIFEST, load only the files explicitly listed in the selected route(s).
+   - Do NOT glob folders.
+   - Do NOT load "relevant files under" any directory unless the route explicitly lists them.
 
 Then stop and wait for the task instruction, unless the task instruction is already present.
 
@@ -45,3 +43,11 @@ If you follow a higher-priority item that overrides a lower-priority one, record
 
 - Do not reference or compile DevKit files into the application.
 - Apply DevKit rules to the project code and configuration only.
+
+## Required reporting (for any task with code changes)
+
+Before making any changes, you MUST output a "Loaded Rules Inventory" that includes:
+- The selected MANIFEST route(s)
+- The ordered list of loaded file paths (exactly as listed by the route(s))
+
+Do not begin project work until this inventory has been produced.

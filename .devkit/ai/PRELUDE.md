@@ -5,7 +5,7 @@ Define how the AI must behave while applying this DevKit to a codebase.
 This is behavioural governance, not a technical rule source.
 
 Use this before MANIFEST and contracts.
-Preserve existing behaviour unless explicitly instructed to change it.
+Preserve existing behaviour unless explicitly instructed to change it. Expansion is governance, not product behaviour.
 If unsure, leave a review item with a clear reason.
 
 ## Non-negotiable behaviour rules
@@ -42,6 +42,35 @@ If unsure, leave a review item with a clear reason.
 - why (linked to the relevant contract/checklist file)
 - what remains in review (with paths)
 - how to verify (tests, build, run)
+
+## Mandatory compliance workflow (tasks that change code/config)
+
+If you will change project code or configuration, you MUST follow this workflow:
+
+A) Loaded Rules Inventory (before changes)
+- Select MANIFEST route(s).
+- Output:
+  - Selected route(s) and a one-line reason each
+  - The ordered list of loaded file paths
+
+B) Diff-to-Concern Scan (before completion)
+- Inspect the changes made (files edited/added + key constructs introduced).
+- Identify concerns touched by the diff (examples: try/catch, new endpoints, new packages, async changes, logging changes, DI changes, data access changes).
+- For each concern, confirm it is governed by the currently loaded contracts/checklists.
+- Coverage must come from a loaded **contract** or **checklist**. How-to/playbooks do not count as coverage for MUST/MUST NOT rules.
+
+C) Controlled dynamic expansion (only if needed)
+- If any concern is not covered by the loaded set:
+  - Add the minimum additional route(s) from MANIFEST's Expansion allowlist that cover the concern(s).
+  - Output: trigger -> route(s) added -> newly loaded file paths.
+- You MUST NOT load any route not listed in the Expansion allowlist.
+
+D) Post-change Compliance Sweep (before completion)
+- Re-check the changes against the loaded contracts and applicable checklists.
+- If a violation is found:
+  - Fix it, then run this sweep once more.
+- If violations remain after one remediation pass:
+  - Stop and report FAIL with concrete evidence (paths/symbols) and any ambiguity as review items.
 
 ## Apply the DevKit without being prompted
 

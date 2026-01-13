@@ -10,9 +10,57 @@ Load order conventions (within a route):
 3) How-to / Playbooks (advisory)
 
 ## Route selection (required)
+
+### Baseline selection (defaults)
+Use these defaults to avoid under-loading rules:
+
+- Always include **Foundation** for any non-trivial task that changes code or configuration.
+- Include the baseline route(s) for each technology area the task touches (e.g., Dotnet, Angular, Sql),
+  based on the files/projects being changed.
+
+Do NOT manually enumerate additional concerns (e.g., EFCore, logging, async).
+Those are handled by the post-change Diff-to-Concern scan and controlled expansion rules.
+
+### Intent selection
 - Choose the single best-matching route by task intent.
 - If multiple routes apply, load the union in the order listed (contracts -> checklists -> how-to/playbooks).
 - If unsure, start with Foundation, then add the most specific checklist or how-to/playbook.
+
+### Technology detection (for baseline selection)
+Treat a technology area as "touched" if the change set includes files in that area’s project/module
+or typical extensions. Examples (non-exhaustive):
+- Dotnet: `*.cs`, `*.csproj`, `*.sln`, `appsettings*.json`, `Directory.Build.props`, `Directory.Build.targets`
+- Angular: `angular.json`, frontend `package.json`, `*.ts`, `*.html`, `*.scss` within the Angular app
+- Sql: `*.sql` (migrations / schema / stored procedures)
+
+If unsure, include Foundation and record a review item.
+
+
+## Controlled dynamic expansion (allowed)
+
+If the task's diff introduces a concern that is not covered by the currently loaded routes,
+the AI MAY add additional routes ONLY if:
+
+- The route is listed in the "Expansion allowlist" below, AND
+- The expansion is triggered by an observable change in the diff (not reinterpretation of task intent), AND
+- The AI records: trigger -> route(s) added -> newly loaded file paths.
+
+When unioning multiple routes:
+- Preserve relative order within each route list.
+- De-duplicate identical file paths while keeping the first occurrence.
+- Apply the existing load-order conventions: contracts -> checklists -> how-to/playbooks.
+
+## Expansion allowlist (routes that may be added post-start)
+
+- Foundation (Cross-cutting foundation)
+- Dotnet (Dotnet platform rules)
+- Review: HTTP endpoint review (general)
+- Operations: Operational readiness (general)
+- Review: Package guard (dotnet)
+- API: HTTP API change (cross-cutting)
+- Platform: Dependency introduction (cross-cutting)
+- Data: Data access change (cross-cutting)
+- Dotnet: Composition root changes (dotnet)
 
 ## Empty contracts (required handling)
 - If a loaded file contains only `<!-- INTENTIONALLY EMPTY -->`, treat it as "no additional rules defined".
