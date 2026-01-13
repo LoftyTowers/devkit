@@ -8,6 +8,7 @@ For any new **operational** class (handles input or orchestrates work, e.g. endp
       (e.g. `ErrorCode.Validation`).
 - [ ] Uses a structured logging scope with a correlation/trace identifier when available.
 - [ ] Does not `new` collaborators inside methods; all dependencies are provided via constructor DI.
+- [ ] When EF Core is used, production startup does not auto-run migrations and a controlled migration process exists.
 - [ ] Tests cover:
   - Success
   - Validation failure

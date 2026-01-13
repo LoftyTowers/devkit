@@ -13,6 +13,7 @@
 - Documentation updated where relevant (README and/or ADR).
 - Performance and security considerations reviewed briefly.
 - Database migrations are safe and reversible (if data changed).
+- Data access changes that use EF Core satisfy `.devkit/checklists/dotnet/efcore.md`.
 - Public async APIs:
   - Accept `CancellationToken`
   - Are suffixed with `Async`
