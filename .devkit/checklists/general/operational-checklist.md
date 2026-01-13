@@ -2,7 +2,7 @@
 
 For any new **operational** class (handles input or orchestrates work, e.g. endpoint, handler, saga, worker, CLI):
 
-- [ ] Uses a typed `Result` / `Result<T>` and an `ErrorCode` enum (or equivalent error categories) for all outcomes.
+- [ ] Uses a typed `Result` / `Result<T>` and an `ErrorCode` enum (or equivalent error categories) for expected/handled outcomes; unexpected exceptions are handled at the operational boundary or central exception handler per the exceptions contract.
 - [ ] Uses `CancellationToken` on public async methods and passes it through to async collaborators.
 - [ ] Validates input at the edge (DTO/message/command) and treats validation failure as an error outcome
       (e.g. `ErrorCode.Validation`).
@@ -13,8 +13,9 @@ For any new **operational** class (handles input or orchestrates work, e.g. endp
   - Validation failure
   - Unexpected error
   - Cancellation (where supported)
-- [ ] Wraps the full method body in a `try/catch` per the exceptions contract and logs exceptions
-      **once** at the operational boundary.
+- [ ] Unexpected exceptions are logged **exactly once** by the host's designated operational boundary owner
+      (per Logging contract "single owner of unexpected exception logging"); if global exception middleware
+      owns unexpected exception logging, this operational class MUST NOT also log unexpected exceptions.
 
 If any applicable item in this checklist is not met, update the code and/or tests to comply **before**
 considering the feature complete.

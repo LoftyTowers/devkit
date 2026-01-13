@@ -8,9 +8,11 @@ For any new HTTP endpoint or controller:
   - Unexpected -> 500
 - [ ] Uses ProblemDetails (or the project's approved central mapping helper) for error responses.
 - [ ] Uses the approved validation mechanism for request DTOs and converts validation failures into appropriate 4xx responses.
-- [ ] Uses a logging scope that includes:
-  - `HttpContext.TraceIdentifier` as CorrelationId
+- [ ] An operation logging scope exists at the HTTP boundary (middleware or endpoint, as defined by the Logging
+      contract) and includes:
+  - `HttpContext.TraceIdentifier` (or equivalent) as CorrelationId
   - Key business identifiers (e.g. UserId, Email, OrderId) when available
+  The endpoint handler MUST NOT open an additional routine scope if the host already opens the boundary scope.
 - [ ] Never `new`s services; all dependencies are resolved via constructor DI.
 - [ ] Tests assert exact HTTP responses for:
   - Success
