@@ -31,6 +31,14 @@
   - Uses explicit outbound timeouts.
   - Uses async-only HttpClient APIs.
   - Meets resilience baseline where applicable (bounded retries; pipeline attachment).
+- Observability (OpenTelemetry):
+  - Applies `.devkit/contracts/dotnet/observability-opentelemetry.md` where OpenTelemetry is introduced/changed.
+  - Single long-lived TracerProvider per service (no per-request/provider churn).
+  - Resource identity present (service.name + environment metadata).
+  - Spans are ended correctly (using/try-finally).
+  - Span names/attributes avoid high-cardinality and raw URLs.
+  - Baggage constrained (not a general-purpose store).
+  - Production exporter pipeline configured.
 - All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
 - Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
 - No service locator usage.
