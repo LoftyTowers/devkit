@@ -26,6 +26,11 @@
   - No `Task.Run` + immediate `await` in ASP.NET Core request paths.
   - No long-running "forever" ThreadPool loops without isolation (hosted services/queues).
   - `TaskCompletionSource<T>` uses `RunContinuationsAsynchronously` when used.
+- Outbound HTTP (when introduced/edited):
+  - Uses `IHttpClientFactory` or an explicitly documented approved deviation.
+  - Uses explicit outbound timeouts.
+  - Uses async-only HttpClient APIs.
+  - Meets resilience baseline where applicable (bounded retries; pipeline attachment).
 - All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
 - Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
 - No service locator usage.
