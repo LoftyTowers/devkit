@@ -20,6 +20,7 @@
 - Async & Concurrency:
   - No sync-over-async (`.Result`/`.Wait`/`GetAwaiter().GetResult()`).
   - No `async void` except event handlers.
+  - Cancellation uses `OperationCanceledException` via `ThrowIfCancellationRequested` (or equivalent) and tokens are propagated to downstream async calls.
   - `CancellationToken` is propagated where applicable and any created `CancellationTokenSource` is disposed.
   - No `Task.Run` misuse for I/O or already-async calls.
   - No `Task.Run` + immediate `await` in ASP.NET Core request paths.

@@ -17,7 +17,17 @@
 - Code MUST use `await` for sequencing asynchronous operations and MUST NOT use `Task.ContinueWith(...)` for ordinary control flow.
 - Library-style code MUST use `ConfigureAwait(false)` on awaited tasks unless the continuation requires the captured context.
 - Cancellation-aware operations MUST accept a `CancellationToken` and MUST pass it to downstream async APIs that accept a token.
+- `CancellationToken` parameters MUST be the final parameter; they MUST NOT appear in any other position.
+- `CancellationToken` parameters MAY be optional only for public APIs where cancellation is genuinely optional; internal APIs MUST require explicit tokens.
+- When intentionally handling cancellation, code MUST catch `OperationCanceledException` and MUST NOT catch only `TaskCanceledException`.
+- Code MUST NOT catch and swallow `OperationCanceledException` unless it explicitly intends to handle cancellation (cleanup/controlled response); otherwise it MUST propagate.
 - Any `CancellationTokenSource` created by the code MUST be disposed.
+- Cancellation MUST be observed at safe checkpoints before irreversible side-effects (e.g., prior to writes/commits/external side-effects).
+- After a point of no return, code MUST NOT cancel mid-change in a way that can leave partial side-effects or inconsistent state; it MUST complete safely or revert safely.
+- Once a success outcome has been determined (the operation's result is known), code MUST return that result normally and MUST NOT perform additional cancellation checks that can override the completed outcome.
+- In ASP.NET Core request paths, `HttpContext.RequestAborted` MUST be propagated into long-running and I/O-bound work started for that request.
+- Long-running or I/O-bound work within a request MUST NOT run without passing `HttpContext.RequestAborted`.
+- Code MUST NOT rely on request/response stream reads or writes to detect abort for external/background tasks; use `RequestAborted` propagation.
 - Code in request paths and long-running/background loops MUST NOT block ThreadPool threads (e.g., `Thread.Sleep`); use async waits or appropriate scheduling.
 - Long-running background work MUST NOT permanently occupy ThreadPool threads via a "forever" `Task.Run` loop; use an appropriate long-running mechanism when present.
 - When `TaskCompletionSource<T>` is used, it MUST use `TaskCreationOptions.RunContinuationsAsynchronously` unless an explicit comment explains why it is unsafe or unnecessary.
