@@ -44,6 +44,10 @@
   - Validation present and `ValidateOnStart()` used where options are required for startup correctness.
   - No production secrets in appsettings/code; no committed secrets.
   - Reload expectations stated; if reload is required, `reloadOnChange` + `IOptionsMonitor<T>` are used.
+- Security:
+  - No secrets in code/config/version control (see `.devkit/contracts/general/security-baseline.md` and `.devkit/contracts/dotnet/configuration-options.md`).
+  - HTTPS/HSTS is enforced in production where applicable (see `.devkit/contracts/dotnet/security-aspnetcore.md`).
+  - Authentication defaults, CORS posture, and CSRF applicability follow `.devkit/contracts/dotnet/security-aspnetcore.md`.
 - All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
 - Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
 - No service locator usage.
@@ -76,6 +80,6 @@ If the feature touches an HTTP boundary:
   - Logging scopes present
   - Result + ErrorCode mapping
   - Correct 400 / 422 / 500 responses
-  - Full-method try/catch at the boundary
+  - Central exception handling produces ProblemDetails for unexpected errors (no per-endpoint try/catch for expected outcomes)
   - Single-point exception logging
   - No unjustified seams

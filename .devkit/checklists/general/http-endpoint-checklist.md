@@ -8,6 +8,9 @@ For any new HTTP endpoint or controller:
   - Unexpected -> 500
 - [ ] Uses ProblemDetails (or the project's approved central mapping helper) for error responses.
 - [ ] Uses the approved validation mechanism for request DTOs and converts validation failures into appropriate 4xx responses.
+- [ ] Middleware ordering follows `.devkit/contracts/dotnet/api-design-middleware.md` (prevents auth/CORS bypass and ensures exception handling runs early).
+- [ ] CORS is applied before endpoint mapping (avoids preflight/route bypass; `UseCors` after routing or endpoint-level `RequireCors`).
+- [ ] Authn/authz order is correct (`UseAuthentication` before `UseAuthorization`) to ensure policies evaluate with an identity.
 - [ ] An operation logging scope exists at the HTTP boundary (middleware or endpoint, as defined by the Logging
       contract) and includes:
   - `HttpContext.TraceIdentifier` (or equivalent) as CorrelationId
