@@ -33,7 +33,9 @@
   - Meets resilience baseline where applicable (bounded retries; pipeline attachment).
 - Observability (OpenTelemetry):
   - Applies `.devkit/contracts/dotnet/observability-opentelemetry.md` where OpenTelemetry is introduced/changed.
+  - Exception logging at boundaries passes the exception object to `ILogger` overloads.
   - Single long-lived TracerProvider per service (no per-request/provider churn).
+  - Uses a shared `ActivitySource` when tracing is introduced.
   - Resource identity present (service.name + environment metadata).
   - Spans are ended correctly (using/try-finally).
   - Span names/attributes avoid high-cardinality and raw URLs.
