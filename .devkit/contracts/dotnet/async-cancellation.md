@@ -8,7 +8,9 @@
 
 ## Rules
 
+- If a method calls an async API, the call chain MUST remain async and the task MUST be awaited end-to-end.
 - If a method awaits asynchronous work, it MUST be `async` and MUST return `Task`, `Task<T>`, `ValueTask`, or `ValueTask<T>`. It MUST NOT return `void`, except where D2 applies.
+- I/O-bound operations MUST use true async APIs where available; code MUST NOT use `Task.Run` to wrap I/O-bound work or already-async calls.
 - Code MUST NOT synchronously block on tasks (`Task.Wait()`, `Task<T>.Result`, `GetAwaiter().GetResult()`).
 - `async void` MUST NOT be used except for event handlers whose required signature returns `void`.
 - In ASP.NET Core request paths, code MUST NOT use `Task.Run(...)` and immediately `await` it.
@@ -16,7 +18,9 @@
 - Library-style code MUST use `ConfigureAwait(false)` on awaited tasks unless the continuation requires the captured context.
 - Cancellation-aware operations MUST accept a `CancellationToken` and MUST pass it to downstream async APIs that accept a token.
 - Any `CancellationTokenSource` created by the code MUST be disposed.
+- Code in request paths and long-running/background loops MUST NOT block ThreadPool threads (e.g., `Thread.Sleep`); use async waits or appropriate scheduling.
 - Long-running background work MUST NOT permanently occupy ThreadPool threads via a "forever" `Task.Run` loop; use an appropriate long-running mechanism when present.
+- When `TaskCompletionSource<T>` is used, it MUST use `TaskCreationOptions.RunContinuationsAsynchronously` unless an explicit comment explains why it is unsafe or unnecessary.
 - `Task.Factory.StartNew(...)` MUST NOT be used for async delegates or as a substitute for `Task.Run` without explicit, justified scheduling semantics.
 - Private helper methods may omit the token **only** if they perform no I/O and no long-running work.
 - Cancellation MUST be represented via `OperationCanceledException` (or a derived type), using `ThrowIfCancellationRequested` or equivalent propagation.

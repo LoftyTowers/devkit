@@ -9,6 +9,10 @@ For any new **operational** class (handles input or orchestrates work, e.g. endp
 - [ ] Uses a structured logging scope with a correlation/trace identifier when available.
 - [ ] Does not `new` collaborators inside methods; all dependencies are provided via constructor DI.
 - [ ] When EF Core is used, production startup does not auto-run migrations and a controlled migration process exists.
+- [ ] No blocking calls in request paths (explicitly: no `Thread.Sleep`).
+- [ ] No sync-over-async (`.Result`/`.Wait`/`GetAwaiter().GetResult()`).
+- [ ] `CancellationToken` flows through operational handlers where applicable.
+- [ ] No `Task.Run` + immediate `await` in ASP.NET Core request paths.
 - [ ] Tests cover:
   - Success
   - Validation failure

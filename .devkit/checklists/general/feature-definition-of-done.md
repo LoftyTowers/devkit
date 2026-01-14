@@ -17,6 +17,14 @@
 - Public async APIs:
   - Accept `CancellationToken`
   - Are suffixed with `Async`
+- Async & Concurrency:
+  - No sync-over-async (`.Result`/`.Wait`/`GetAwaiter().GetResult()`).
+  - No `async void` except event handlers.
+  - `CancellationToken` is propagated where applicable and any created `CancellationTokenSource` is disposed.
+  - No `Task.Run` misuse for I/O or already-async calls.
+  - No `Task.Run` + immediate `await` in ASP.NET Core request paths.
+  - No long-running "forever" ThreadPool loops without isolation (hosted services/queues).
+  - `TaskCompletionSource<T>` uses `RunContinuationsAsynchronously` when used.
 - All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
 - Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
 - No service locator usage.
