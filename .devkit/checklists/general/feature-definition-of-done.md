@@ -39,6 +39,11 @@
   - Span names/attributes avoid high-cardinality and raw URLs.
   - Baggage constrained (not a general-purpose store).
   - Production exporter pipeline configured.
+- Configuration & Options pattern:
+  - Options abstraction matches service lifetime (no `IOptionsSnapshot<T>` in singletons).
+  - Validation present and `ValidateOnStart()` used where options are required for startup correctness.
+  - No production secrets in appsettings/code; no committed secrets.
+  - Reload expectations stated; if reload is required, `reloadOnChange` + `IOptionsMonitor<T>` are used.
 - All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
 - Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
 - No service locator usage.

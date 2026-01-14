@@ -10,4 +10,4 @@ These are the approved defaults for .NET projects using this DevKit.
 - Resilience: Polly **only** where the operation is idempotent (timeouts, retry/backoff, circuit breaker).
 - HTTP: `IHttpClientFactory`; MUST NOT `new HttpClient()`.
 - See also: `.devkit/contracts/dotnet/http-clients.md`.
-- Config: Options pattern; validate on start; MUST NOT store secrets in code or logs.
+- Config & Options: see `.devkit/contracts/dotnet/configuration-options.md` and `.devkit/playbooks/dotnet/configuration-options.md`.
