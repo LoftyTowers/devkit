@@ -28,6 +28,8 @@
 - In ASP.NET Core request paths, `HttpContext.RequestAborted` MUST be propagated into long-running and I/O-bound work started for that request.
 - Long-running or I/O-bound work within a request MUST NOT run without passing `HttpContext.RequestAborted`.
 - Code MUST NOT rely on request/response stream reads or writes to detect abort for external/background tasks; use `RequestAborted` propagation.
+- Background loops/waits (e.g., `Task.Delay`, timers, `PeriodicTimer.WaitForNextTickAsync`) MUST pass the `CancellationToken` and stop work promptly when cancellation is requested.
+- Code MUST NOT continue doing new work after cancellation is requested.
 - Code in request paths and long-running/background loops MUST NOT block ThreadPool threads (e.g., `Thread.Sleep`); use async waits or appropriate scheduling.
 - Long-running background work MUST NOT permanently occupy ThreadPool threads via a "forever" `Task.Run` loop; use an appropriate long-running mechanism when present.
 - When `TaskCompletionSource<T>` is used, it MUST use `TaskCreationOptions.RunContinuationsAsynchronously` unless an explicit comment explains why it is unsafe or unnecessary.

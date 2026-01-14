@@ -8,11 +8,13 @@ For any new **operational** class (handles input or orchestrates work, e.g. endp
       (e.g. `ErrorCode.Validation`).
 - [ ] Uses a structured logging scope with a correlation/trace identifier when available.
 - [ ] Does not `new` collaborators inside methods; all dependencies are provided via constructor DI.
+- [ ] Hosted services / long-lived workers do not inject scoped services directly; they create per-unit-of-work scopes via `IServiceScopeFactory`.
 - [ ] When EF Core is used, production startup does not auto-run migrations and a controlled migration process exists.
 - [ ] No blocking calls in request paths (explicitly: no `Thread.Sleep`).
 - [ ] No sync-over-async (`.Result`/`.Wait`/`GetAwaiter().GetResult()`).
 - [ ] `CancellationToken` flows through operational handlers where applicable.
 - [ ] No `Task.Run` + immediate `await` in ASP.NET Core request paths.
+- [ ] Background loops/waits honour `CancellationToken` (e.g., `Task.Delay`, timers) and stop work on cancellation.
 - [ ] Tests cover:
   - Success
   - Validation failure
