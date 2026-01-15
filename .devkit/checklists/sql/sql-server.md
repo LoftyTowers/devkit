@@ -52,6 +52,17 @@ See also: .devkit/checklists/sql/query-design.md
 - Deadlock risks are considered for hot paths.
 - Concurrency approach is documented where it affects correctness.
 
+## Transactions and error handling (Blob D)
+- Autocommit vs explicit vs implicit transaction usage is intentional; no implicit mode without commit/rollback logic.
+- Nested transaction ownership and savepoint usage are explicit; inner procedures do not rollback caller-owned transactions.
+- Isolation level selection documents anomaly trade-offs; NOLOCK is not used for correctness-critical reads.
+- Deadlock avoidance patterns are applied (short transactions, consistent ordering, no user interaction in transactions).
+- TRY...CATCH patterns include explicit rollback or commit decision logic and error propagation.
+- XACT_STATE is used in CATCH to choose rollback vs commit; @@TRANCOUNT alone is not used for committable decisions.
+- XACT_ABORT usage is explicit where required, and its limitations are understood.
+- Row-versioning isolation impacts (version store, tempdb) are considered where enabled.
+- Retry-safe design is intentional; idempotency is addressed or retries are avoided.
+
 ## Migrations
 - EF Core migrations are versioned, reviewed, and repeatable. (Dotnet scope)
 - Migration scripts avoid destructive surprises. (Dotnet scope)

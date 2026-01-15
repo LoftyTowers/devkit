@@ -26,6 +26,7 @@ EXEC(@sql + @Status);
 
 ## Cross-references
 - .devkit/contracts/sql/isolation-and-nolock.md
+- .devkit/playbooks/sql/isolation-levels.md
 - .devkit/contracts/sql/type-correctness.md
 - .devkit/contracts/sql/subquery-semantics.md
 - .devkit/contracts/sql/merge.md

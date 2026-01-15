@@ -4,10 +4,19 @@
 Applies to READ UNCOMMITTED/NOLOCK usage for correctness-critical reads.
 
 ## Rules (R#)
-- None. See playbook guidance for isolation selection.
+- R1: Treat SQL Server as supporting READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE, plus SNAPSHOT and READ COMMITTED SNAPSHOT (RCSI).
+- R2: Treat dirty reads as permitted only under READ UNCOMMITTED (including NOLOCK), and not under READ COMMITTED or higher.
+- R3: Under READ COMMITTED without RCSI, treat shared locks for reads as held for the duration of the read operation (not the full transaction), so non-repeatable reads and phantoms remain possible.
+- R4: Treat REPEATABLE READ as preventing dirty and non-repeatable reads but still allowing phantoms.
+- R5: Treat SERIALIZABLE as preventing dirty reads, non-repeatable reads, and phantoms, with increased blocking due to range locks.
+- R6: Treat SNAPSHOT isolation as providing transaction-level read consistency via row versioning without holding row/page locks for reads.
+- R7: Treat READ_COMMITTED_SNAPSHOT ON as changing READ COMMITTED to use row-versioned statement-level reads, removing most reader-writer blocking.
+- R8: When ALLOW_SNAPSHOT_ISOLATION is ON, treat SQL Server as creating row versions for data modifications regardless of whether current transactions are using SNAPSHOT.
+- R9: When READ_COMMITTED_SNAPSHOT is ON, treat readers as using versioned reads while writers still block writers.
 
 ## Prohibited patterns (P#)
-- P1: Using READ UNCOMMITTED (including NOLOCK) for correctness-critical reads is prohibited.
+- P1: Using READ UNCOMMITTED (including NOLOCK) for correctness-critical reads is prohibited and is not a correctness-preserving deadlock fix.
+- P2: Assuming RCSI provides transaction-level repeatable reads (it is statement-level consistency).
 
 ## Allowed deviations (D#)
 - None.
