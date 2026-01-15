@@ -9,6 +9,7 @@ Guidance for using views and stored procedures as permission surfaces via owners
 ## Default guidance
 - R1: Ownership chaining and EXECUTE AS SHOULD be used deliberately to encapsulate access via procs or views with stable ownership, granting only EXECUTE or SELECT where intended.
 - R2: When views are used as a security abstraction, permissions SHOULD be granted on the view and direct permissions on underlying tables SHOULD be withheld, consistent with ownership chaining expectations.
+- R3: When ownership differs and chaining would break, designs SHOULD explicitly account for required permissions on the underlying objects.
 
 ## Anti-patterns
 - P1: Relying on accidental ownership chains (inconsistent owners or schemas) as an unreviewed security boundary.
@@ -25,8 +26,9 @@ Bad:
 GRANT SELECT ON dbo.Orders TO AppRole; -- bypasses view boundary
 
 ## Deviations/Exceptions
-- None explicitly identified.
+- D1: Using explicit table permissions is allowed where ownership cannot be unified and the boundary is documented.
 
 ## Cross-references
 - .devkit/contracts/sql/cross-database-ownership-chaining.md
+- .devkit/contracts/sql/ownership-chaining.md
 - .devkit/playbooks/sql/views.md

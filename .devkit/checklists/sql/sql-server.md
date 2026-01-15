@@ -90,6 +90,48 @@ See also: .devkit/checklists/sql/query-design.md
 - No secrets stored in plain text in the repository.
 - Auditing/traceability considered for sensitive operations (where required).
 
+## Blob G — Security & Personal Data Handling
+### Data classification
+- [ ] Sensitive/personal columns are classified with information type and sensitivity label; classification uses supported metadata mechanisms. (contracts/sql/data-classification.md)
+- [ ] Personal/sensitive columns are not left unclassified where classification is in use. (contracts/sql/data-classification.md)
+
+### Least privilege / permissions model
+- [ ] Broad table/database grants are avoided; only required objects are granted. (contracts/sql/permissions-model.md)
+- [ ] db_owner is not granted as a routine access pattern; per-user grants are not the primary model. (contracts/sql/permissions-model.md)
+
+### Ownership chaining / procs & views boundaries
+- [ ] Ownership chaining assumptions are validated with matching ownership; EXECUTE AS does not embed credentials. (contracts/sql/ownership-chaining.md, contracts/sql/permissions-model.md)
+
+### TDE
+- [ ] TDE is not treated as protection for in-memory or in-transit data; certificates/keys are backed up and stored off-host. (contracts/sql/tde.md)
+- [ ] TDE is not relied on to prevent privileged plaintext access via queries. (contracts/sql/tde.md)
+
+### Always Encrypted
+- [ ] Server-side limitations are acknowledged in design; unsupported operations are not assumed to work. (contracts/sql/always-encrypted.md)
+
+### Key management boundaries
+- [ ] Keys/protector secrets are not stored in code or unencrypted in the database. (contracts/sql/key-management.md)
+- [ ] CMKs are stored outside the database; required key material is backed up. (contracts/sql/key-management.md)
+
+### Hashing vs encryption
+- [ ] Passwords are stored using hashing, not encryption or plaintext. (contracts/sql/hashing-and-encryption.md)
+
+### Row-Level Security (RLS)
+- [ ] RLS is not applied where bypass/incompatibility is documented, and not treated as a replacement for app authorization. (contracts/sql/row-level-security.md)
+- [ ] RLS administrative permissions are restricted to required principals. (contracts/sql/row-level-security.md)
+
+### Dynamic Data Masking (DDM)
+- [ ] UNMASK permissions are tightly controlled; DDM is not treated as a primary security control. (contracts/sql/dynamic-data-masking.md)
+- [ ] DDM is not applied to Always Encrypted columns or used to hide update behavior. (contracts/sql/dynamic-data-masking.md)
+
+### Auditing
+- [ ] Sensitive-data audit group use and audit spec changes are controlled; audit permissions are restricted. (contracts/sql/auditing.md)
+- [ ] Audit logs are protected against tampering or unauthorised deletion. (contracts/sql/auditing.md)
+
+### Retention, deletion, anonymisation
+- [ ] Irreversible erasure uses physical deletion; soft delete is not treated as erasure or audit trail. (contracts/sql/retention-and-deletion.md)
+- [ ] Anonymisation and pseudonymisation are not conflated. (contracts/sql/retention-and-deletion.md)
+
 ## Blob E — SQL Artefacts & Encapsulation
 ### Stored procedures — parameter contracts and calls
 - Stored procedure parameters use explicit data types and direction; treated as a public contract.

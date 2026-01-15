@@ -24,3 +24,5 @@ Bad:
 
 ## Cross-references
 - .devkit/contracts/sql/soft-delete-authority-boundary.md
+- .devkit/contracts/sql/retention-and-deletion.md
+- .devkit/playbooks/sql/retention-and-deletion.md
