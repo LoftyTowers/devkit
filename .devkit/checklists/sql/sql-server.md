@@ -2,6 +2,8 @@
 
 Use this checklist during code review, schema review, or production issue triage.
 
+See also: .devkit/checklists/sql/query-design.md
+
 ## Schema design
 - Every table has a PRIMARY KEY.
 - PRIMARY KEY columns are NOT NULL.
@@ -40,10 +42,10 @@ Use this checklist during code review, schema review, or production issue triage
 - Concurrency approach is documented where it affects correctness.
 
 ## Migrations
-- EF Core migrations are versioned, reviewed, and repeatable.
-- Migration scripts avoid destructive surprises.
-- Rollback strategy exists (where required).
-- Deployment order and app/db compatibility is considered.
+- EF Core migrations are versioned, reviewed, and repeatable. (Dotnet scope)
+- Migration scripts avoid destructive surprises. (Dotnet scope)
+- Rollback strategy exists (where required). (Dotnet scope)
+- Deployment order and app/db compatibility is considered. (Dotnet scope)
 
 ## Security
 - Principle of least privilege for database users/roles.
