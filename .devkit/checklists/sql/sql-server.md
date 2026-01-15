@@ -34,6 +34,17 @@ See also: .devkit/checklists/sql/query-design.md
 - Avoid unnecessary or wide indexes (only include required columns).
 - Index usage is monitored and unused indexes are removed over time.
 
+## Indexing (Blob C)
+- Clustered index count is 0 or 1.
+- Composite key order follows equality then range then sort; distinctness order considered.
+- Key column limits respected (16 columns, 900 bytes total key size).
+- INCLUDE column limit respected (1,023 columns).
+- INCLUDE columns are not treated as key columns for seeks/range scans.
+- Filtered index predicates use only allowed forms (no LIKE, OR, computed predicate, or multi-table references).
+- No redundant or superseded indexes (leading key coverage checked).
+- No numeric selectivity thresholds stated as authoritative.
+- If a heap is used, the scenario justification matches allowed deviation patterns.
+
 ## Transactions and locking
 - Transaction boundaries are explicit where correctness depends on them.
 - Long-running transactions avoided.
