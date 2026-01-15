@@ -7,5 +7,7 @@
 - DEFAULT constraints apply on INSERT when no value is provided.
 - DEFAULT constraints SHOULD be explicitly named.
 - Columns that must always have a value SHOULD be defined as NOT NULL.
+- Before adding a constraint, ensure existing data satisfies the constraint conditions (for example, validate or remediate violations before applying).
+- Before adding NOT NULL to an existing column, update existing NULL values to non-NULL (for example, backfill defaults prior to altering).
 
 See also: .devkit/how-to/sql/filtered-unique-indexes.md

@@ -7,5 +7,7 @@
 - R10: Designs MUST NOT rely on DEFAULT constraints to update values on UPDATE.
 
 ## Prohibited patterns
-- P1: Relying on CHECK constraints to block deletes is prohibited.
-- P2: Relying on DEFAULT constraints to change values on UPDATE is prohibited.
+- P1: MUST NOT add a constraint without first addressing existing violating rows.
+- P2: MUST NOT change a nullable column to NOT NULL while NULLs still exist.
+- P3: Relying on CHECK constraints to block deletes is prohibited.
+- P4: Relying on DEFAULT constraints to change values on UPDATE is prohibited.

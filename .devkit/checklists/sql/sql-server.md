@@ -68,6 +68,21 @@ See also: .devkit/checklists/sql/query-design.md
 - Migration scripts avoid destructive surprises. (Dotnet scope)
 - Rollback strategy exists (where required). (Dotnet scope)
 - Deployment order and app/db compatibility is considered. (Dotnet scope)
+### Blob F — Migrations & Schema Evolution
+- Each generated EF Core migration is reviewed before applying; data-loss warnings are explicitly acknowledged.
+- Migration names are descriptive and communicate intent.
+- Production deployment prefers SQL scripts; bundles are acceptable when workflow supports executable review.
+- Migrations are not applied programmatically at application startup in production.
+- Idempotent scripts are used for multi-db or unknown migration state; non-idempotent scripts are not assumed safe.
+- __EFMigrationsHistory is treated as the authoritative applied-state record; manual edits are discouraged (not asserted as Tier-1 in this blob).
+- Raw SQL is used for operations EF Core does not manage; untracked objects are not forced into model operations.
+- EXEC wrapper is used when a statement must be first/only in a batch.
+- Transaction suppression is used for non-transaction-compatible operations; transaction wrapping is not forced for such cases.
+- Renames use supported rename operations; add -> backfill -> remove sequence is used for data-preserving transforms.
+- Backfills are deterministic; batching is considered without universal thresholds; single large transaction allowed for small datasets when atomicity is required.
+- Seeding uses UseSeeding/UseAsyncSeeding with idempotent checks and sync/async parity; HasData is limited to truly static small reference data with explicit keys.
+- HasData is not used for large, non-deterministic, external, database-generated-key, or custom-transformation scenarios.
+- MERGE usage: index best practices applied, write-path impact considered, ON clause contains only matching criteria, and HOLDLOCK is not claimed as mandated without Tier-1 sources.
 
 ## Security
 - Principle of least privilege for database users/roles.
