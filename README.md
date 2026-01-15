@@ -3,9 +3,6 @@
 
 ---
 
-### Start Here
-The canonical .NET example is in [examples/dotnet/layered-microservice](examples/dotnet/layered-microservice/), showing the full layered structure (API → Application → Domain → Infrastructure → Shared → Tests). Angular and SQL scaffolds live under `examples/angular` and `examples/SQL`.
-
 ## 🚀 Setup Instructions
 
 ### 1. Clone or download this DevKit
@@ -63,15 +60,19 @@ You should see:
 ## ⚙️ What’s Inside
 
 ```
-devkit/
-├── examples/             # Worked examples (layered microservice, patterns, Angular, SQL)
-├── general/              # Shared engineering philosophy, checklists, and design recipes
-├── languages/            # Language-specific style, recipes, and libraries (dotnet, etc.)
-├── preludes/             # AI preload instructions (“what to follow before coding”)
-└── tools/                # Helper scripts to sync DevKit into projects
+.devkit/
+├── ai/
+├── contracts/
+│   ├── general/
+│   └── dotnet/
+├── checklists/
+│   ├── general/
+│   └── dotnet/
+├── how-to/
+│   └── dotnet/
+└── playbooks/
 ```
-
-The sync scripts copy everything except `.git`, `.github`, and `tools` into your target folder using `robocopy` (Windows) or `rsync` (macOS/Linux).
+The sync scripts copy `.devkit/` into your target project and exclude `.git`, `.github`, and `tools`.
 
 ---
 
@@ -85,49 +86,26 @@ This forces the model to preload your architecture, coding style, error handling
 
 ```
 READ THESE FILES BEFORE DOING ANYTHING:
-General rules:
-- .devkit/general/charter.md
-- .devkit/general/checklists.md
-- .devkit/general/coding-patterns.md
-- .devkit/general/design-recipes.md
-- .devkit/general/engineering-style.md
-- .devkit/general/house-style-contract.md
-- .devkit/general/operational-contract.md
 
-.NET-specific rules:
-- .devkit/languages/dotnet/design-recipes.md
-- .devkit/languages/dotnet/style.md
-- .devkit/languages/dotnet/libraries.md
+DEVKIT SESSION INITIALISATION
 
-Preludes:
-- .devkit/preludes/prelude-cursor.md
-- .devkit/preludes/prelude-dotnet.md
-- .devkit/preludes/prelude-general.md
+You are working in this repository using the DevKit.
 
-INSTRUCTION PRECEDENCE (ALWAYS USE THIS ORDER):
-1. C# / .NET language and runtime rules  
-2. Specific user instructions in this task  
-3. DevKit rules in `.devkit/**`  
-4. Project-specific DevKit overrides (if present)  
-5. Model defaults  
+Start at `.devkit/ENTRY-POINT.md` and follow its instructions exactly.
 
-If any conflict occurs, follow the higher-priority item and state which rule was overridden.
+This is a long-running task.
+Load the full DevKit as instructed by the entry point.
+Do not cherry-pick or partially load rules.
 
-AFTER reading the DevKit, summarise the rules you will follow for:
-- Controllers
-- Services
-- Validation (FluentValidation, ValidateAsync)
-- Error handling (strict try/catch wrapping the entire method unless explicitly documented otherwise)
-- Logging (structured logging; log exceptions only at the appropriate boundary)
-- Async + CancellationToken usage
-- Test rules (NUnit only)
-- Dependency Injection (all services resolved via DI; no `new` inside methods)
-- Result<T> + ErrorCode usage
-- Extensibility rules (add patterns only when DevKit explicitly allows it)
-- csproj management (always add required PackageReference entries, including Swagger/OpenAPI)
+After loading, confirm (max 6 bullets):
+- Which language scope(s) you have loaded (e.g. .NET)
+- That the DevKit has been fully loaded from the entry point
+- Any known areas explicitly marked to ignore for now (if instructed)
+- The key non-negotiables you will enforce
+- That you are ready to receive the task
 
-Then stop.  
-Do not write any code until I give you the feature or file to implement.
+Then STOP.
+Do not write any code until I give you the task.
 ```
 
 ## Why this matters
@@ -149,13 +127,7 @@ This creates a predictable, professional, senior-quality codebase across project
 
 ---
 
-## 🔁 Updating across projects
-1. Pull the latest changes in `G:\Programming\devkit`.
-2. In each project, rerun the sync command (e.g., `& "G:\Programming\devkit\tools\sync-ai.ps1" ".devkit"`).
-
----
-
 ## 🧭 Key principle
-> The DevKit doesn’t write code for you — it teaches your AI *how you* write code.
+> The DevKit doesn’t write code for you - it teaches your AI *how you* write code.
 
 It’s your architecture, your rules, automated.

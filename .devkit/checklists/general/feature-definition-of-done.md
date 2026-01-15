@@ -1,0 +1,87 @@
+# Feature Definition of Done
+
+- Tests updated/added:
+  - Unit tests always
+  - Integration tests if a boundary is touched
+  - Keep tests in a separate test project (no tests in controller files)
+  - Use clear arrange/act/assert; keep tests short and focused
+- Structured logs added at meaningful points:
+  - Message templates with named properties
+  - Exceptions logged once at the operational boundary
+  - Log meaningful events (start/end, external I/O)
+  - (Optional) metrics/tracing if the platform supports it
+- Documentation updated where relevant (README and/or ADR).
+- Performance and security considerations reviewed briefly.
+- Database migrations are safe and reversible (if data changed).
+- Data access changes that use EF Core satisfy `.devkit/checklists/dotnet/efcore.md`.
+- Public async APIs:
+  - Accept `CancellationToken`
+  - Are suffixed with `Async`
+- Async & Concurrency:
+  - No sync-over-async (`.Result`/`.Wait`/`GetAwaiter().GetResult()`).
+  - No `async void` except event handlers.
+  - Cancellation uses `OperationCanceledException` via `ThrowIfCancellationRequested` (or equivalent) and tokens are propagated to downstream async calls.
+  - `CancellationToken` is propagated where applicable and any created `CancellationTokenSource` is disposed.
+  - No `Task.Run` misuse for I/O or already-async calls.
+  - No `Task.Run` + immediate `await` in ASP.NET Core request paths.
+  - No long-running "forever" ThreadPool loops without isolation (hosted services/queues).
+  - `TaskCompletionSource<T>` uses `RunContinuationsAsynchronously` when used.
+- Outbound HTTP (when introduced/edited):
+  - Uses `IHttpClientFactory` or an explicitly documented approved deviation.
+  - Uses explicit outbound timeouts.
+  - Uses async-only HttpClient APIs.
+  - Meets resilience baseline where applicable (bounded retries; pipeline attachment).
+- Observability (OpenTelemetry):
+  - Applies `.devkit/contracts/dotnet/observability-opentelemetry.md` where OpenTelemetry is introduced/changed.
+  - Exception logging at boundaries passes the exception object to `ILogger` overloads.
+  - Single long-lived TracerProvider per service (no per-request/provider churn).
+  - Uses a shared `ActivitySource` when tracing is introduced.
+  - Resource identity present (service.name + environment metadata).
+  - Spans are ended correctly (using/try-finally).
+  - Span names/attributes avoid high-cardinality and raw URLs.
+  - Baggage constrained (not a general-purpose store).
+  - Production exporter pipeline configured.
+- Configuration & Options pattern:
+  - Options abstraction matches service lifetime (no `IOptionsSnapshot<T>` in singletons).
+  - Validation present and `ValidateOnStart()` used where options are required for startup correctness.
+  - No production secrets in appsettings/code; no committed secrets.
+  - Reload expectations stated; if reload is required, `reloadOnChange` + `IOptionsMonitor<T>` are used.
+- Security:
+  - No secrets in code/config/version control (see `.devkit/contracts/general/security-baseline.md` and `.devkit/contracts/dotnet/configuration-options.md`).
+  - HTTPS/HSTS is enforced in production where applicable (see `.devkit/contracts/dotnet/security-aspnetcore.md`).
+  - Authentication defaults, CORS posture, and CSRF applicability follow `.devkit/contracts/dotnet/security-aspnetcore.md`.
+- All collaborators use **constructor DI** (logger, validator, repos, gateways, clock).
+- Method bodies are wrapped in `try/catch` **unless an explicit comment explains why not**.
+- No service locator usage.
+- No static singletons for shared state.
+- Static methods are allowed **only** for pure helpers.
+- Extensibility considered using the decision table:
+  - [ ] External boundary -> Port + Adapter
+  - [ ] Real variation now or soon (>=2 variants) -> Strategy
+  - [ ] Construction differs by config/environment -> Factory
+  - [ ] Cross-cutting concern -> Decorator
+  - [ ] Otherwise: no pattern (keep it simple)
+- Any new seam includes a **one-line note** explaining its purpose and trigger.
+
+If the feature touches an HTTP boundary:
+
+- Errors are mapped via `Result` / `Result<T>` + `ErrorCode` using a central mapper (e.g. ProblemDetails).
+- Error mapping covers:
+  - Validation -> 400
+  - Domain -> 422
+  - Unexpected -> 500
+- Structured logging scopes include:
+  - CorrelationId (TraceIdentifier)
+  - Key business identifiers where available
+- Tests cover:
+  - Happy path
+  - Invalid input
+  - Exact HTTP status codes
+- DevKit HTTP self-check passes:
+  - Async + CancellationToken
+  - Logging scopes present
+  - Result + ErrorCode mapping
+  - Correct 400 / 422 / 500 responses
+  - Central exception handling produces ProblemDetails for unexpected errors (no per-endpoint try/catch for expected outcomes)
+  - Single-point exception logging
+  - No unjustified seams
