@@ -4,13 +4,13 @@
 Defines enforceable rules for transaction state checks inside error handling paths.
 
 ## Rules (R#)
-- R1: Use XACT_STATE() inside CATCH to distinguish: committable transaction (1), no transaction (0), and uncommittable transaction (-1).
-- R2: When XACT_STATE() is -1, treat the transaction as uncommittable and permit only rollback (not commit).
-- R3: Treat @@TRANCOUNT as indicating whether a user transaction is active and nesting depth, but not whether the transaction is committable or uncommittable.
+- XACT_STATE() MUST be used inside CATCH to distinguish between a committable transaction (1), no transaction (0), and an uncommittable transaction (-1).
+- When XACT_STATE() returns -1, the transaction MUST be treated as uncommittable and MUST only be rolled back.
+- @@TRANCOUNT MUST be treated as indicating whether a user transaction is active and its nesting depth, and MUST NOT be used to determine whether a transaction is committable or uncommittable.
 
 ## Prohibited patterns (P#)
-- P1: Using @@TRANCOUNT alone to decide commit vs rollback inside CATCH.
-- P2: Attempting COMMIT when no corresponding BEGIN exists (for example, after rollback to zero).
+- @@TRANCOUNT MUST NOT be used alone to decide between COMMIT and ROLLBACK inside CATCH.
+- COMMIT MUST NOT be attempted when no corresponding BEGIN TRANSACTION exists.
 
 ## Allowed deviations (D#)
 - None.

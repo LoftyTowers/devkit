@@ -7,7 +7,7 @@ Applies to user-facing query result sizing where unbounded results are unsafe or
 - None. See playbook guidance for sizing practices.
 
 ## Prohibited patterns (P#)
-- P2: MUST NOT return unbounded result sets for user-facing endpoints.
+- Unbounded result sets MUST NOT be returned for user-facing endpoints.
 
 ## Allowed deviations (D#)
 - None.

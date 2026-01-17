@@ -4,7 +4,7 @@
 Defines enforceable ownership chaining requirements for procedures and views.
 
 ## Rules (R#)
-- G-OC-R2: Ownership chaining requires the procedure or view and underlying table to share the same owner.
+- Ownership chaining requires the procedure or view and the underlying table to share the same owner.
 
 ## Prohibited patterns (P#)
 - None.

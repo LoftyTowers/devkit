@@ -4,12 +4,12 @@
 Defines enforceable requirements for Dynamic Data Masking (DDM).
 
 ## Rules (R#)
-- G-DDM-R2: UNMASK permissions MUST be managed so only authorized principals can see unmasked results.
+- UNMASK permissions MUST be managed so that only authorized principals can see unmasked results.
 
 ## Prohibited patterns (P#)
-- G-DDM-P1: Relying on DDM alone to prevent data theft or breach.
-- G-DDM-P2: Granting UPDATE permissions on masked columns without accounting for updates not being masked.
-- G-DDM-P3: Applying DDM masking to Always Encrypted columns.
+- DDM MUST NOT be relied upon as the sole mechanism to prevent data theft or breach.
+- UPDATE permissions MUST NOT be granted on masked columns without accounting for the fact that updates are not masked.
+- DDM masking MUST NOT be applied to Always Encrypted columns.
 
 ## Allowed deviations (D#)
 - None.

@@ -1,16 +1,10 @@
 # SQL Server aggregation filtering contract
 
 ## Scope
-Applies to HAVING usage for non-aggregate predicates.
+Applies to the use of HAVING clauses for predicates that do not depend on aggregate expressions.
 
-## Rules (R#)
-- None. See playbook guidance for correct filtering placement.
-
-## Prohibited patterns (P#)
-- P1: Using HAVING for non-aggregate filters that should be applied before GROUP BY is prohibited.
-
-## Allowed deviations (D#)
-- None.
+## Rules
+- Queries MUST NOT use HAVING to apply predicates that do not depend on aggregate expressions; such predicates MUST be applied before GROUP BY.
 
 ## Cross-references
 - .devkit/playbooks/sql/aggregation.md

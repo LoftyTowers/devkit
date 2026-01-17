@@ -1,14 +1,14 @@
 # SQL Server relationships contract
 
 ## Foreign keys
-- R1: Foreign key column data types MUST match the referenced column data type exactly.
-- R2: A FOREIGN KEY MAY reference a PRIMARY KEY or a UNIQUE constraint.
-- R4: SQL Server does NOT automatically create an index on FOREIGN KEY column(s); designs MUST NOT assume one exists.
-- R6: A composite FOREIGN KEY MUST have the same number of columns as the referenced constraint, with matching data types in order.
+- Foreign key column data types MUST match the referenced column data type exactly.
+- A FOREIGN KEY MAY reference a PRIMARY KEY or a UNIQUE constraint.
+- SQL Server does NOT automatically create an index on FOREIGN KEY column(s); designs MUST NOT assume one exists.
+- A composite FOREIGN KEY MUST have the same number of columns as the referenced constraint, with matching data types in order.
 
 ## Prohibited patterns
-- P1: Foreign keys with mismatched data types are prohibited.
-- P2: Assuming SQL Server auto-indexes FOREIGN KEY columns is prohibited.
+- Foreign keys MUST NOT be defined with mismatched data types.
+- SQL Server MUST NOT be assumed to auto-index FOREIGN KEY columns.
 
 ## Deviations
-- D1: FOREIGN KEY targets that are UNIQUE are explicitly allowed.
+- FOREIGN KEY targets MAY be UNIQUE constraints.

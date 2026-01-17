@@ -4,12 +4,12 @@
 Applies to dynamic SQL that can include user input.
 
 ## Rules (R#)
-- R1: Dynamic SQL that includes user input MUST use sp_executesql with explicit parameters rather than concatenating input into SQL text.
-- R2: EXEC(@sql) with concatenated user input MUST NOT be used.
+- Dynamic SQL that includes user input MUST use sp_executesql with explicit parameters rather than concatenating input into SQL text.
+- EXEC(@sql) MUST NOT be used with concatenated user input.
 
 ## Prohibited patterns (P#)
-- P1: Concatenating user input into dynamic SQL strings is prohibited.
-- P2: Executing concatenated SQL with EXEC(@sql) where user input can influence the query is prohibited.
+- User input MUST NOT be concatenated into dynamic SQL strings.
+- Concatenated SQL MUST NOT be executed with EXEC(@sql) when user input can influence the query.
 
 ## Allowed deviations (D#)
 - None.

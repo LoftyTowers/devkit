@@ -4,11 +4,11 @@
 Defines enforceable requirements for Row-Level Security (RLS).
 
 ## Rules (R#)
-- G-RLS-R3: Create, alter, and drop security policies MUST be restricted to principals with required high-privilege permissions.
+- Create, alter, and drop security policies MUST be restricted to principals with the required high-privilege permissions.
 
 ## Prohibited patterns (P#)
-- G-RLS-P1: Applying RLS where it is bypassed or incompatible without redesign.
-- G-RLS-P2: Treating RLS as a replacement for application authorization.
+- RLS MUST NOT be applied where it is bypassed or incompatible without redesign.
+- RLS MUST NOT be treated as a replacement for application authorization.
 
 ## Allowed deviations (D#)
 - None.

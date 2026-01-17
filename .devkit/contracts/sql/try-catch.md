@@ -4,13 +4,13 @@
 Defines enforceable semantics for TRY...CATCH behavior and transaction error handling.
 
 ## Rules (R#)
-- R1: Treat TRY...CATCH as trapping execution errors of severity > 10 that do not terminate the connection; CATCH runs only when an error occurs in TRY.
-- R2: Treat TRY...CATCH as not automatically rolling back a transaction; CATCH logic must decide whether to commit or roll back.
+- Treat TRY...CATCH as trapping execution errors of severity > 10 that do not terminate the connection; CATCH runs only when an error occurs in TRY.
+- Treat TRY...CATCH as not automatically rolling back a transaction; CATCH logic must decide whether to commit or roll back.
 
 ## Prohibited patterns (P#)
-- P1: Assuming TRY...CATCH automatically rolls back the transaction on error.
-- P2: Assuming TRY...CATCH will catch compile-time errors.
-- P3: Assuming TRY...CATCH sees every error and can always perform cleanup (compile-time errors and connection-terminating errors are excluded).
+- TRY...CATCH MUST NOT be assumed to automatically roll back the transaction on error.
+- TRY...CATCH MUST NOT be assumed to catch compile-time errors.
+- TRY...CATCH MUST NOT be assumed to see every error or to always be able to perform cleanup.
 
 ## Allowed deviations (D#)
 - None.

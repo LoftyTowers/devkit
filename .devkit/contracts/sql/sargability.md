@@ -7,7 +7,7 @@ Applies to predicate forms that defeat index seeks on indexed columns.
 - None. See playbook guidance for sargable patterns.
 
 ## Prohibited patterns (P#)
-- P1: MUST NOT wrap an indexed column in a function (including ISNULL/COALESCE) in a way that prevents index seek usage.
+- Indexed columns MUST NOT be wrapped in functions (including ISNULL or COALESCE) in a way that prevents index seek usage.
 
 ## Allowed deviations (D#)
 - None.

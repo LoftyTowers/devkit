@@ -4,10 +4,10 @@
 Defines enforceable requirements for indexed view creation.
 
 ## Rules (R#)
-- R1: Indexed views MUST NOT be created unless the view definition satisfies SQL Server's documented indexed-view requirements and limitations.
+- Indexed views MUST NOT be created unless the view definition satisfies SQL Server’s documented indexed-view requirements and limitations.
 
 ## Prohibited patterns (P#)
-- P1: Creating indexed views without meeting documented requirements.
+- Indexed views MUST NOT be created without meeting documented indexed-view requirements.
 
 ## Allowed deviations (D#)
 - None.

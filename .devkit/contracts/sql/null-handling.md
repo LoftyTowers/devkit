@@ -1,7 +1,7 @@
 # SQL Server NULL handling contract
 
 ## NULL semantics
-- R1: NULL comparisons MUST use IS NULL / IS NOT NULL.
+- NULL comparisons MUST use IS NULL or IS NOT NULL.
 
 ## Prohibited patterns
-- P1: Using = NULL or != NULL is prohibited.
+- NULL comparisons MUST NOT use = NULL or != NULL.

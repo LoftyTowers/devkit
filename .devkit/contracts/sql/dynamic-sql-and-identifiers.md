@@ -4,10 +4,10 @@
 Defines enforceable rules for parameter usage and identifier substitution.
 
 ## Rules (R#)
-- R3: Stored procedure parameters MUST NOT be used to substitute object identifiers (for example, table or column names); parameters are only for constant expressions.
+- Stored procedure parameters MUST NOT be used to substitute object identifiers (for example, table or column names); parameters MUST be used only for constant expressions.
 
 ## Prohibited patterns (P#)
-- P2: Attempting to parameterize object names (for example, FROM @TableName) as if parameters can replace identifiers.
+- Object names MUST NOT be parameterized as if parameters can replace identifiers (for example, FROM @TableName).
 
 ## Allowed deviations (D#)
 - None.

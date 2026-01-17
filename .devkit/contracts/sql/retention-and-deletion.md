@@ -4,12 +4,12 @@
 Defines enforceable requirements for erasure and deletion semantics.
 
 ## Rules (R#)
-- G-RET-R3: If irreversible erasure is required, physical deletion MUST be used rather than soft delete.
+- If irreversible erasure is required, physical deletion MUST be used rather than soft delete.
 
 ## Prohibited patterns (P#)
-- G-RET-P1: Treating soft delete as equivalent to erasure.
-- G-RET-P2: Treating soft delete as equivalent to an audit trail.
-- G-RET-P3: Conflating anonymisation with pseudonymisation.
+- Soft delete MUST NOT be treated as equivalent to erasure.
+- Soft delete MUST NOT be treated as equivalent to an audit trail.
+- Anonymisation MUST NOT be conflated with pseudonymisation.
 
 ## Allowed deviations (D#)
 - None.

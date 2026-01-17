@@ -7,7 +7,7 @@ Applies to SELECT projection choices that affect client-facing correctness and s
 - None. See playbook guidance for projection practices.
 
 ## Prohibited patterns (P#)
-- P1: MUST NOT use SELECT * in production queries that feed application clients.
+- SELECT * MUST NOT be used in production queries that feed application clients.
 
 ## Allowed deviations (D#)
 - None.

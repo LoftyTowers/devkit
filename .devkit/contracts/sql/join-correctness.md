@@ -4,7 +4,7 @@
 Applies to JOIN logic where non-unique keys can amplify rows.
 
 ## Rules (R#)
-- R2: When using JOIN to combine tables, query authors MUST account for duplicate amplification where join keys are not unique.
+- When using JOIN to combine tables, query authors MUST account for duplicate amplification where join keys are not unique.
 
 ## Prohibited patterns (P#)
 - None.

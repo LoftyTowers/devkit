@@ -4,12 +4,12 @@
 Applies to pagination patterns and correctness expectations.
 
 ## Rules (R#)
-- R1: OFFSET/FETCH pagination MUST include ORDER BY (see R2).
-- R2: Keyset/seek pagination MUST NOT be described as a native SQL Server pagination feature.
+- OFFSET/FETCH pagination MUST include ORDER BY.
+- Keyset or seek pagination MUST NOT be described as a native SQL Server pagination feature.
 
 ## Prohibited patterns (P#)
-- P1: Claiming SQL Server provides native keyset pagination syntax is prohibited.
-- P2: Assuming OFFSET pagination is stable under concurrent modifications without additional consistency controls is prohibited.
+- SQL Server MUST NOT be claimed to provide native keyset pagination syntax.
+- OFFSET pagination MUST NOT be assumed to be stable under concurrent modifications without additional consistency controls.
 
 ## Allowed deviations (D#)
 - None.

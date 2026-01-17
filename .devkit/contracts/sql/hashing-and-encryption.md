@@ -4,10 +4,10 @@
 Defines enforceable rules for hashing vs encryption of sensitive data.
 
 ## Rules (R#)
-- G-HE-R1: Passwords MUST be stored using hashing, not encryption.
+- Passwords MUST be stored using hashing, not encryption.
 
 ## Prohibited patterns (P#)
-- G-HE-P1: Storing passwords in reversible form (encrypted or plaintext).
+- Passwords MUST NOT be stored in reversible form, including encrypted or plaintext storage.
 
 ## Allowed deviations (D#)
 - None.

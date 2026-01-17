@@ -7,7 +7,7 @@ Applies to NOT IN and NULL semantics in subquery comparisons.
 - None. See playbook guidance for safe alternatives.
 
 ## Prohibited patterns (P#)
-- P1: MUST NOT use NOT IN against a nullable subquery result without explicitly addressing NULL semantics.
+- NOT IN MUST NOT be used against a nullable subquery result without explicitly addressing NULL semantics.
 
 ## Allowed deviations (D#)
 - None.

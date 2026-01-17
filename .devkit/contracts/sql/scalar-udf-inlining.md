@@ -4,7 +4,7 @@
 Defines enforceable constraints for scalar UDF inlining assumptions.
 
 ## Rules (R#)
-- R3: Scalar UDF inlining MUST NOT be assumed to apply universally; applicability depends on documented eligibility constraints and can be disabled or blocked.
+- Scalar UDF inlining MUST NOT be assumed to apply universally; applicability depends on documented eligibility constraints and can be disabled or blocked.
 
 ## Prohibited patterns (P#)
 - None.
