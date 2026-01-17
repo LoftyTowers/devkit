@@ -4,8 +4,8 @@
 Covers pagination safety, ordering, and stability under concurrency.
 
 ## Guidance (mapped to relevant R#)
-- R3: For stable pagination across concurrent data changes, SNAPSHOT or SERIALIZABLE isolation SHOULD be used together with a unique ORDER BY; apply only when stability is required and validated.
-- R3 (CTE): Recursive CTE usage SHOULD include an explicit MAXRECURSION safeguard to prevent infinite recursion.
+- For stable pagination across concurrent data changes, SNAPSHOT or SERIALIZABLE isolation SHOULD be used together with a unique ORDER BY, and only when stability is required and validated.
+- Recursive CTE usage SHOULD include an explicit MAXRECURSION safeguard to prevent infinite recursion.
 
 ## Trade-offs and pitfalls
 - Stronger isolation improves stability but can increase contention.

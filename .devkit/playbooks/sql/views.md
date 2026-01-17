@@ -4,14 +4,14 @@
 Guidance for views as logical read surfaces and security abstractions.
 
 ## When to use
-- When encapsulating read logic or exposing a stable read surface.
-- When mediating access to base tables through a controlled interface.
+- This guidance SHOULD be applied when encapsulating read logic or exposing a stable read surface.
+- This guidance SHOULD be applied when mediating access to base tables through a controlled interface.
 
 ## Default guidance
-- R1: Views SHOULD be treated as logical read abstractions (stored SELECT definitions), not as inherent performance features.
+- Views SHOULD be treated as logical read abstractions (stored SELECT definitions), not as inherent performance features.
 
 ## Anti-patterns
-- P1: Assuming non-indexed views inherently improve query performance.
+- Non-indexed views SHOULD NOT be assumed to inherently improve query performance.
 
 ## Examples/pitfalls
 See .devkit/playbooks/sql/permissions-and-ownership-chaining.md for view-permissions examples.

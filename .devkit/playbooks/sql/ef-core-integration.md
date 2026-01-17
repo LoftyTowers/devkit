@@ -4,19 +4,19 @@
 Guidance for SQL artefacts only when EF Core consumes results from this SQL artefact or stored procedure.
 
 ## When to use
-- Only when EF Core maps results from raw SQL, views, functions, or stored procedures.
+- This guidance SHOULD be applied only when EF Core maps results from raw SQL, views, functions, or stored procedures.
 
 ## Default guidance
-- P1: Changing stored procedure result-set column names or shapes without considering EF Core's documented mapping requirements is prohibited.
+- Stored procedure result-set column names or shapes SHOULD NOT be changed without considering EF Core’s documented mapping requirements.
 
 ## Anti-patterns
-- P1: Modifying result set shapes without validating EF Core mappings.
+- Result set shapes SHOULD NOT be modified without validating EF Core mappings.
 
 ## Examples/pitfalls
 Good:
-- Review EF Core mapping expectations before altering result set shapes.
+- EF Core mapping expectations SHOULD be reviewed before altering result set shapes.
 Bad:
-- Rename a result column without updating EF Core mapping.
+- Result columns SHOULD NOT be renamed without updating EF Core mappings.
 
 ## Deviations/Exceptions
 - None explicitly identified.

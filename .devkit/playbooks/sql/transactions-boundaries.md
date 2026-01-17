@@ -8,13 +8,13 @@ Guidance for choosing transaction boundaries and modes.
 - When considering implicit transactions or autocommit usage.
 
 ## When not to use
-- Do not use as a substitute for contract rules on explicit boundaries.
+- This guidance SHOULD NOT be used as a substitute for contract rules on explicit boundaries.
 
 ## Guidance
-- D1: Autocommit is allowed when business consistency does not require multi-statement atomicity.
-- R1 (rowcount checks): Affected-row checks (for example, @@ROWCOUNT) are a common defensive technique but are not mandated by Tier 1 sources.
-- P1 (rowcount checks): Avoid stating that all write procedures must validate @@ROWCOUNT as an authoritative requirement.
-- D1 (rowcount checks): Using rowcount checks is allowed where the system chooses to validate write expectations without concurrency tokens.
+- Autocommit MAY be used when business consistency does not require multi-statement atomicity.
+- Affected-row checks (for example, @@ROWCOUNT) MAY be used as a defensive technique but are not mandated by Tier 1 sources.
+- It SHOULD be avoided to state that all write procedures must validate @@ROWCOUNT as an authoritative requirement.
+- Rowcount checks MAY be used where the system chooses to validate write expectations without concurrency tokens.
 
 ## Pitfalls
 - Assuming multi-statement atomicity without an explicit transaction.

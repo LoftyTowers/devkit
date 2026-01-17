@@ -4,9 +4,9 @@
 Covers COALESCE and ISNULL semantics and correct selection.
 
 ## Guidance (mapped to relevant R#)
-- R1: Use COALESCE when ANSI-compliant NULL handling is required and/or when more than two arguments are needed.
-- R2: Use ISNULL when single evaluation of an expression is required.
-- D1: Either function is allowed when the evaluation and datatype/nullability implications are explicitly acceptable.
+- COALESCE SHOULD be used when ANSI-compliant NULL handling is required and/or when more than two arguments are needed.
+- ISNULL SHOULD be used when single evaluation of an expression is required.
+- Either function MAY be used when the evaluation and datatype or nullability implications are explicitly acceptable.
 
 ## Trade-offs and pitfalls
 - COALESCE can evaluate an expression more than once depending on usage.

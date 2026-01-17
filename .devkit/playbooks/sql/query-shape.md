@@ -4,8 +4,8 @@
 Covers SELECT projection discipline for application-facing queries.
 
 ## Guidance (mapped to relevant R#)
-- R1: Queries SHOULD use explicit column lists in SELECT (avoid SELECT *).
-- R3: Queries SHOULD project only the required columns rather than retrieving whole entities or rows when not needed.
+- Queries SHOULD use explicit column lists in SELECT and avoid SELECT *.
+- Queries SHOULD project only the required columns rather than retrieving whole entities or rows when they are not needed.
 
 ## Trade-offs and pitfalls
 - Over-selecting columns increases IO and can hide breaking changes when schemas evolve.

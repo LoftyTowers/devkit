@@ -4,7 +4,7 @@
 Covers result set sizing for user-facing queries.
 
 ## Guidance (mapped to relevant R#)
-- R2: Queries returning user-facing data SHOULD limit result set size (TOP or OFFSET/FETCH) to avoid unbounded results.
+- Queries returning user-facing data SHOULD limit result set size (TOP or OFFSET/FETCH) to avoid unbounded results.
 
 ## Trade-offs and pitfalls
 - Unbounded queries can exhaust resources and create poor user experiences.

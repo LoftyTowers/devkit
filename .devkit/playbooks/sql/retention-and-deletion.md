@@ -4,21 +4,21 @@
 Guidance for retention, deletion, and anonymisation terminology.
 
 ## When to use
-- When defining data retention and deletion patterns.
+- This guidance SHOULD be applied when defining data retention and deletion patterns.
 
 ## Default guidance
-- G-RET-R1: Soft delete is logical deletion that retains data and requires disciplined filtering to exclude deleted rows.
-- G-RET-R2: Archiving may copy deleted rows to an archive store before physical deletion.
-- G-RET-R4: Anonymisation is irreversible; pseudonymisation is reversible; designs must not conflate them.
+- Soft delete is logical deletion that retains data and requires disciplined filtering to exclude deleted rows.
+- Archiving MAY copy deleted rows to an archive store before physical deletion.
+- Anonymisation is irreversible, pseudonymisation is reversible, and designs SHOULD NOT conflate them.
 
 ## Anti-patterns
 - Conflating anonymisation with pseudonymisation.
 
 ## Examples/pitfalls
 Good:
-- Document whether deletion is logical (soft) or physical.
+- Whether deletion is logical (soft) or physical SHOULD be documented.
 Bad:
-- Treat soft delete as irreversible erasure.
+- Soft delete SHOULD NOT be treated as irreversible erasure.
 
 ## Deviations/Exceptions
 - None explicitly identified.

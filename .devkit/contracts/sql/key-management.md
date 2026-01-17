@@ -3,6 +3,16 @@
 ## Scope
 Defines enforceable rules for cryptographic key handling and storage boundaries.
 
+## When to use
+- When managing encryption keys and backups.
+
+## Default guidance
+- Loss or unavailability of key material protecting encrypted data MUST be treated as catastrophic and MUST be mitigated by backups as described.
+
+## Anti-patterns
+- Key backup or restore testing MUST NOT be ignored.
+
+
 ## Rules (R#)
 - Cryptographic keys and protector secrets MUST NOT be hardcoded in code or stored unencrypted in the database.
 - Column master keys (CMKs) MUST be stored outside the database in a trusted key store; the database MUST contain only metadata and encrypted column encryption keys (CEKs).

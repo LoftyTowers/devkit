@@ -1,44 +1,44 @@
 # SQL Server schema evolution playbook
 
-- Do not rely on physical column order.
-- Avoid SELECT * for schema-change safety.
+- Physical column order SHOULD NOT be relied on.
+- SELECT * SHOULD be avoided for schema-change safety.
 - Adding columns mid-table may require a table rebuild.
 
 ## Migration naming and review
-- Use descriptive migration names that communicate intent (commit-message style).
-- Review each migration's operations for correctness and data-loss risk before applying.
+- Migration names SHOULD be descriptive and communicate intent (commit-message style).
+- Each migration’s operations SHOULD be reviewed for correctness and data-loss risk before applying.
 
 ## Production deployment strategy
-- Prefer generating SQL scripts to deploy EF Core migrations to production.
-- Migration bundles are an acceptable alternative when the workflow supports executable review and deployment; document constraints.
-- Using migration bundles instead of SQL scripts is an allowed alternative when operational review supports it.
+- Generating SQL scripts SHOULD be preferred for deploying EF Core migrations to production.
+- Migration bundles MAY be used as an alternative when the workflow supports executable review and deployment; constraints SHOULD be documented.
+- Migration bundles MAY be used instead of SQL scripts when operational review supports it.
 
 ## Idempotent scripts and history
-- Generate idempotent scripts when the last applied migration is unknown or when deploying to multiple databases.
-- Use the migration-scripting how-to for idempotent script generation details.
-- Treat __EFMigrationsHistory as the authoritative applied-state record for idempotency decisions.
-- Warning (not asserted as Tier-1 in this blob): avoid manual edits or deletes in __EFMigrationsHistory.
+- Idempotent scripts SHOULD be generated when the last applied migration is unknown or when deploying to multiple databases.
+- The migration-scripting how-to SHOULD be used for idempotent script generation details.
+- __EFMigrationsHistory SHOULD be treated as the authoritative applied-state record for idempotency decisions.
+- Manual edits or deletes in __EFMigrationsHistory SHOULD be avoided.
 
 ## Custom SQL in migrations
-- Use raw SQL in migrations for objects or operations EF Core does not manage.
-- Anti-pattern: forcing EF model operations to manage untracked objects; prefer migration SQL.
-- When a statement must be first or only in a batch, use the EXEC wrapper described in the migration-scripting how-to.
+- Raw SQL SHOULD be used in migrations for objects or operations EF Core does not manage.
+- EF model operations SHOULD NOT be forced to manage untracked objects; migration SQL SHOULD be preferred.
+- When a statement must be first or only in a batch, the EXEC wrapper described in the migration-scripting how-to SHOULD be used.
 
 ## Transaction handling in migrations
-- Use the migration-transactions how-to when operations are incompatible with automatic transaction wrapping.
+- The migration-transactions how-to SHOULD be used when operations are incompatible with automatic transaction wrapping.
 
 ## Data-preserving transforms
-- If scaffolding produces drop+add for a rename, replace it with the supported rename operation to preserve data.
-- For data-preserving changes, use: add new schema element(s) -> backfill data -> remove old schema element(s).
+- If scaffolding produces drop and add for a rename, it SHOULD be replaced with the supported rename operation to preserve data.
+- For data-preserving changes, the sequence add new schema element(s) → backfill data → remove old schema element(s) SHOULD be used.
 
 ## Backfills and large transformations
-- Execute deterministic backfills as explicit migration steps when required to align data with schema.
-- Consider batching large operations to reduce log growth and blocking; avoid universal numeric thresholds.
-- A single large transaction is acceptable for small datasets when atomicity is required.
+- Deterministic backfills SHOULD be executed as explicit migration steps when required to align data with schema.
+- Batching large operations SHOULD be considered to reduce log growth and blocking, and universal numeric thresholds SHOULD be avoided.
+- A single large transaction MAY be used for small datasets when atomicity is required.
 
 ## Seeding
-- Use UseSeeding/UseAsyncSeeding in controlled environments; keep sync and async logic aligned.
-- Use HasData only for truly static, small reference data with explicit keys; document limitations.
+- UseSeeding or UseAsyncSeeding MAY be used in controlled environments, and sync and async logic SHOULD be kept aligned.
+- HasData SHOULD be used only for truly static, small reference data with explicit keys, and limitations SHOULD be documented.
 - See the EF Core seeding how-to for patterns and examples.
 
 ## Cross-references

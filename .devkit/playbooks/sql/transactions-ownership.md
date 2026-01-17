@@ -8,12 +8,12 @@ Guidance for caller-owned vs procedure-owned transactions, nesting, and savepoin
 - When defining savepoint usage patterns.
 
 ## When not to use
-- Do not use as a replacement for enforceable transaction semantics in contracts.
+- This guidance SHOULD NOT be used as a replacement for enforceable transaction semantics in contracts.
 
 ## Guidance
-- R3: When an inner stored procedure is invoked under an existing outer transaction, avoid unconditionally committing or rolling back the outer transaction; use savepoints or signal failure to the caller.
-- R4: If a stored procedure is designed to own its transaction when called standalone, start and commit that transaction only when no caller transaction is active (checked via @@TRANCOUNT).
-- D1: Procedure-owned transactions are allowed where the system is intentionally T-SQL-centric and transaction ownership is documented and consistent.
+- When an inner stored procedure is invoked under an existing outer transaction, unconditionally committing or rolling back the outer transaction SHOULD be avoided; savepoints SHOULD be used or failure SHOULD be signalled to the caller.
+- If a stored procedure is designed to own its transaction when called standalone, that transaction SHOULD be started and committed only when no caller transaction is active (checked via @@TRANCOUNT).
+- Procedure-owned transactions MAY be used where the system is intentionally T-SQL-centric and transaction ownership is documented and consistent.
 
 ## Pitfalls
 - Hidden commits or rollbacks that break caller-owned transaction semantics.

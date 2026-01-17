@@ -4,9 +4,9 @@
 Covers UNION/UNION ALL selection and intent clarity.
 
 ## Guidance (mapped to relevant R#)
-- R1: Use UNION ALL when deduplication is not required; use UNION only when deduplication is required.
-- P1: Using UNION when deduplication is not required is discouraged because of unnecessary sort/aggregate work.
-- D1: UNION (deduplication) is explicitly allowed when business logic requires de-duplicated results.
+- UNION ALL SHOULD be used when deduplication is not required, and UNION SHOULD be used only when deduplication is required.
+- UNION SHOULD be avoided when deduplication is not required, because it introduces unnecessary sort or aggregate work.
+- UNION MAY be used when business logic requires de-duplicated results.
 
 ## Trade-offs and pitfalls
 - UNION incurs extra work to remove duplicates; UNION ALL preserves row counts.

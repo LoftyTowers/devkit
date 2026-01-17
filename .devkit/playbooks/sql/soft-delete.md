@@ -4,23 +4,23 @@
 Guidance for choosing soft delete patterns as explicit local design decisions.
 
 ## When to use
-- When evaluating soft delete as a pattern option.
+- This guidance SHOULD be applied when evaluating soft delete as a pattern option.
 
 ## Default guidance
-- R2: Any soft delete implementation MUST be treated as a pattern-level decision requiring explicit local choice, rather than an assumed default.
+- Any soft delete implementation SHOULD be treated as a pattern-level decision requiring explicit local choice, rather than an assumed default.
 
 ## Anti-patterns
-- P1: Claiming soft delete is always better than hard delete as an authoritative rule.
-- P2: Encoding a single soft delete pattern as mandatory solely on vendor authority.
+- Soft delete SHOULD NOT be claimed as always better than hard delete as an authoritative rule.
+- A single soft delete pattern SHOULD NOT be encoded as mandatory solely on vendor authority.
 
 ## Examples/pitfalls
 Good:
-- Document the chosen soft delete approach and why it fits local requirements.
+- The chosen soft delete approach and why it fits local requirements SHOULD be documented.
 Bad:
-- Assume soft delete is required everywhere without a local decision.
+- Soft delete SHOULD NOT be assumed to be required everywhere without a local decision.
 
 ## Deviations/Exceptions
-- D1: Any soft delete pattern may be chosen locally, provided the choice is treated as an explicit design decision.
+- Any soft delete pattern MAY be chosen locally, provided the choice is treated as an explicit design decision.
 
 ## Cross-references
 - .devkit/contracts/sql/soft-delete-authority-boundary.md

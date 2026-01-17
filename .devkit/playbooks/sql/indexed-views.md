@@ -4,22 +4,22 @@
 Guidance for evaluating indexed view use and write-path impact.
 
 ## When to use
-- When considering indexed views for read performance under strict requirements.
+- This guidance SHOULD be applied when considering indexed views for read performance under strict requirements.
 
 ## Default guidance
-- R2: Before relying on an indexed view in production, the DML overhead on participating base tables MUST be evaluated and tested under realistic workloads.
+- Before relying on an indexed view in production, the DML overhead on participating base tables SHOULD be evaluated and tested under realistic workloads.
 
 ## Anti-patterns
-- P2: Introducing indexed views without testing write-path impact.
+- Indexed views SHOULD NOT be introduced without testing write-path impact.
 
 ## Examples/pitfalls
 Good:
-- Test write paths under realistic load before deploying indexed views.
+- Write paths SHOULD be tested under realistic load before deploying indexed views.
 Bad:
-- Assume indexed views are safe without measuring DML impact.
+- Indexed views SHOULD NOT be assumed to be safe without measuring DML impact.
 
 ## Deviations/Exceptions
-- D1: Use indexed views only when requirements are met and need is proven.
+- Indexed views MAY be used only when requirements are met and the need is proven.
 
 ## Cross-references
 - .devkit/contracts/sql/indexed-views.md

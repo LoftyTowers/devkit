@@ -4,8 +4,8 @@
 Covers join syntax clarity and join logic review.
 
 ## Guidance (mapped to relevant R#)
-- R1: Queries SHOULD use ANSI JOIN syntax (INNER JOIN, LEFT OUTER JOIN) in the FROM clause.
-- P1 (style guidance): Avoid non-ANSI join syntax that obscures join logic and filtering.
+- Queries SHOULD use ANSI JOIN syntax (INNER JOIN, LEFT OUTER JOIN) in the FROM clause.
+- Non-ANSI join syntax that obscures join logic and filtering SHOULD be avoided.
 
 ## Trade-offs and pitfalls
 - Non-ANSI joins can hide join predicates and accidentally create cartesian products.

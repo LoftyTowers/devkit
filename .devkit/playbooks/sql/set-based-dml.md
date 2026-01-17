@@ -4,8 +4,8 @@
 Covers preference for set-based DML over row-by-row processing.
 
 ## Guidance (mapped to relevant R#)
-- R1: Prefer set-based UPDATE/DELETE with JOINs instead of cursors or row-by-row loops.
-- P1: Row-by-row loops/cursors for operations that can be expressed as set-based DML are discouraged.
+- Set-based UPDATE or DELETE with JOINs SHOULD be preferred over cursors or row-by-row loops.
+- Row-by-row loops or cursors SHOULD be avoided for operations that can be expressed as set-based DML.
 
 ## Trade-offs and pitfalls
 - Row-by-row processing is often slower and harder to reason about for correctness.

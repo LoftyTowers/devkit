@@ -4,21 +4,21 @@
 Guidance for DDM behavior and limitations.
 
 ## When to use
-- When using DDM to reduce exposure of sensitive data.
+- DDM SHOULD be considered when reducing exposure of sensitive data.
 
 ## Default guidance
-- G-DDM-R1: DDM masks query results without changing underlying data.
-- G-DDM-R3: DDM should not be treated as a primary security control; pair with other controls.
-- G-DDM-R4: Designs must account for limitations (updates not masked; incompatibility with Always Encrypted on the same column; type constraints).
+- DDM masks query results without changing the underlying data.
+- DDM SHOULD NOT be treated as a primary security control and SHOULD be paired with other controls.
+- Designs SHOULD account for limitations such as updates not being masked, incompatibility with Always Encrypted on the same column, and type constraints.
 
 ## Anti-patterns
 - Relying on DDM as the sole control for sensitive data.
 
 ## Examples/pitfalls
 Good:
-- Use DDM alongside encryption and access controls.
+- DDM SHOULD be used alongside encryption and access controls.
 Bad:
-- Assume DDM alone prevents data theft.
+- DDM alone SHOULD NOT be assumed to prevent data theft.
 
 ## Deviations/Exceptions
 - None explicitly identified.

@@ -4,8 +4,8 @@
 Covers predicate forms that preserve index usage.
 
 ## Guidance (mapped to relevant R#)
-- R1: Queries SHOULD avoid applying functions to indexed columns in WHERE, JOIN, or ORDER BY predicates.
-- R2: Queries SHOULD avoid wrapping indexed columns in ISNULL/COALESCE in WHERE predicates; prefer IS NULL / IS NOT NULL where applicable.
+- Queries SHOULD avoid applying functions to indexed columns in WHERE, JOIN, or ORDER BY predicates.
+- Queries SHOULD avoid wrapping indexed columns in ISNULL or COALESCE in WHERE predicates, and IS NULL or IS NOT NULL SHOULD be preferred where applicable.
 
 ## Trade-offs and pitfalls
 - Function-wrapped predicates often force scans instead of seeks.

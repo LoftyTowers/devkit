@@ -8,14 +8,14 @@ Guidance for designing retry-safe behavior for deadlocks and transient failures.
 - When assessing idempotency requirements for retries.
 
 ## When not to use
-- Do not use to define numeric retry counts or delays.
+- This guidance SHOULD NOT be used to define numeric retry counts or delays.
 
 ## Guidance
-- R1: Treat deadlock resolution as rolling back the deadlock victim transaction; callers must tolerate and handle this by retrying at an appropriate boundary when safe.
-- R2: When retries are possible, require idempotent design to avoid duplicates or inconsistent state, especially due to commit outcome ambiguity.
-- P1: Retrying non-idempotent operations without keys, constraints, or verification to prevent duplication is prohibited.
-- P2: Treating NOLOCK as a substitute for retry-safe design is prohibited.
-- D1: Not implementing retries is allowed when the system explicitly chooses fail-fast behavior and avoids automatic re-execution.
+- Deadlock resolution SHOULD be treated as rolling back the deadlock victim transaction, and callers SHOULD tolerate and handle this by retrying at an appropriate boundary when safe.
+- When retries are possible, designs SHOULD be idempotent to avoid duplicates or inconsistent state, especially due to commit outcome ambiguity.
+- Non-idempotent operations SHOULD NOT be retried without keys, constraints, or verification to prevent duplication.
+- NOLOCK SHOULD NOT be treated as a substitute for retry-safe design.
+- Retries MAY be omitted when the system explicitly chooses fail-fast behavior and avoids automatic re-execution.
 
 ## Pitfalls
 - Retrying without idempotency safeguards.

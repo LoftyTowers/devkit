@@ -4,8 +4,8 @@
 Covers filtering placement relative to GROUP BY and aggregate expressions.
 
 ## Guidance (mapped to relevant R#)
-- R1: Use WHERE to filter rows before aggregation and HAVING to filter aggregated results.
-- D1: HAVING is allowed for filters that depend on aggregate expressions.
+- Filtering SHOULD use WHERE to restrict rows before aggregation and HAVING to restrict aggregated results.
+- HAVING MAY be used when a filter depends on aggregate expressions.
 
 ## Trade-offs and pitfalls
 - Misusing HAVING for non-aggregate filters can inflate work and produce incorrect results.

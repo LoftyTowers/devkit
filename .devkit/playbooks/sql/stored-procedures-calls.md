@@ -4,13 +4,13 @@
 Guidance for calling stored procedures safely and compatibly.
 
 ## When to use
-- When invoking stored procedures from application or database code.
+- This guidance SHOULD be applied when invoking stored procedures from application or database code.
 
 ## Default guidance
-- R2: Calls to stored procedures SHOULD specify parameter names explicitly (not positional) to preserve compatibility when parameters are added or reordered.
+- Calls to stored procedures SHOULD specify parameter names explicitly (not positional) to preserve compatibility when parameters are added or reordered.
 
 ## Anti-patterns
-- P1: Calling stored procedures positionally where it creates fragility under signature evolution.
+- Stored procedures SHOULD NOT be called positionally where it creates fragility under signature evolution.
 
 ## Examples/pitfalls
 Good:

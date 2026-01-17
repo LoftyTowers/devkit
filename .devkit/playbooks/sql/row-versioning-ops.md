@@ -8,14 +8,14 @@ Guidance for operational implications of row-versioning isolation.
 - When assessing tempdb and version store impacts.
 
 ## When not to use
-- Do not present row-versioning as a free performance improvement.
+- Row-versioning SHOULD NOT be presented as a free performance improvement.
 
 ## Guidance
-- R3: Long-running snapshot or versioned transactions keep versions alive longer, which can drive version store growth and read failures if space is exhausted.
-- R4: Row-versioning is a concurrency trade-off with storage and IO impact, not free performance.
-- P1: Enabling RCSI or SNAPSHOT while assuming no storage or version-store impact is prohibited.
-- P2: Treating SNAPSHOT as just faster reads without accounting for update conflicts and version retention is prohibited.
-- D1: Choosing locking-based isolation is allowed when operational constraints limit version-store use.
+- Long-running snapshot or versioned transactions SHOULD be expected to keep versions alive longer, which can drive version store growth and read failures if space is exhausted.
+- Row-versioning SHOULD be treated as a concurrency trade-off with storage and IO impact, not as free performance.
+- RCSI or SNAPSHOT SHOULD NOT be enabled while assuming no storage or version-store impact.
+- SNAPSHOT SHOULD NOT be treated as merely faster reads without accounting for update conflicts and version retention.
+- Locking-based isolation MAY be chosen when operational constraints limit version-store use.
 
 ## Pitfalls
 - Ignoring version store growth.

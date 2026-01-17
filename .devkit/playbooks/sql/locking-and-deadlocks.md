@@ -8,12 +8,12 @@ Guidance for minimizing blocking and deadlocks in transactional workloads.
 - When diagnosing deadlock patterns.
 
 ## When not to use
-- Do not treat NOLOCK as a correctness-preserving fix.
+- NOLOCK SHOULD NOT be treated as a correctness-preserving fix.
 
 ## Guidance
-- R5: To minimize deadlocks, keep transactions short, avoid user interaction inside transactions, access objects in a consistent order, and consider row-versioning isolation where appropriate.
-- P3: Read-modify-write patterns at READ COMMITTED must not assume readers and writers will not deadlock; review ordering and locking.
-- D1: Using row-versioning (RCSI or SNAPSHOT) to reduce reader-writer blocking is allowed when business rules permit and operational constraints are acceptable.
+- To minimize deadlocks, transactions SHOULD be kept short, user interaction inside transactions SHOULD be avoided, objects SHOULD be accessed in a consistent order, and row-versioning isolation SHOULD be considered where appropriate.
+- Read-modify-write patterns at READ COMMITTED SHOULD NOT assume that readers and writers will not deadlock; ordering and locking SHOULD be reviewed.
+- Row-versioning isolation (RCSI or SNAPSHOT) MAY be used to reduce reader-writer blocking when business rules permit and operational constraints are acceptable.
 
 ## Pitfalls
 - Long-running transactions that extend lock duration.
