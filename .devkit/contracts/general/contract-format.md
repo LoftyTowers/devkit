@@ -1,4 +1,4 @@
-# Untitled
+# Contract format
 
 ## Scope
 
