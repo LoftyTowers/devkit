@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- HTTP API response design and error mapping at controller or endpoint boundaries.
 
 ## Rules
 

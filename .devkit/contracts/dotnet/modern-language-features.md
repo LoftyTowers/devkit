@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- C# language feature usage for records, pattern matching, required members, immutability, and nullable reference types.
 
 ## Rules
 

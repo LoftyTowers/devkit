@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for EF Core concurrency tokens and conflict handling.
 
 ## When to use
 

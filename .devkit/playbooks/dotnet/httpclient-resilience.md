@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for HttpClient resilience policy composition.
 
 ## When to use
 

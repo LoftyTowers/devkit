@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for .NET style preferences, including naming and cancellation token conventions.
 
 ## When to use
 

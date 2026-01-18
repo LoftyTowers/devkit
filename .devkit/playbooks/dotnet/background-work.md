@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for background services and hosted work patterns in .NET.
 
 ## When to use
 

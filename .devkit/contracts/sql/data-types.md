@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server data type consistency and deprecated type usage.
 
 ## Rules
 

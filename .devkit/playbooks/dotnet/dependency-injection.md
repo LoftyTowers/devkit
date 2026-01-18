@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for .NET dependency injection patterns and registrations.
+
 ## When to use
 
 - None.

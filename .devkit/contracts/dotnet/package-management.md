@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Package reference updates and output expectations for .NET projects.
+
 ## Rules
 
 - When generated code relies on a library that may not already exist in the project, **add the required `<PackageReference>` entries**

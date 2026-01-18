@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for SQL Server constraint design and data readiness.
+
 ## When to use
 
 - None.

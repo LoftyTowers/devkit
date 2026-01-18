@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for HttpClient timeout strategies.
 
 ## When to use
 

@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Documentation expectations for .NET code, including XML comments.
 
 ## Rules
 

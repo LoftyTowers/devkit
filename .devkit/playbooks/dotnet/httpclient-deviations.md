@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for HttpClient deviations and singleton usage.
 
 ## When to use
 

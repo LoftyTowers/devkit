@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for ASP.NET Core security headers and related practices.
 
 ## When to use
 

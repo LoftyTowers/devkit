@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for SQL Server index design and maintenance.
+
 ## When to use
 
 - None.

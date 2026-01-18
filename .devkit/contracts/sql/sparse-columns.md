@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server sparse column definitions and index participation.
 
 ## Rules
 

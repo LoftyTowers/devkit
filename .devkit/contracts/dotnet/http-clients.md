@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- HTTP client usage, lifetimes, and timeout behavior in .NET.
 
 ## Rules
 

@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for async and concurrency patterns, including ConfigureAwait and Task.Run usage.
+
 ## When to use
 
 - None.

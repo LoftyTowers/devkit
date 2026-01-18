@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for EF Core query tracking and loading strategies.
+
 ## When to use
 
 - None.

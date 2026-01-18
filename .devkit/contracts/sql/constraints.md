@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server constraint correctness and data readiness expectations.
 
 ## Rules
 

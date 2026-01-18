@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for OpenTelemetry instrumentation in .NET.
 
 ## When to use
 

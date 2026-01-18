@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for request timeout behavior and middleware handling.
 
 ## When to use
 

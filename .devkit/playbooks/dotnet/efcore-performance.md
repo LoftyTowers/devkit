@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for EF Core performance practices, including compiled queries and indexing discipline.
 
 ## When to use
 

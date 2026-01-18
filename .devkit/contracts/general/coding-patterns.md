@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Applicability of common coding patterns across languages.
 
 ## Rules
 

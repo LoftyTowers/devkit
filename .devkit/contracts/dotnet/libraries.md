@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Approved default libraries and logging stack choices for .NET projects.
 
 ## Rules
 

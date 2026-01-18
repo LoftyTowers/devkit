@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server computed column definitions, indexing, and constraint interactions.
 
 ## Rules
 

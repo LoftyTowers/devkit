@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for EF Core migrations workflows.
 
 ## When to use
 

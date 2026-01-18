@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server NULL comparison semantics and operator usage.
 
 ## Rules
 

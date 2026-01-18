@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for ASP.NET Core API design and middleware choices.
 
 ## When to use
 

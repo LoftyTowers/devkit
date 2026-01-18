@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for general dependency injection usage patterns.
+
 ## When to use
 
 - None.

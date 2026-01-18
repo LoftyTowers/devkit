@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for .NET GC mode selection and tuning trade-offs.
 
 ## When to use
 

@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Dependency injection usage for collaborator creation and composition.
+
 ## Rules
 
 - **All collaborators** (repositories, gateways, clients, clocks, validators, loggers, etc.) MUST be injected via the constructor.

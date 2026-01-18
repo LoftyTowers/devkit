@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Naming conventions for identifiers and types in .NET codebases.
 
 ## Rules
 

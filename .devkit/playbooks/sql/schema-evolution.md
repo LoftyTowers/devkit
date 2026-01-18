@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for SQL Server schema evolution and migration workflows.
+
 ## When to use
 
 - None.

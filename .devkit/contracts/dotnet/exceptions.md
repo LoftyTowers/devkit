@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Exception handling and failure signaling at operational boundaries and inner layers.
+
 ## Rules
 
 - Unexpected/unhandled exceptions MAY bubble to a central exception handler (middleware/filters) at the API boundary, which MUST return an HTTP 5xx **ProblemDetails** response (sanitised; no sensitive internals).

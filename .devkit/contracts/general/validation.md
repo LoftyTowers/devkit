@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Input validation placement and edge validation approach.
 
 ## Rules
 

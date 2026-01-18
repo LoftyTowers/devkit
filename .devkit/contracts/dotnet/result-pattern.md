@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Explicit outcome modeling for expected failures and API boundary mapping.
 
 ## Rules
 

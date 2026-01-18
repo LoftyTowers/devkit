@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Structured logging, scopes, diagnostic context, and exception logging in .NET apps.
+
 ## Rules
 
 ### Scopes and context

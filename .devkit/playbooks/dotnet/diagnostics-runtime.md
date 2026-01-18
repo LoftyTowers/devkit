@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for runtime diagnostics and metrics tooling in .NET.
 
 ## When to use
 

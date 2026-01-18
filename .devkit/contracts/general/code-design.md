@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Code design principles for abstractions and extensibility.
 
 ## Rules
 

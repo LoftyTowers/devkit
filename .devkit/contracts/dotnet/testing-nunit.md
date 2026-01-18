@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Test framework and assertion library selection for .NET tests.
 
 ## Rules
 

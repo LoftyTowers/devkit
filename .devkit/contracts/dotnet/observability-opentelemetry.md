@@ -2,6 +2,8 @@
 
 ## Scope
 
+- OpenTelemetry configuration and usage in .NET services, including providers, activities, metrics, and exporters.
+
 ## Rules
 
 ### Context propagation

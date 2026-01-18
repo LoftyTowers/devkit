@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Non-enforceable guidance for SQL Server data type selection and indexing limits.
+
 ## When to use
 
 - None.

@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Non-enforceable guidance for configuration binding and options patterns in .NET.
 
 ## When to use
 

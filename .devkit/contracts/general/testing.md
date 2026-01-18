@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Testing expectations for unit and integration coverage on changes.
 
 ## Rules
 

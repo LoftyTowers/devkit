@@ -2,6 +2,8 @@
 
 ## Scope
 
+- EF Core DbContext lifecycle, query posture, transactions, migrations, and concurrency.
+
 ## Rules
 
 ### DbContext lifetime and scope

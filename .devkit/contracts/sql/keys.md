@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server primary key definitions and limits.
 
 ## Rules
 

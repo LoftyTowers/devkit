@@ -2,6 +2,8 @@
 
 ## Scope
 
+- Baseline security practices for input handling, secrets, and logging.
+
 ## Rules
 
 - MUST validate all **external inputs** (HTTP requests, messages, events, CLI arguments) before use.

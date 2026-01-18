@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- Dependency injection usage and lifetime relationships in .NET components.
 
 ## Rules
 

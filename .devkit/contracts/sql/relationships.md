@@ -2,7 +2,7 @@
 
 ## Scope
 
-- None.
+- SQL Server foreign key relationships and type alignment.
 
 ## Rules
 
