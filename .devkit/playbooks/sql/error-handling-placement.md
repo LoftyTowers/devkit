@@ -1,16 +1,20 @@
 # Error handling placement playbook (SQL Server)
 
 ## Scope
+
 Guidance for where to place error handling and how to structure TRY...CATCH decisions.
 
 ## When to use
+
 - When deciding between boundary-centric handling and layered error handling.
 - When designing TRY...CATCH patterns with transaction ownership.
 
-## When not to use
+## Guidance
+
+### When not to use
+
 - TRY...CATCH SHOULD NOT be treated as catching compile-time errors or connection-terminating errors.
 
-## Guidance
 - Boundary-centric error handling SHOULD be the preferred baseline framing for OLTP services; inner procedures typically roll back local work (if they own it) and rethrow.
 - Layered TRY...CATCH with local compensation SHOULD mainly be used for administrative or batch workflows, given the higher complexity and ownership risks.
 - Layering error handlers SHOULD be avoided where transaction ownership becomes ambiguous.
@@ -23,11 +27,19 @@ Guidance for where to place error handling and how to structure TRY...CATCH deci
 - Where documented as required (for example, certain OLE DB or distributed transaction scenarios), XACT_ABORT SHOULD be set ON for data modification unless the provider supports nested transactions.
 - XACT_ABORT MAY be left OFF when the design intentionally relies on statement-level rollback behavior and explicitly manages transaction state.
 
-## Pitfalls
+## Trade-offs and pitfalls
+
+### Pitfalls
+
 - Assuming TRY...CATCH catches every error and always allows cleanup.
 - Mixing ownership boundaries without a clear rollback/commit decision.
 
+## Examples
+
+- None.
+
 ## Cross-references
+
 - contracts/sql/try-catch.md
 - contracts/sql/xact-state.md
 - contracts/sql/xact-abort.md

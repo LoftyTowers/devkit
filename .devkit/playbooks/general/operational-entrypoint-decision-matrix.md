@@ -1,5 +1,7 @@
 # Operational Entry Point Decision Matrix (Minimalism Bias)
 
+## Scope
+
 Scope:
 Applies to any operational entry point, including:
 - HTTP endpoints (controllers/minimal APIs)
@@ -14,7 +16,13 @@ Escalate to additional layers (service/handler/DTO/validator) only when there is
 
 ---
 
-## Default rule
+## When to use
+
+- None.
+
+## Guidance
+
+### Default rule
 
 Start minimal:
 - Keep trivial orchestration close to the entry point.
@@ -23,7 +31,7 @@ Start minimal:
 
 ---
 
-## Escalation triggers
+### Escalation triggers
 
 Introduce a dedicated service/handler (or equivalent) when ANY of the following is true:
 
@@ -51,7 +59,7 @@ If none of the above apply, keep it minimal.
 
 ---
 
-## Input model and validation triggers
+### Input model and validation triggers
 
 Introduce a request DTO and validator when ANY of the following is true:
 
@@ -69,7 +77,7 @@ If input is trivial and there are no real validation rules:
 
 ---
 
-## Interface triggers (avoid speculative seams)
+### Interface triggers (avoid speculative seams)
 
 Introduce a new interface only when at least one is true:
 
@@ -83,7 +91,18 @@ Otherwise:
 
 ---
 
-## Practical examples
+### Output expectation for AI assistants
+
+When creating new types (DTO/service/interface/validator), state which trigger(s) justified it.
+When staying minimal, state why triggers did not apply.
+
+## Trade-offs and pitfalls
+
+- None.
+
+## Examples
+
+### Practical examples
 
 Minimal is correct:
 - A health-check/ping endpoint returning a constant
@@ -98,7 +117,6 @@ Escalation is correct:
 
 ---
 
-## Output expectation for AI assistants
+## Cross-references
 
-When creating new types (DTO/service/interface/validator), state which trigger(s) justified it.
-When staying minimal, state why triggers did not apply.
+- None.

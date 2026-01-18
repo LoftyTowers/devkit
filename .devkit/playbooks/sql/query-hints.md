@@ -1,9 +1,17 @@
 # SQL Server query hints playbook
 
 ## Scope
+
 Covers hint usage, plan stability, and related correctness risks.
 
-## Guidance (mapped to relevant R#)
+## When to use
+
+- None.
+
+## Guidance
+
+### Guidance (mapped to relevant R#)
+
 - NOLOCK (READ UNCOMMITTED) SHOULD be avoided for transactional queries and MAY be used only for non-critical reporting.
 - The RECOMPILE hint SHOULD be used only for queries with highly variable cardinality per execution.
 - OPTIMIZE FOR MAY be used when a common parameter value is known, with stated risks if parameters vary.
@@ -14,17 +22,22 @@ Covers hint usage, plan stability, and related correctness risks.
 - @@ROWCOUNT alone MAY be used when only the total affected rows across all MERGE actions is sufficient.
 
 ## Trade-offs and pitfalls
+
 - Hints can lock in bad plans and must be validated against real workload behavior.
 - Implicit conversions can force scans and alter comparison semantics.
 - NOT IN with NULLs can eliminate expected rows.
 
-## Examples (good vs bad)
+## Examples
+
+### Examples (good vs bad)
+
 Good:
 EXEC sp_executesql @sql, N'@Status int', @Status = @Status;
 Bad:
 EXEC(@sql + @Status);
 
 ## Cross-references
+
 - .devkit/contracts/sql/isolation-and-nolock.md
 - .devkit/playbooks/sql/isolation-levels.md
 - .devkit/contracts/sql/type-correctness.md

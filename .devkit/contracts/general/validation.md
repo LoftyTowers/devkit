@@ -1,6 +1,12 @@
 # Validation
 
-## Edge validation
+## Scope
+
+- None.
+
+## Rules
+
+### Edge validation
 
 - MUST perform input validation at the edge of the system:
   - HTTP: use the approved validation mechanism on request DTOs.
@@ -12,8 +18,20 @@
 - SHOULD NOT duplicate validation rules across layers without a documented reason.
   - If a validator guarantees basic shape (e.g., email syntax), downstream handlers MAY assume that shape.
 
-## Validation principles
+### Validation principles
 
 - SHOULD keep validation rules close to the DTO/request model and fail fast.
 - MUST NOT use exceptions for control-flow validation.
 - SHOULD aggregate errors for 400 responses.
+
+## Prohibited patterns
+
+- None.
+
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

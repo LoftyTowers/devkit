@@ -1,5 +1,7 @@
 # SQL Server constraints playbook
 
+## Scope
+
 - UNIQUE constraints allow one NULL per column (unlike PRIMARY KEY).
 - UNIQUE constraints create a unique nonclustered index automatically unless CLUSTERED is specified.
 - A UNIQUE constraint SHOULD be used to express a business rule in the logical model; a unique index SHOULD be used when options such as filtering or INCLUDE columns are needed.
@@ -11,3 +13,23 @@
 - Before adding NOT NULL to an existing column, existing NULL values SHOULD be updated to non-NULL (for example, backfilling defaults prior to altering).
 
 See also: .devkit/how-to/sql/filtered-unique-indexes.md
+
+## When to use
+
+- None.
+
+## Guidance
+
+- None.
+
+## Trade-offs and pitfalls
+
+- None.
+
+## Examples
+
+- None.
+
+## Cross-references
+
+- None.

@@ -1,9 +1,11 @@
 # API design and middleware (ASP.NET Core)
 
 ## Scope
+
 ASP.NET Core pipeline ordering and API middleware concerns for HTTP services.
 
 ## Rules
+
 - Middleware ordering MUST follow this baseline to keep security and error handling consistent:
   - Exception handling early
   - HTTPS redirection and static files before routing
@@ -19,12 +21,22 @@ ASP.NET Core pipeline ordering and API middleware concerns for HTTP services.
   - If explicit middleware is used, `UseAuthentication` MUST run before `UseAuthorization`.
   - Endpoints MUST apply policies via `[Authorize]` or `RequireAuthorization` as appropriate.
 
+### Error shape
+
+Error response shape is governed by:
+- `.devkit/contracts/general/api-design.md` — “Error response mapping”
+- `.devkit/contracts/dotnet/exceptions.md` — “Exception Handling (canonical)”
+
 ## Prohibited patterns
+
 - Endpoint mapping before CORS/auth middleware MUST NOT occur.
 - `UseCors` after endpoints are mapped MUST NOT occur.
 - `UseAuthorization` before `UseAuthentication` MUST NOT occur.
 
-## Error shape
-Error response shape is governed by:
-- `.devkit/contracts/general/api-design.md` — “Error response mapping”
-- `.devkit/contracts/dotnet/exceptions.md` — “Exception Handling (canonical)”
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

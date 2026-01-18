@@ -1,20 +1,32 @@
 # SQL Server row-level security contract
 
 ## Scope
+
 Defines enforceable requirements for Row-Level Security (RLS).
 
-## Rules (R#)
+### Notes
+
+- RLS is defense-in-depth and has known bypass conditions.
+
+## Rules
+
+### Rules (R#)
+
 - Create, alter, and drop security policies MUST be restricted to principals with the required high-privilege permissions.
 
-## Prohibited patterns (P#)
+## Prohibited patterns
+
+### Prohibited patterns (P#)
+
 - RLS MUST NOT be applied where it is bypassed or incompatible without redesign.
 - RLS MUST NOT be treated as a replacement for application authorization.
 
-## Allowed deviations (D#)
+## Allowed deviations
+
+### Allowed deviations (D#)
+
 - None.
 
-## Notes
-- RLS is defense-in-depth and has known bypass conditions.
-
 ## Cross-references
+
 - .devkit/playbooks/sql/row-level-security.md

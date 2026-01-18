@@ -1,4 +1,8 @@
-## Scope definitions
+# Untitled
+
+## Scope
+
+### Definitions
 
 ### Operational handlers
 
@@ -15,3 +19,19 @@ Operational handlers **do not** include:
 - Pure domain or application services
 - Repositories or infrastructure adapters
 - Configuration, options, or mapping types
+
+## Rules
+
+- None.
+
+## Prohibited patterns
+
+- None.
+
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

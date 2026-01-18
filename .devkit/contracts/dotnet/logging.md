@@ -1,36 +1,8 @@
 # Logging
 
-## Logging rules
+## Scope
 
-- MUST use structured logging (`ILogger<T>` or equivalent) with **message templates and named properties**.
-- Loggers MUST be obtained via MEL abstractions (`ILogger` / `ILogger<T>`) from dependency injection.
-- Application and library code MUST NOT depend on concrete logging implementations (e.g., Serilog `Logger`) outside the application entry point.
-- Static or global logger instances MUST NOT be used outside the application entry point.
-- Message templates MUST be constant string literals (CA2254 intent).
-- Message templates MUST NOT be composed at runtime (no concatenation, interpolation, localisation tokens, or runtime building).
-- Placeholder names in message templates MUST be meaningful and stable for the event.
-- Placeholder names MUST NOT contain variable data.
-- Values required for filtering, correlation, or analysis MUST be captured as structured properties (template placeholders or scope properties).
-- A pre-formatted message string MUST NOT be passed as the first parameter when structured data is intended.
-- Full request/response bodies or full object graphs MUST NOT be logged by default.
-- If payload logging is explicitly required, it MUST be opt-in, redacted or masked, size-limited or truncated, and MUST NOT be enabled in production unless explicitly approved.
-- Payload logging MUST be behind a configuration flag and MUST default to OFF.
-- Payload logging MUST be per-endpoint/operation (or per handler), not a global always-on setting.
-- When payload logging is enabled, only filtered/redacted extracts MAY be logged; raw payloads MUST NOT be emitted.
-- Logging configuration MUST be centralised in the application entry point (Program.cs / host builder) and/or configuration files.
-- Business logic MUST NOT configure logging providers or sinks.
-- When Serilog is used as the MEL provider, configuration MUST explicitly enable MEL scope/context propagation into Serilog events.
-- Scope/context inclusion MUST be configured explicitly; reliance on implicit defaults is forbidden.
-- The logging pipeline MUST NOT emit duplicate log events for a single log call.
-- When adding Serilog or other providers, default providers that cause duplicate events MUST be cleared or disabled.
-- Logging MUST NOT perform blocking external I/O on the caller path.
-- When a sink can block (network, database, remote API), buffering, async wrappers, or durable sinks MUST be used.
-- Production log level configuration MUST be explicit, including minimum levels and category/namespace overrides.
-- MUST NOT use string interpolation or string concatenation in log messages.
-
----
-
-## Scopes and context
+### Scopes and context
 
 - For each operation, a logging scope MUST be opened at the boundary that includes:
   - a correlation / trace identifier (if the platform provides one),
@@ -51,7 +23,7 @@
 
 ---
 
-## Diagnostic context preservation (inner layers -> boundary)
+### Diagnostic context preservation (inner layers -> boundary)
 
 ### Purpose
 
@@ -98,7 +70,50 @@ Preserve inner-layer diagnostic context so boundary logging is sufficient to dia
 
 ---
 
-## Boundary exception logging
+## Rules
+
+### Logging rules
+
+- MUST use structured logging (`ILogger<T>` or equivalent) with **message templates and named properties**.
+- Loggers MUST be obtained via MEL abstractions (`ILogger` / `ILogger<T>`) from dependency injection.
+- Application and library code MUST NOT depend on concrete logging implementations (e.g., Serilog `Logger`) outside the application entry point.
+- Static or global logger instances MUST NOT be used outside the application entry point.
+- Message templates MUST be constant string literals (CA2254 intent).
+- Message templates MUST NOT be composed at runtime (no concatenation, interpolation, localisation tokens, or runtime building).
+- Placeholder names in message templates MUST be meaningful and stable for the event.
+- Placeholder names MUST NOT contain variable data.
+- Values required for filtering, correlation, or analysis MUST be captured as structured properties (template placeholders or scope properties).
+- A pre-formatted message string MUST NOT be passed as the first parameter when structured data is intended.
+- Full request/response bodies or full object graphs MUST NOT be logged by default.
+- If payload logging is explicitly required, it MUST be opt-in, redacted or masked, size-limited or truncated, and MUST NOT be enabled in production unless explicitly approved.
+- Payload logging MUST be behind a configuration flag and MUST default to OFF.
+- Payload logging MUST be per-endpoint/operation (or per handler), not a global always-on setting.
+- When payload logging is enabled, only filtered/redacted extracts MAY be logged; raw payloads MUST NOT be emitted.
+- Logging configuration MUST be centralised in the application entry point (Program.cs / host builder) and/or configuration files.
+- Business logic MUST NOT configure logging providers or sinks.
+- When Serilog is used as the MEL provider, configuration MUST explicitly enable MEL scope/context propagation into Serilog events.
+- Scope/context inclusion MUST be configured explicitly; reliance on implicit defaults is forbidden.
+- The logging pipeline MUST NOT emit duplicate log events for a single log call.
+- When adding Serilog or other providers, default providers that cause duplicate events MUST be cleared or disabled.
+- Logging MUST NOT perform blocking external I/O on the caller path.
+- When a sink can block (network, database, remote API), buffering, async wrappers, or durable sinks MUST be used.
+- Production log level configuration MUST be explicit, including minimum levels and category/namespace overrides.
+- MUST NOT use string interpolation or string concatenation in log messages.
+
+---
+
+### Operational events
+
+- SHOULD log start and end of significant operations at **Information** level.
+- SHOULD log validation and domain failures at **Information** or **Warning**, depending on severity and expected frequency.
+
+## Prohibited patterns
+
+- None.
+
+## Allowed deviations
+
+### Boundary exception logging
 
 - Exceptions MUST be logged only at an operational boundary (controllers, handlers, workers), unless explicitly authorised.
 - Boundary logging MUST log the exception object itself (not message-only logging).
@@ -116,7 +131,7 @@ Preserve inner-layer diagnostic context so boundary logging is sufficient to dia
 
 ---
 
-## Exception logging
+### Exception logging
 
 - Logging exceptions MUST preserve the original exception and stack trace.
 - Logging MUST NOT swallow exceptions.
@@ -124,7 +139,6 @@ Preserve inner-layer diagnostic context so boundary logging is sufficient to dia
 
 ---
 
-## Operational events
+## Cross-references
 
-- SHOULD log start and end of significant operations at **Information** level.
-- SHOULD log validation and domain failures at **Information** or **Warning**, depending on severity and expected frequency.
+- None.
