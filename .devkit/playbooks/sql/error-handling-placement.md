@@ -18,7 +18,7 @@ Guidance for where to place error handling and how to structure TRY...CATCH deci
 - Boundary-centric error handling SHOULD be the preferred baseline framing for OLTP services; inner procedures typically roll back local work (if they own it) and rethrow.
 - Layered TRY...CATCH with local compensation SHOULD mainly be used for administrative or batch workflows, given the higher complexity and ownership risks.
 - Layering error handlers SHOULD be avoided where transaction ownership becomes ambiguous.
-- Layered handling MAY be used where the code’s purpose is administrative or batch maintenance and is intentionally designed for such patterns.
+- Layered handling MAY be used where the code's purpose is administrative or batch maintenance and is intentionally designed for such patterns.
 - @@TRANCOUNT checks MAY be used alongside XACT_STATE when the intent is to determine whether any transaction scope is active, rather than to make committable-state decisions.
 - THROW SHOULD be preferred in new code for raising errors and for rethrowing the current exception while preserving error information.
 - RAISERROR MAY be used for backward compatibility and does not consistently honor XACT_ABORT; its batch-continuation behavior depends on severity and options.

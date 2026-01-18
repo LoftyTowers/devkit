@@ -17,7 +17,7 @@
 ### Migration naming and review
 
 - Migration names SHOULD be descriptive and communicate intent (commit-message style).
-- Each migration’s operations SHOULD be reviewed for correctness and data-loss risk before applying.
+- Each migration's operations SHOULD be reviewed for correctness and data-loss risk before applying.
 
 ### Production deployment strategy
 

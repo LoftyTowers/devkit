@@ -1,9 +1,9 @@
-# DevKit 🧠
+# DevKit
 *A reusable AI-assisted coding framework for senior-level code generation.*
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone or download this DevKit
 Open PowerShell or your terminal and run:
@@ -11,7 +11,7 @@ Open PowerShell or your terminal and run:
 git clone https://github.com/LoftyTowers/devkit.git
 ```
 
-*(Or your own private fork if you’ve made one.)*
+*(Or your own private fork if you've made one.)*
 
 ---
 
@@ -57,26 +57,26 @@ You should see:
 
 ---
 
-## ⚙️ What’s Inside
+## What's Inside
 
 ```
 .devkit/
-├── ai/
-├── contracts/
-│   ├── general/
-│   └── dotnet/
-├── checklists/
-│   ├── general/
-│   └── dotnet/
-├── how-to/
-│   └── dotnet/
-└── playbooks/
+|-- ai/
+|-- contracts/
+|   |-- general/
+|   `-- dotnet/
+|-- checklists/
+|   |-- general/
+|   `-- dotnet/
+|-- how-to/
+|   `-- dotnet/
+`-- playbooks/
 ```
 The sync scripts copy `.devkit/` into your target project and exclude `.git`, `.github`, and `tools`.
 
 ---
 
-## 🧩 Using DevKit with AI tools
+## Using DevKit with AI tools
 
 Before starting any coding task, provide your AI assistant (Cursor, Copilot, ChatGPT, etc.) with the following DevKit Prep Prompt.
 
@@ -127,7 +127,7 @@ This creates a predictable, professional, senior-quality codebase across project
 
 ---
 
-## 🧭 Key principle
-> The DevKit doesn’t write code for you - it teaches your AI *how you* write code.
+## Key principle
+> The DevKit doesn't write code for you - it teaches your AI *how you* write code.
 
-It’s your architecture, your rules, automated.
+It's your architecture, your rules, automated.
