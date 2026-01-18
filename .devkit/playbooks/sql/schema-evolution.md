@@ -2,15 +2,15 @@
 
 ## Scope
 
-- Physical column order SHOULD NOT be relied on.
-- SELECT * SHOULD be avoided for schema-change safety.
-- Adding columns mid-table may require a table rebuild.
-
 ## When to use
 
 - None.
 
 ## Guidance
+
+- Physical column order SHOULD NOT be relied on.
+- SELECT * SHOULD be avoided for schema-change safety.
+- Adding columns mid-table may require a table rebuild.
 
 ### Migration naming and review
 

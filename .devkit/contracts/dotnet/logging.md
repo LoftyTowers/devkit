@@ -2,6 +2,8 @@
 
 ## Scope
 
+## Rules
+
 ### Scopes and context
 
 - For each operation, a logging scope MUST be opened at the boundary that includes:
@@ -69,8 +71,6 @@ Preserve inner-layer diagnostic context so boundary logging is sufficient to dia
 - Boundary logging MUST treat `Exception.Data` as untrusted and MUST filter to allowed keys/types before logging.
 
 ---
-
-## Rules
 
 ### Logging rules
 

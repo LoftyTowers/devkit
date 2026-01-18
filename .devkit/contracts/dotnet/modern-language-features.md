@@ -25,6 +25,13 @@
 - Properties not intended to change after construction MUST be init-only or otherwise immutable.
 - If a type is intended to be immutable, its public surface MUST NOT permit mutation after initialization.
 
+### Nullable reference types (R1-R4)
+
+- MUST enable nullable-aware context for new C# projects.
+- MUST use nullable annotations to express nullability for reference-type parameters, return values, and members within nullable-aware context.
+- When migrating existing code, MUST enable nullable context incrementally (per project or file) and address warnings within the migrated scope.
+- Nullable suppression (`!`, `#nullable disable`) MUST be narrowly scoped and MUST NOT be applied solution-wide or broadly at project level.
+
 ## Prohibited patterns
 
 - None.
@@ -35,9 +42,4 @@
 
 ## Cross-references
 
-### Nullable reference types (R1-R4)
-
-- MUST enable nullable-aware context for new C# projects.
-- MUST use nullable annotations to express nullability for reference-type parameters, return values, and members within nullable-aware context.
-- When migrating existing code, MUST enable nullable context incrementally (per project or file) and address warnings within the migrated scope.
-- Nullable suppression (`!`, `#nullable disable`) MUST be narrowly scoped and MUST NOT be applied solution-wide or broadly at project level.
+- None.

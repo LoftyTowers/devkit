@@ -2,12 +2,12 @@
 
 ## Scope
 
+## Rules
+
 ### DbContext lifetime and scope
 
 - DbContext MUST be registered as Scoped per request/unit-of-work, with one context instance per scope.
 - Singleton or otherwise long-lived/shared DbContext across requests MUST NOT be used.
-
-## Rules
 
 ### Thread safety
 

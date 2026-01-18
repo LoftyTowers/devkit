@@ -2,13 +2,13 @@
 
 ## Scope
 
+## Rules
+
 - **All collaborators** (repositories, gateways, clients, clocks, validators, loggers, etc.) MUST be injected via the constructor.
 - MUST NOT resolve services manually or use service locator patterns inside methods.
 - MUST NOT instantiate collaborators with `new` inside classes or operational methods.
 - Static members are allowed **only** for pure, stateless helpers (no I/O, no shared state).
 - MAY instantiate pure values/DTOs and short-lived in-method data structures (e.g., `List<T>`) within a method.
-
-## Rules
 
 ### DI vs static vs factory
 

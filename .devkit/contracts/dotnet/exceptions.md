@@ -2,6 +2,8 @@
 
 ## Scope
 
+## Rules
+
 - Unexpected/unhandled exceptions MAY bubble to a central exception handler (middleware/filters) at the API boundary, which MUST return an HTTP 5xx **ProblemDetails** response (sanitised; no sensitive internals).
 - Endpoints MUST NOT use `try/catch` primarily to steer expected outcomes (e.g., catching to return 404/400/409).
 - Expected failures (validation, known domain rule failures, known external failures) MUST be represented as explicit outcomes (e.g., `Result` / `ReturnObj`) and MUST NOT use exceptions for control flow.
@@ -17,8 +19,6 @@
 - If an exception is caught, it MUST either:
   - propagate to the boundary for translation, or
   - be translated at the boundary into an Unexpected outcome.
-
-## Rules
 
 ### Failure signalling for non-HTTP handlers (dotnet operational boundaries)
 

@@ -2,16 +2,16 @@
 
 ## Scope
 
-### Notes
-
-- Use `ConfigureAwait(false)` in library/infrastructure code that does not require a captured context.
-- Avoid `ConfigureAwait(false)` when you must resume on the original context (e.g., UI updates).
-
 ## When to use
 
 - None.
 
 ## Guidance
+
+### Notes
+
+- Use `ConfigureAwait(false)` in library/infrastructure code that does not require a captured context.
+- Avoid `ConfigureAwait(false)` when you must resume on the original context (e.g., UI updates).
 
 ### CPU-bound vs I/O-bound decisioning (R8)
 
@@ -21,7 +21,7 @@
 
 ## Allowed deviations
 
-### Allowed deviation (D2): Task.Run for CPU-bound offload
+### Task.Run for CPU-bound offload
 
 - `Task.Run` MAY be used for CPU-bound work when you need to free a UI/request thread.
 - `Task.Run` MUST NOT be used to wrap I/O-bound work or already-async calls.
@@ -43,10 +43,6 @@ var data = await Task.Run(() => ReadAsync(stream, cancellationToken));
 ```
 
 ## Trade-offs and pitfalls
-
-- None.
-
-## Examples
 
 - None.
 

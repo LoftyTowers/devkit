@@ -2,11 +2,11 @@
 
 ## Scope
 
+## Rules
+
 ### Context propagation
 
 - Context propagation MUST use the SDK/instrumentation defaults (W3C TraceContext) unless there is an explicit custom requirement.
-
-## Rules
 
 ### Providers and sources
 

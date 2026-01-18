@@ -2,13 +2,13 @@
 
 ## Scope
 
-Guidance below uses SHOULD language and describes engine behavior. These are not mandates.
-
 ## When to use
 
 - None.
 
 ## Guidance
+
+Guidance below uses SHOULD language and describes engine behavior. These are not mandates.
 
 ### Clustered index keys
 
