@@ -19,7 +19,7 @@
 - MUST design boundaries for high cohesion and low coupling.
 - SHOULD use explicit interfaces at integration boundaries and where multiple implementations are expected.
 - When trade-offs exist, propose 2-3 options briefly, then pick one and implement.
-- See `.devkit/contracts/general/coding-patterns.md` for pattern selection rules and tables.
+- See `.devkit/contracts/dotnet/coding-patterns.md` for pattern selection rules and tables.
 
 ### Separation of concerns
 

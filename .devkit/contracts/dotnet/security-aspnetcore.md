@@ -9,9 +9,15 @@
 - CSRF / antiforgery (MVC/Razor Pages)
 - Data Protection usage + key management requirements
 - HTTPS + HSTS
-- See `.devkit/contracts/general/security-baseline.md` for secret handling.
 
 ## Rules
+
+### Security baseline
+
+- MUST validate all **external inputs** (HTTP requests, messages, events, CLI arguments) before use.
+- MUST NOT embed secrets (keys, tokens, passwords, connection strings) in code, configuration files, or version control.
+- MUST NOT log secrets, credentials, or sensitive personal data.
+- SHOULD follow the principle of least privilege for permissions, credentials, and access scopes.
 
 - JWT bearer auth MUST validate signature, issuer (iss), audience (aud), and expiry (exp); tokens missing required claims MUST be rejected.
 - Token issuance MUST use standard OAuth 2.0 / OpenID Connect flows; code MUST NOT mint tokens from raw credentials or ad-hoc mechanisms.
