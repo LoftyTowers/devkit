@@ -4,25 +4,20 @@
 
 Defines enforceable ownership chaining requirements for procedures and views.
 
-### Notes
+## Precedence and scope
 
-- If ownership cannot be unified, explicit permissions must be considered.
+- Contracts are authoritative for MUST/MUST NOT rules.
+- Playbooks and how-to guides are advisory patterns, examples, or execution steps.
 
 ## Rules
-
-### Rules (R#)
 
 - Ownership chaining requires the procedure or view and the underlying table to share the same owner.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - None.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 

@@ -4,6 +4,11 @@
 
 Defines enforceable rules for EF Core migrations and schema evolution safety.
 
+## Precedence and scope
+
+- Contracts are authoritative for MUST/MUST NOT rules and governance.
+- Playbooks and how-to guides are advisory patterns, examples, or execution steps.
+
 ## Rules
 
 ### Scaffolding
@@ -38,7 +43,6 @@ Defines enforceable rules for EF Core migrations and schema evolution safety.
 - Seeding MUST be idempotent so it can be run multiple times safely.
 - Sync and async seeding MUST have equivalent logic when both are implemented.
 - HasData MUST NOT be used for large datasets, non-deterministic data, external calls, database-generated keys, or custom transformations.
-- HasData MUST NOT be used for dynamic, non-deterministic, external, or database-generated-keys scenarios.
 - UseSeeding and UseAsyncSeeding MUST NOT be used without idempotency checks.
 
 ## Prohibited patterns
