@@ -21,6 +21,11 @@
 - CPU-bound work consumes CPU cycles locally. Consider `Task.Run` only when you must keep a thread responsive.
 - Default: use async I/O; do not offload I/O to `Task.Run`.
 
+### Cancellation token conventions (guidance)
+
+- Always pass the cancellation token through to async collaborators and check it before heavy or long-running work.
+- SHOULD use async end-to-end (e.g., validation, gateways, repositories) and pass the `CancellationToken` through all layers.
+
 ## Allowed deviations
 
 ### Task.Run for CPU-bound offload

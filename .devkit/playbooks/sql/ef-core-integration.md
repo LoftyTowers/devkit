@@ -12,7 +12,7 @@ Guidance for SQL artefacts only when EF Core consumes results from this SQL arte
 
 ### Default guidance
 
-- Stored procedure result-set column names or shapes SHOULD NOT be changed without considering EF Core’s documented mapping requirements.
+- Stored procedure result-set column names or shapes SHOULD NOT be changed without considering EF Core's documented mapping requirements.
 
 ### Anti-patterns
 

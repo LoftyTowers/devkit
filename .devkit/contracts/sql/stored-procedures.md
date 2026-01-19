@@ -12,7 +12,7 @@ Defines enforceable rules for stored procedure parameter contracts.
 
 ### Rules (R#)
 
-- Stored procedure parameters MUST be declared with explicit data types and direction and MUST be treated as part of the procedure’s public contract.
+- Stored procedure parameters MUST be declared with explicit data types and direction and MUST be treated as part of the procedure's public contract.
 
 ## Prohibited patterns
 

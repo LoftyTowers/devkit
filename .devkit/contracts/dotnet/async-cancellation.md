@@ -45,8 +45,8 @@
 
 ## Allowed deviations
 
-- D1: A synchronous boundary MAY block exactly once at the outermost entry point only when an async entry point is impossible. This MUST be isolated to that boundary and MUST NOT appear in application logic.
-- D2: `async void` MAY be used for UI/event handlers only where the event signature requires `void`.
+- A synchronous boundary MAY block exactly once at the outermost entry point only when an async entry point is impossible. This MUST be isolated to that boundary and MUST NOT appear in application logic.
+- `async void` MAY be used for UI/event handlers only where the event signature requires `void`.
 
 ## Cross-references
 
