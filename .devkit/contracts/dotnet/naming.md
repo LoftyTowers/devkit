@@ -1,6 +1,12 @@
 # Naming
 
-## Enforceable rules
+## Scope
+
+- Naming conventions for identifiers and types in .NET codebases.
+
+## Rules
+
+### Enforceable rules
 
 - MUST use a consistent naming convention for the same identifier category within the same scope/codebase.
 - MUST NOT mix casing styles for the same identifier category within the same scope.
@@ -55,3 +61,15 @@
 ### Private fields
 
 - Private field naming MUST follow a single chosen convention within a project. Default is **_camelCase**, but other conventions are allowed if documented and applied consistently.
+
+## Prohibited patterns
+
+- None.
+
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

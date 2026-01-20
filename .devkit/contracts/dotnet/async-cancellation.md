@@ -1,6 +1,8 @@
-## Async and cancellation
+# Async and cancellation
 
-## Definitions
+## Scope
+
+### Definitions
 
 - **ASP.NET Core request path**: controllers/endpoints and services directly invoked by them for that request.
 - **Library-style code**: reusable, non-UI, non-endpoint code where a captured context is not required by default.
@@ -37,7 +39,15 @@
 - Private helper methods may omit the token **only** if they perform no I/O and no long-running work.
 - Cancellation MUST be represented via `OperationCanceledException` (or a derived type), using `ThrowIfCancellationRequested` or equivalent propagation.
 
+## Prohibited patterns
+
+- None.
+
 ## Allowed deviations
 
-- D1: A synchronous boundary MAY block exactly once at the outermost entry point only when an async entry point is impossible. This MUST be isolated to that boundary and MUST NOT appear in application logic.
-- D2: `async void` MAY be used for UI/event handlers only where the event signature requires `void`.
+- A synchronous boundary MAY block exactly once at the outermost entry point only when an async entry point is impossible. This MUST be isolated to that boundary and MUST NOT appear in application logic.
+- `async void` MAY be used for UI/event handlers only where the event signature requires `void`.
+
+## Cross-references
+
+- None.

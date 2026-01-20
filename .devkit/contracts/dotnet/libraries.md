@@ -1,6 +1,12 @@
 # Libraries
 
-## Libraries (pinned)
+## Scope
+
+- Approved default libraries and logging stack choices for .NET projects.
+
+## Rules
+
+### Libraries (pinned)
 
 These are the approved defaults for .NET projects using this DevKit.
 
@@ -11,3 +17,15 @@ These are the approved defaults for .NET projects using this DevKit.
 - HTTP: `IHttpClientFactory`; MUST NOT `new HttpClient()`.
 - See also: `.devkit/contracts/dotnet/http-clients.md`.
 - Config & Options: see `.devkit/contracts/dotnet/configuration-options.md` and `.devkit/playbooks/dotnet/configuration-options.md`.
+
+## Prohibited patterns
+
+- None.
+
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

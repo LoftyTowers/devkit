@@ -1,5 +1,15 @@
 # EF Core queries (guidance)
 
+## Scope
+
+- Non-enforceable guidance for EF Core query tracking and loading strategies.
+
+## When to use
+
+- None.
+
+## Guidance
+
 - Use tracking queries when updates are required or identity resolution is necessary; otherwise prefer no-tracking reads.
 - `AsNoTrackingWithIdentityResolution` MAY be used when identity resolution is needed without full tracking.
 - Project only required data (Select/DTO shaping) rather than materialising full entities unnecessarily.
@@ -8,3 +18,15 @@
   - Explicit loading when the relationship is optional or conditional.
   - Projection when only a subset of fields is required.
 - Avoid N+1 by ensuring related data is loaded explicitly or via projection.
+
+## Trade-offs and pitfalls
+
+- None.
+
+## Examples
+
+- None.
+
+## Cross-references
+
+- None.

@@ -1,6 +1,7 @@
 # Security (ASP.NET Core)
 
 ## Scope
+
 - Authentication (JWT bearer, cookies)
 - OAuth2/OIDC middleware usage
 - Authorisation policies and defaults
@@ -8,9 +9,16 @@
 - CSRF / antiforgery (MVC/Razor Pages)
 - Data Protection usage + key management requirements
 - HTTPS + HSTS
-- See `.devkit/contracts/general/security-baseline.md` for secret handling.
 
 ## Rules
+
+### Security baseline
+
+- MUST validate all **external inputs** (HTTP requests, messages, events, CLI arguments) before use.
+- MUST NOT embed secrets (keys, tokens, passwords, connection strings) in code, configuration files, or version control.
+- MUST NOT log secrets, credentials, or sensitive personal data.
+- SHOULD follow the principle of least privilege for permissions, credentials, and access scopes.
+
 - JWT bearer auth MUST validate signature, issuer (iss), audience (aud), and expiry (exp); tokens missing required claims MUST be rejected.
 - Token issuance MUST use standard OAuth 2.0 / OpenID Connect flows; code MUST NOT mint tokens from raw credentials or ad-hoc mechanisms.
 - External/OIDC login flows MUST use built-in middleware, MUST run over HTTPS, MUST use state/nonce, and provider tokens/claims MUST be validated.
@@ -27,6 +35,7 @@
 Note: Pipeline ordering and related prohibitions are defined in `.devkit/contracts/dotnet/api-design-middleware.md`.
 
 ## Prohibited patterns
+
 - Accepting JWTs without validating signature, issuer, audience, and expiry MUST NOT occur.
 - Custom token issuance outside standard OAuth/OIDC flows MUST NOT occur.
 - CORS MUST NOT be used as a substitute for authentication/authorisation.
@@ -36,3 +45,11 @@ Note: Pipeline ordering and related prohibitions are defined in `.devkit/contrac
 - Deleting Data Protection keys without explicitly accepting unrecoverable protected data MUST NOT occur.
 - Missing antiforgery validation for unsafe form posts in cookie-auth web apps MUST NOT occur.
 - Skipping HTTPS/HSTS in production without an explicit risk decision MUST NOT occur.
+
+## Allowed deviations
+
+- None.
+
+## Cross-references
+
+- None.

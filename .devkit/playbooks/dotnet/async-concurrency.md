@@ -1,11 +1,35 @@
 # Async and concurrency (guidance)
 
-## CPU-bound vs I/O-bound decisioning (R8)
+## Scope
+
+- Non-enforceable guidance for async and concurrency patterns, including ConfigureAwait and Task.Run usage.
+
+## When to use
+
+- None.
+
+## Guidance
+
+### Notes
+
+- Use `ConfigureAwait(false)` in library/infrastructure code that does not require a captured context.
+- Avoid `ConfigureAwait(false)` when you must resume on the original context (e.g., UI updates).
+
+### CPU-bound vs I/O-bound decisioning (R8)
+
 - I/O-bound work waits on external systems (network, disk, database). Await I/O tasks directly.
 - CPU-bound work consumes CPU cycles locally. Consider `Task.Run` only when you must keep a thread responsive.
 - Default: use async I/O; do not offload I/O to `Task.Run`.
 
-## Allowed deviation (D2): Task.Run for CPU-bound offload
+### Cancellation token conventions (guidance)
+
+- Always pass the cancellation token through to async collaborators and check it before heavy or long-running work.
+- SHOULD use async end-to-end (e.g., validation, gateways, repositories) and pass the `CancellationToken` through all layers.
+
+## Allowed deviations
+
+### Task.Run for CPU-bound offload
+
 - `Task.Run` MAY be used for CPU-bound work when you need to free a UI/request thread.
 - `Task.Run` MUST NOT be used to wrap I/O-bound work or already-async calls.
 
@@ -25,6 +49,10 @@ var data = await Task.Run(() => httpClient.GetAsync(url, cancellationToken));
 var data = await Task.Run(() => ReadAsync(stream, cancellationToken));
 ```
 
-## ConfigureAwait boundaries (note)
-- Use `ConfigureAwait(false)` in library/infrastructure code that does not require a captured context.
-- Avoid `ConfigureAwait(false)` when you must resume on the original context (e.g., UI updates).
+## Trade-offs and pitfalls
+
+- None.
+
+## Cross-references
+
+- None.
