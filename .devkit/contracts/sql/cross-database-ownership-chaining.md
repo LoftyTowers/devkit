@@ -10,19 +10,13 @@ Defines enforceable rules for cross-database ownership chaining.
 
 ## Rules
 
-### Rules (R#)
-
 - Cross-database ownership chaining MUST NOT be enabled unless there is explicit justification and documentation.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - Cross-database ownership chaining MUST NOT be enabled as a convenience shortcut without explicit justification.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - Cross-database ownership chaining MAY be enabled only if there is explicit justification and documentation.
 

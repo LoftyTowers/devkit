@@ -6,8 +6,6 @@ Defines enforceable rules for transaction boundaries and modes (autocommit, expl
 
 ## Rules
 
-### Rules (R#)
-
 - Treat SQL Server autocommit as the default mode where each individual statement is committed or rolled back as a unit when it completes.
 - Treat an explicit transaction as beginning at BEGIN TRANSACTION and ending only when committed or rolled back.
 - Treat locks and resources required for modifications as held until explicit transaction completion (commit or rollback).
@@ -15,14 +13,10 @@ Defines enforceable rules for transaction boundaries and modes (autocommit, expl
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - Multiple statements MUST NOT be assumed to be atomic in autocommit mode without an explicit transaction.
 - Implicit transactions MUST NOT be enabled without explicit commit or rollback logic for each implicit transaction.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 

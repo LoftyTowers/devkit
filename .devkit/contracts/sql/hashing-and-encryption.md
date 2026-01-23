@@ -10,19 +10,13 @@ Defines enforceable rules for hashing vs encryption of sensitive data.
 
 ## Rules
 
-### Rules (R#)
-
 - Passwords MUST be stored using hashing, not encryption.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - Passwords MUST NOT be stored in reversible form, including encrypted or plaintext storage.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 

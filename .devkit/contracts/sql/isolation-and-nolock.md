@@ -6,8 +6,6 @@ Applies to READ UNCOMMITTED/NOLOCK usage for correctness-critical reads.
 
 ## Rules
 
-### Rules (R#)
-
 - Treat SQL Server as supporting READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE, plus SNAPSHOT and READ COMMITTED SNAPSHOT (RCSI).
 - Treat dirty reads as permitted only under READ UNCOMMITTED (including NOLOCK), and not under READ COMMITTED or higher.
 - Under READ COMMITTED without RCSI, treat shared locks for reads as held for the duration of the read operation (not the full transaction), so non-repeatable reads and phantoms remain possible.
@@ -20,14 +18,10 @@ Applies to READ UNCOMMITTED/NOLOCK usage for correctness-critical reads.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - READ UNCOMMITTED (including NOLOCK) MUST NOT be used for correctness-critical reads and MUST NOT be treated as a correctness-preserving deadlock fix.
 - READ COMMITTED SNAPSHOT (RCSI) MUST NOT be assumed to provide transaction-level repeatable reads.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 
