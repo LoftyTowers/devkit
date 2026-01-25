@@ -1,3 +1,5 @@
+# Statement batches (SQL Server contract)
+
 ## Scope
 Authoritative rules governing SQL Server statement batches, batch boundaries, first-in-batch requirements, and client-side batch separator semantics.
 
@@ -29,3 +31,4 @@ Authoritative rules governing SQL Server statement batches, batch boundaries, fi
 - how-to/sql/batch-separators-go-aware-clients.md
 - playbooks/sql/executing-scripts-without-go-support.md
 - contracts/sql/validation-authority.md
+

@@ -1,3 +1,5 @@
+# Handling editor diagnostics playbook (SQL Server)
+
 ## Scope
 Non-enforceable guidance for interpreting editor and static diagnostics in SQL Server workflows.
 
@@ -18,3 +20,4 @@ Use when editor or build-time diagnostics conflict with observed SQL Server runt
 
 ## Cross-references
 - contracts/sql/validation-authority.md
+

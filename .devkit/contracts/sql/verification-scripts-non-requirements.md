@@ -1,3 +1,5 @@
+# Verification scripts non-requirements (SQL Server contract)
+
 ## Scope
 Explicit guardrails defining what the DevKit does not mandate for verification scripts.
 
@@ -12,3 +14,4 @@ Explicit guardrails defining what the DevKit does not mandate for verification s
 
 ## Cross-references
 - playbooks/sql/verification-scripts-batch-safety.md
+

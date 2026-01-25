@@ -1,3 +1,5 @@
+# Batch separators in GO-aware clients (SQL Server)
+
 ## When to use this
 Use when authoring or executing SQL scripts through tools that recognise the GO batch separator (for example VS Code, SSMS, Azure Data Studio, sqlcmd).
 
@@ -24,3 +26,4 @@ CREATE OR ALTER PROCEDURE dbo.P AS SELECT 1;
 
 ## Cross-references
 - contracts/sql/statement-batches.md
+

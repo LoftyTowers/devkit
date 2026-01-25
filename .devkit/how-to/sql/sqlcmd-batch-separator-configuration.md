@@ -1,3 +1,5 @@
+# sqlcmd batch separator configuration (SQL Server)
+
 ## When to use this
 Use when executing SQL scripts via sqlcmd and custom batch separator behaviour is required.
 
@@ -16,3 +18,4 @@ sqlcmd -S . -d MyDb -c "##" -i script.sql
 
 ## Cross-references
 - how-to/sql/batch-separators-go-aware-clients.md
+

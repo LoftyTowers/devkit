@@ -1,3 +1,5 @@
+# Validation authority (SQL Server contract)
+
 ## Scope
 Defines authoritative validation sources for SQL Server correctness and execution behaviour.
 
@@ -13,3 +15,4 @@ Defines authoritative validation sources for SQL Server correctness and executio
 
 ## Cross-references
 - playbooks/sql/handling-editor-diagnostics.md
+

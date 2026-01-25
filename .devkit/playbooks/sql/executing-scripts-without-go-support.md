@@ -1,3 +1,5 @@
+# Executing scripts without GO support playbook (SQL Server)
+
 ## Scope
 Guidance for executing SQL scripts through APIs or execution paths that do not recognise GO.
 
@@ -15,3 +17,4 @@ Use when executing SQL through ADO.NET, JDBC, or other single-batch execution me
 
 ## Cross-references
 - contracts/sql/statement-batches.md
+

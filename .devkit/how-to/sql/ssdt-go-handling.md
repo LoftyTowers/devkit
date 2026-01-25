@@ -1,3 +1,5 @@
+# SSDT GO handling (SQL Server)
+
 ## When to use this
 Use when working with SSDT database projects and generated build or deployment scripts.
 
@@ -12,3 +14,4 @@ Use when working with SSDT database projects and generated build or deployment s
 
 ## Cross-references
 - contracts/sql/statement-batches.md
+

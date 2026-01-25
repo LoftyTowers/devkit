@@ -1,3 +1,5 @@
+# Verification scripts batch safety playbook (SQL Server)
+
 ## Scope
 Guidance for writing verification scripts that execute safely across different batch execution models.
 
@@ -18,3 +20,4 @@ Use when authoring verification or diagnostic scripts intended for reuse.
 
 ## Cross-references
 - contracts/sql/statement-batches.md
+
