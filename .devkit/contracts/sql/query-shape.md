@@ -6,19 +6,13 @@ Applies to SELECT projection choices that affect client-facing correctness and s
 
 ## Rules
 
-### Rules (R#)
-
 - None. See playbook guidance for projection practices.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - SELECT * MUST NOT be used in production queries that feed application clients.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 

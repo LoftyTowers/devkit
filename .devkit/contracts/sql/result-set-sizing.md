@@ -6,19 +6,13 @@ Applies to user-facing query result sizing where unbounded results are unsafe or
 
 ## Rules
 
-### Rules (R#)
-
 - None. See playbook guidance for sizing practices.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - Unbounded result sets MUST NOT be returned for user-facing endpoints.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 

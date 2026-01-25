@@ -6,8 +6,6 @@ Defines enforceable behaviors for locks, blocking, escalation, and deadlocks.
 
 ## Rules
 
-### Rules (R#)
-
 - Treat exclusive locks for data modifications as held until transaction completion regardless of isolation level.
 - Under READ COMMITTED without RCSI, expect reader-writer blocking due to shared locks for reads conflicting with exclusive locks for writes during overlapping operations.
 - Treat lock escalation as possible (row or page to table lock) when thresholds or memory pressure are reached, expanding blocking scope.
@@ -16,14 +14,10 @@ Defines enforceable behaviors for locks, blocking, escalation, and deadlocks.
 
 ## Prohibited patterns
 
-### Prohibited patterns (P#)
-
 - Transactions MUST NOT be long-running in ways that unnecessarily extend lock duration and amplify blocking.
 - NOLOCK MUST NOT be used as a default policy to avoid blocking or deadlocks without explicitly accepting correctness anomalies.
 
 ## Allowed deviations
-
-### Allowed deviations (D#)
 
 - None.
 
