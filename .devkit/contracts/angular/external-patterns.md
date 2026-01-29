@@ -2,6 +2,8 @@
 
 ## Scope
 
+- This contract covers external structural decisions for Angular projects, including workspace support and repository strategy boundaries.
+- It does not prescribe DDD or bounded-context patterns and leaves monorepo versus multi-repo choices to organisational discretion.
 ## Rules
 - Angular CLI MUST support multi-project workspaces.
 - Repository strategy MAY be decided by the organisation.

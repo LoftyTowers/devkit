@@ -2,6 +2,8 @@
 
 ## Scope
 
+- This playbook defines guidance for Angular component structure and dependency injection patterns, including standalone components, templates, and styling boundaries.
+- It applies to application components and services under `src/app/`, focusing on maintainability and correct injector scoping.
 ## Core guidance
 
 ## Rules & patterns

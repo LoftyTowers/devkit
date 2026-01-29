@@ -2,6 +2,8 @@
 
 ## Scope
 
+- This playbook covers how Angular projects should organise modules and shared infrastructure, including CoreModule, SharedModule, and feature modules.
+- It applies to NgModule-based applications and clarifies when domain-based module boundaries and lazy loading are expected.
 ## Core guidance
 
 ## Rules & patterns
