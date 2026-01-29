@@ -48,6 +48,13 @@
 - `@Self()` and `@SkipSelf()` MAY be used to control injector hierarchy.
 - Non-class dependencies MUST be injected using `InjectionToken`.
 
+- Files MUST use consistent lowercase, dash-separated naming. hero-list.component.ts, user.service.ts, app.config.ts
+- Files MUST use a dot followed by a type suffix in their names. hero.component.ts, hero.service.ts, hero.model.ts
+- Sub-folders SHOULD be avoided until there are around seven files in a folder.
+- Files MUST be grouped into a dedicated feature folder when a feature grows beyond around seven files. heroes/hero-list.component.ts
+- Application code MUST be organised by feature rather than by technical type. src/app/heroes/, src/app/dashboard/, src/app/components/, src/app/services/
+- All application code MUST be placed under src/app/.
+- Code SHOULD be organised by feature rather than by technical layer.
 ## Prohibited patterns
 - Type-based folder organisation at application root (e.g. `components/`, `services/`, `models/` at root) MUST NOT be used.
 - Deep nesting before the 7-file threshold MUST NOT be used.
@@ -63,12 +70,19 @@
 - Tree-shakeable services for new code MUST NOT be registered without `providedIn`.
 - Circular dependencies between services MUST NOT be introduced.
 
+- Type-based folder organisation MUST NOT be used.
+- Deeply nested folder hierarchies MUST NOT be introduced before there are around seven files.
+- Inconsistent naming conventions MUST NOT be used. camelCase, PascalCase, kebab-case
 ## Allowed deviations
 - Standalone components supersede NgModule patterns for new projects. CoreModule/SharedModule patterns MAY be used only in NgModule-based applications.
 - The 400-line limit is a guideline; cohesive, single-responsibility components MAY exceed 400 lines with documented justification.
 - The 3-line threshold for templates/styles is subjective; teams MAY adopt an ?always external templates/styles? convention.
 - Module providers MAY be used for lazy-loaded module scopes; `providedIn` is preferred for tree-shaking.
 
+- Naming suffix conventions MAY change as standalone component guidance evolves.
 ## Cross-references
 - .devkit/checklists/angular/architecture-checklist.md
 - .devkit/contracts/angular/performance-optimization.contract.md
+
+
+
