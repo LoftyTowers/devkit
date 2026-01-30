@@ -21,6 +21,15 @@
 - Services MUST be scoped to the appropriate injector level.
 - Non-class dependencies MUST be provided using InjectionToken.
 - Lazy-module-scoped services MAY use module providers or providedIn.
+- BehaviorSubject MAY be used for shared state in services as a legacy pattern.
+- Services MUST expose observables rather than subjects.
+- State services MUST be provided at an appropriate injector scope.
+- Component-local state MUST be stored in component fields.
+- Shared state across components MUST be managed using services.
+- State SHOULD be passed via inputs for simple parent-child relationships.
+- Outputs MUST be used for child-to-parent communication.
+- State services MUST be scoped to the appropriate injector level.
+- Either service-based state sharing or input and output bindings MAY be used.
 
 ## Anti-patterns
 - Oversized components over 400 lines SHOULD NOT be used without clear justification.
@@ -30,6 +39,12 @@
 - Services MUST NOT be provided in component metadata unnecessarily.
 - Services MUST NOT be registered only in module providers instead of using providedIn.
 - Circular dependencies between services MUST NOT exist. NG0200
+- BehaviorSubject instances MUST NOT be exposed directly from services.
+- Multiple instances of state services MUST NOT be created when shared state is required.
+- Mutable state MUST NOT be shared between components.
+- Global services MUST NOT be used for component-local state.
+- Deeply nested prop drilling SHOULD NOT be used.
+- State services MUST NOT be scoped inappropriately.
 
 ## Allowed deviations
 - Components MAY exceed 400 lines when they remain cohesive and maintainable.
