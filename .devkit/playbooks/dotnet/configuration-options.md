@@ -6,8 +6,6 @@
 
 ## When to use
 
-- None.
-
 ## Guidance
 
 ### Strongly-typed binding (R2)

@@ -6,8 +6,6 @@
 
 ## When to use
 
-- None.
-
 ## Guidance
 
 - When a registration requires other services, factory overloads that receive `IServiceProvider` SHOULD be used rather than constructing interim providers.
