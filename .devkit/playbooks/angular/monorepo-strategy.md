@@ -8,7 +8,3 @@
   - Justified by Nx being the officially referenced monorepo tool in the Angular ecosystem with first-class support and an enterprise-grade architecture guide.
 - Nx custom generators can be used to encode organisation-specific standards, ensuring that new libraries, components, and features follow established conventions automatically.
 
-***
-
-# SECTION 3 — HOW-TO PROCEDURES (DETERMINISTIC) + FILE PLACEMENT
-
