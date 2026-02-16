@@ -26,7 +26,3 @@ Governs library type classification and inter-project dependency constraints in 
 ## Allowed deviations
 - MAY define additional library types beyond the four canonical types if clearly documented and the number remains small.
 
-***
-
-# SECTION 2 — PLAYBOOK GUIDANCE (JUDGEMENT) + FILE PLACEMENT
-
