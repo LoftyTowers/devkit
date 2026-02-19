@@ -26,7 +26,4 @@ When to use: When setting up a new Angular workspace or standardising selector p
 - `angular.json` showing the `prefix` value.
 - Lint output with zero selector-prefix violations.
 
-***
-
-# SECTION 4 — CHECKLIST GATES (VERIFICATION) + FILE PLACEMENT
 

@@ -236,5 +236,3 @@ When subscribing to long-lived observables in component classes (non-template us
 ### Validation
 - Component destruction triggers observable completion — verify in unit tests by spying on subscription teardown.
 - Chrome DevTools Memory panel shows no retained subscriptions after component navigation.
-
-***

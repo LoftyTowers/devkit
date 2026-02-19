@@ -63,5 +63,3 @@ Performance optimization in Angular spans change detection efficiency, bundle si
 - PREFERENCE — JUSTIFIED: Use `takeUntilDestroyed()` from `@angular/core/rxjs-interop` over manual `Subject` + `takeUntil` + `ngOnDestroy` patterns for subscription cleanup. The operator is more concise, less error-prone, and directly tied to the injection context lifecycle.
 
 - PREFERENCE — JUSTIFIED: Use `source-map-explorer` or `webpack-bundle-analyzer` in CI to audit bundle composition after each merge to `main`. This catches accidental dependency bloat before deployment. NO PRIMARY SUPPORT — SECONDARY ONLY.
-
-***

@@ -63,5 +63,3 @@ Rules governing Angular application performance including change detection strat
 - MAY use `track item` (identity tracking) when no unique property exists, with the understanding that this degrades re-render performance.
 
 - MAY omit `@defer` for components that are small and always visible above the fold.
-
-***
