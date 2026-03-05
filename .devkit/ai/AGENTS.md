@@ -8,7 +8,7 @@ Codex MUST follow this sequence before making any project changes.
 MANDATORY LOAD SEQUENCE (NON-NEGOTIABLE)
 ------------------------------------------------------------
 
-1) Read `.devkit/ai/ENTRY-POINT.md`
+1) Read `.devkit/ENTRY-POINT.md`
 2) Read `.devkit/ai/PRELUDE.md`
 3) Read `.devkit/ai/MANIFEST.md`
 4) From MANIFEST:
@@ -73,18 +73,14 @@ VERIFICATION GATE (REQUIRED BEFORE COMPLETION)
 
 Before declaring task completion, you MUST run:
 
-scripts/devkit-verify
-
-If this command fails:
-- Do not complete the task
-- Fix issues
-- Re-run verification
+.devkit\tools\Run-DiffCheck.ps1
 
 ------------------------------------------------------------
 STRICT CONSTRAINTS
 ------------------------------------------------------------
 
-- DevKit files under `.devkit/**` are read-only.
+- DevKit folder under `.devkit\ai\schemas` is available for you to create `loaded-rules-inventory.json`.
+- All other Devkit files under `.devkit\**` are read only.
 - Do NOT modify DevKit during project work.
 - Do NOT compile or reference DevKit content inside the application.
 - Do NOT weaken security controls without explicit instruction.
